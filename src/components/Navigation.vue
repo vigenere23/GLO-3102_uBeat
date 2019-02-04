@@ -1,21 +1,15 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css"/>
 <template>
   <div id="navigationContainer">
-    <div id="mobileToolbarContainer" class="hidden-lg-and-up">
-      <mobileToolbar/>
-    </div>
-    <div id="desktopToolbarContainer" class="hidden-md-and-down">
-      <desktopToolbar/>
-    </div>
+      <toolbar/>
   </div>
 </template>
 
 <script>
-  import DesktopToolbar from './DesktopToolbar';
-  import MobileToolbar from './MobileToolbar';
+  import Toolbar from './Toolbar';
 
   export default {
-    components: { MobileToolbar, DesktopToolbar }
+    components: { Toolbar }
   };
 </script>
 
