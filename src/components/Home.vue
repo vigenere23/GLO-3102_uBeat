@@ -59,14 +59,14 @@
   }
   .space{
     height: 8em;
-    background-color: black;
+    /*background-color: black;*/
   }
 
 
   .aqua{
     width: 100%;
     height: 100%;
-    background-color: aqua;
+    /*background-color: aqua;*/
   }
 
   .backgroundImage{
