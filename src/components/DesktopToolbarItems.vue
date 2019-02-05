@@ -1,5 +1,5 @@
 <template>
-    <div id="desktopToolbarItems" v-if="isFixed">
+    <div id="desktopToolbarItems" v-if="fixed">
         <v-toolbar-items>
             <v-btn flat>Playlists</v-btn>
             <v-menu offset-y>
