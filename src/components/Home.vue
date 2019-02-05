@@ -1,24 +1,28 @@
 <template>
-  <div class="aqua">
+  <div class="blue-grey darken-4 full-height-page">
     <div class="littleSpace"></div>
     <div class="littleSpace"></div>
 
     <div>
-        <h1 class="bigger">Home</h1>
+        <h1>Home</h1>
     </div>
     <div class="space"></div>
 
 
-    <div class="aqua">
+    <div>
 
-        <div class="textcenter" > <h2> Electronic music </h2>
+        <div> <h2> Electronic music </h2>
 
 
           <div class="littleSpace"> </div>
           <div class="albums">
-              <div class="image"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
-              <div class="bigger"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/Skrillex_scary_monsters.jpg/220px-Skrillex_scary_monsters.jpg" alt="album from skrillex"></div>
-              <div class="bigger"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Deadmau5_-_while_%2812%29.png/220px-Deadmau5_-_while_%2812%29.png" alt="album from deadmau5"></div>
+              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
+              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/Skrillex_scary_monsters.jpg/220px-Skrillex_scary_monsters.jpg" alt="album from skrillex"></div>
+              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Deadmau5_-_while_%2812%29.png/220px-Deadmau5_-_while_%2812%29.png" alt="album from deadmau5"></div>
+              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
+              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
+              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
+              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
           </div>
         </div>
 
@@ -29,7 +33,7 @@
 
 
 
-      <div class="bigger textcenter" > Electronic music
+      <div> <h2>Electronic music</h2>
 
         <div class="littleSpace"> </div>
         <div class="albums">
@@ -47,71 +51,56 @@
 
 <style>
 
-  .textcenter{
+  h1{
+    color: white;
+    font-size: 96px;
+    text-align: center;
+  }
+
+  h2{
+    font-size: 35px;
+    color: white;
     text-align: center;
   }
 
   .albums{
     display: flex;
-    justify-content: space-evenly;
+    overflow: auto;
+  }
 
+  .albums::-webkit-scrollbar{
+    display: none;
+  }
+
+  .albums div div{
+    color: white;
+  }
+
+  .albums div:hover{
+    opacity: 0.6;
+    transition: all 100ms ease-in-out;
+  }
+
+  .albums div:active{
+    transform: scale(0.97);
+    transition: all 100ms ease-in-out;
+  }
+
+  .albums div:not(:last-child)
+  {
+    padding-right: 32px;
+  }
+
+  .albums div img{
+    width: 200px;
   }
 
   .littleSpace{
     height: 1em;
   }
   .space{
-    height: 5em;
-    /*background-color: black;*/
+    height: 3em;
   }
 
-
-  .aqua{
-    width: 100%;
-    height: 100%;
-    background-color: dimgray;
-  }
-
-  .backgroundImage{
-    background-image: url("http://www.assuropoil.fr/wp-content/uploads/assurance-chat-assurer-son-chat1.jpg");
-
-  }
-
-  h1{
-    text-align: center;
-  }
-
-  .bigger{
-    font-size: xx-large;
-  }
-
-  .background{
-    background-color: red;
-  }
-
-
-
-  .centerHorizontal{
-    height: max-content;
-    position: relative;
-    margin:auto;
-    bottom:0;
-    top:0;
-
-  }
-
-  .centerVertical{
-    display: flex;
-    justify-content: center;
-  }
-
-  .fullscreen
-  {
-    display: flex;
-    height: 100px;
-    width: 200px;
-    background-color: red;
-  }
 </style>
 
-<!--homePageTest-->
