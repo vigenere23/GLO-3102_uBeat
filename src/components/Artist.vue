@@ -3,8 +3,8 @@
     <div class="centered-page">
 
       <div id="title">
-        <h1 class="display-4">Tame Impala</h1>
-        <h2 class="display-2">Psychedelic rock</h2>
+        <h1>Tame Impala</h1>
+        <h2>Psychedelic rock</h2>
         <a href="https://itunes.apple.com/ca/artist/tame-impala/290242959" target="_blank">iTunes</a>
       </div>
 
@@ -15,7 +15,7 @@
       </div>
 
       <div class="cover-list">
-        <h3 class="display-1">Albums</h3>
+        <h3>Albums</h3>
         <ul>
           <li>
             <a href="javascript:">
@@ -69,6 +69,16 @@
 
   #artist-page #title h1 {
     margin-bottom: 0.1em;
+    font-size: 96px;
+    font-weight: 300;
+    line-height: 1em;
+    letter-spacing: -.04em;
+  }
+
+  #artist-page #title h2 {
+    font-size: 36px;
+    line-height: 1.5em;
+    font-weight: 400;
   }
 
   #artist-page #title a {
@@ -95,6 +105,9 @@
 
   .cover-list h3 {
     margin-bottom: 16px;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.2em;
   }
 
   .cover-list ul {
@@ -137,11 +150,36 @@
 
   .cover-list img {
     width: 200px;
-    height: 200px;
   }
 
-  @media screen and (max-width:640px) {
-    
+  @media screen and (max-width: 640px) {
+    #artist-page {
+      padding-top: 24px;
+    }
+
+    #artist-page #title {
+      margin-bottom: 32px;
+    }
+
+    #artist-page #title h1 {
+      font-size: 54px;
+    }
+
+    #artist-page #title h2 {
+      font-size: 24px;
+    }
+
+    .cover-list {
+      margin-top: 32px;
+    }
+
+    .cover-list h3 {
+      font-size: 24px;
+    }
+
+    .cover-list img {
+      width: 160px;
+    }
   }
 
 
