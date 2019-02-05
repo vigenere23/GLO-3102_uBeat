@@ -5,7 +5,7 @@
       <div id="title">
         <h1>Tame Impala</h1>
         <h2>Psychedelic rock</h2>
-        <a href="https://itunes.apple.com/ca/artist/tame-impala/290242959" target="_blank">iTunes</a>
+        <a target="_blank" href="https://geo.itunes.apple.com/ca/artist/tame-impala/290242959?mt=1&app=music" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music) no-repeat;width:158px;height:45px;"></a>
       </div>
 
       <div class="cover-list">
@@ -180,12 +180,10 @@
     font-size: 36px;
     line-height: 1.5em;
     font-weight: 400;
+    color: rgba(255, 255, 255, 0.68);
   }
 
   #artist-page #title a {
-    color: rgba(255, 255, 2555, 0.68);
-    font-size: 16px;
-    font-weight: 400;
     margin-top: 16px;
   }
 
@@ -206,6 +204,10 @@
     overflow-x: auto;
     padding: 8px 0;
     list-style: none;
+  }
+
+  .cover-list ul::-webkit-scrollbar { 
+    display: none; 
   }
 
   .cover-list li {
