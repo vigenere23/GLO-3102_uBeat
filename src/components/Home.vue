@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <div class="background">
+  <div class="aqua">
+    <div class="littleSpace"></div>
+    <div class="littleSpace"></div>
+
+    <div>
         <h1 class="bigger">Home</h1>
     </div>
     <div class="space"></div>
@@ -8,12 +11,12 @@
 
     <div class="aqua">
 
-        <div class="bigger textcenter" > Electronic music
+        <div class="textcenter" > <h2> Electronic music </h2>
 
 
           <div class="littleSpace"> </div>
           <div class="albums">
-              <div class="image"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> </div>
+              <div class="image"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
               <div class="bigger"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/Skrillex_scary_monsters.jpg/220px-Skrillex_scary_monsters.jpg" alt="album from skrillex"></div>
               <div class="bigger"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Deadmau5_-_while_%2812%29.png/220px-Deadmau5_-_while_%2812%29.png" alt="album from deadmau5"></div>
           </div>
@@ -58,7 +61,7 @@
     height: 1em;
   }
   .space{
-    height: 8em;
+    height: 5em;
     /*background-color: black;*/
   }
 
@@ -66,7 +69,7 @@
   .aqua{
     width: 100%;
     height: 100%;
-    /*background-color: aqua;*/
+    background-color: dimgray;
   }
 
   .backgroundImage{
