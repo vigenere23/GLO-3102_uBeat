@@ -243,13 +243,15 @@
     margin-top: 8px;
     text-transform: capitalize;
     font-size: 16px;
+    font-weight: 500;
     line-height: 1.25em;
   }
 
   .cover-list p.year {
     margin: 0;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.68);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .cover-list img {
