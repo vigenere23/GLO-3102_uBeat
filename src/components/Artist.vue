@@ -261,7 +261,37 @@
     width: 100%;
   }
 
-  @media screen and (max-width: 640px) {
+  @media screen and (min-width: 561px) and (max-width: 820px) {
+    #artist-page #title h1 {
+      font-size: 54px;
+    }
+
+    #artist-page #title h2 {
+      font-size: 24px;
+    }
+
+    .cover-list {
+      margin-top: 38px;
+    }
+
+    .cover-list h3 {
+      font-size: 28px;
+    }
+
+    .cover-list li {
+      flex-basis: 180px;
+    }
+
+    .cover-list p.name {
+      font-size: 15px;
+    }
+
+    .cover-list p.year {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
     #artist-page {
       padding-top: 24px;
     }
@@ -271,11 +301,11 @@
     }
 
     #artist-page #title h1 {
-      font-size: 54px;
+      font-size: 42px;
     }
 
     #artist-page #title h2 {
-      font-size: 24px;
+      font-size: 20px;
     }
 
     .cover-list {
@@ -287,12 +317,16 @@
     }
 
     .cover-list li {
-      width: 160px;
+      flex-basis: 140px;
+    }
+
+    .cover-list p.name {
+      font-size: 14px;
+    }
+
+    .cover-list p.year {
+      font-size: 13px;
     }
   }
 
-
 </style>
-<!--
-TODO: Logo itunes?
--->
