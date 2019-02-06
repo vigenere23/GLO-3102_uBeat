@@ -11,39 +11,80 @@
 
     <div>
 
-        <div> <h2> Electronic music </h2>
 
+      <div> <h2> Psychedelic rock </h2>
+
+        <div class="littleSpace"> </div>
+        <div class="albums">
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Tame_Impala_-_Currents.png" alt="album by Tame Impala"> <div> Currents </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Ta13oo_by_Denzel_Curry.jpg" alt="album by Denzel Curry"><div>Ta13oo</div></div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/7/7e/The_Sciences_%282018%29.jpg" alt="album by Sleep"><div>The sciences</div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/1/18/Kids_See_Ghost_Cover.jpg" alt="album by Kids See Ghosts"> <div> Kids See Ghosts </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/7/7f/MGMT_little_dark_age.jpg" alt="album by MGMT"> <div> Little Dark Age </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/5/55/Ghost_-_Prequelle_%28album%29.jpg" alt="album by Ghost"> <div> Prequelle </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Pink_Floyd%2C_Wish_You_Were_Here_%281975%29.png" alt="album by Pink Floyd"> <div>Wish You Were Here</div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg" alt="album by the Beatles"> <div> Abbey Road </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/0/09/Yes-close.jpg" alt="album by Yes"> <div> Close to the Edge </div> </div>
+
+        </div>
+      </div>
+
+      <div class="space"></div>
+
+        <div> <h2> Electronic </h2>
 
           <div class="littleSpace"> </div>
           <div class="albums">
-              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
-              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/Skrillex_scary_monsters.jpg/220px-Skrillex_scary_monsters.jpg" alt="album from skrillex"></div>
-              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Deadmau5_-_while_%2812%29.png/220px-Deadmau5_-_while_%2812%29.png" alt="album from deadmau5"></div>
-              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
-              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
-              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
-              <div> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Kaskade_-_atmosphere.jpg/220px-Kaskade_-_atmosphere.jpg" alt="album from kaskade"> <div> le nomd de tigui qui mange des patate </div> </div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/1/10/Kaskade_-_Automatic.jpg" alt="album by Kaskade"> <div> Automatic </div> </div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/b/b0/Deadmau5_-_Mau5ville_Level_3.jpg" alt="album by Deadmau5"><div>Mau5ville: Level 3</div></div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/5/52/RecessSkrillex.jpg" alt="album by Skrillex"><div>Recess</div> </div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/f/f3/Kraftwerk_-_3-D_The_Catalogue.png" alt="album by Kraftwerk"> <div> 3-D The Catalogue </div> </div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/0/0a/Marshmello_Joytime_II.jpg" alt="album by Marshmello"> <div> Joytime II </div> </div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/d/d7/The_Chainsmokers_%E2%80%93_Sick_Boy_album.png" alt="album by The Chainsmokers"> <div> Sick Boy </div> </div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/6/66/David_Guetta_-_7_%28album_cover%29.jpg" alt="album by David Guetta"> <div>7</div> </div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/6/63/Encore_album_cover.jpeg" alt="album by DJ Snake"> <div> Encore </div> </div>
+            <div> <img src="https://upload.wikimedia.org/wikipedia/en/f/fc/Clublife_Vol_5_China_Album_Cover.jpg" alt="album by  Tiësto"> <div>Clublife, Vol. 5 - China </div> </div>
           </div>
         </div>
-
-
-
 
       <div class="space"></div>
 
 
-
-      <div> <h2>Electronic music</h2>
+      <div> <h2> Rap </h2>
 
         <div class="littleSpace"> </div>
         <div class="albums">
-          <div class="image"> <img src="data:image/jpeg;base64,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" alt="album by Johny Cash"> </div>
-          <div class="bigger"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/Skrillex_scary_monsters.jpg/220px-Skrillex_scary_monsters.jpg" alt="album from skrillex"></div>
-          <div class="bigger"> <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d7/Deadmau5_-_while_%2812%29.png/220px-Deadmau5_-_while_%2812%29.png" alt="album from deadmau5"></div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/9/97/Cardi_B_-_Invasion_of_Privacy.png" alt="album by Cardi B"> <div> Invasion of Privacy </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/6/62/Eminem_-_Kamikaze.jpg" alt="album by Eminem"><div>Kamikaze </div></div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/6/65/Black_Panther_-_The_Album.png" alt="album by Kendrick Lamar"><div>Black Panther</div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/f/f8/Wu-Tang_The_Saga_Continues.jpg" alt="album by Wu Tang"> <div> The Saga Continues</div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/b/b1/50-cent-animal-ambition.jpg" alt="album by 50 Cent"> <div> Animal Ambition </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/8/83/HNDRXX_cover.jpg" alt="album by Future"> <div> Hndrxx </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/6/67/Kodak_Black_%E2%80%93_Dying_to_Live.png" alt="album by Kodak Black"> <div>Dying to Live</div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/6/65/Big_Sean_and_Metro_Boomin_%E2%80%93_Double_or_Nothing.png" alt="album by Big Sean and Metro Boomin"> <div> Double or Nothing </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/0/00/Carterfive.jpeg" alt="album by Lil Wayne"> <div> Tha Carter V </div> </div>
         </div>
       </div>
 
+      <div class="space"></div>
 
+      <div> <h2> Pop </h2>
+
+        <div class="littleSpace"> </div>
+        <div class="albums">
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/Thank_U%2C_Next_album_cover.png" alt="album by Ariana Grande"> <div> Thank U, Next </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/4/49/Red_Pill_Blues_cover.png" alt="album by Maroon 5"><div>Red Pill Blues</div></div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/a/a8/Rita_Ora_Phoenix_cover.png" alt="album by Rita Ora"><div>Phoenix</div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/4/45/Divide_cover.png" alt="album by Ed Sheeran"> <div> ÷ </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/2/20/Dua_Lipa_%28album%29.png" alt="album by Dua Lipa"> <div> Dua Lipa </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/e/e0/A_Star_Is_Born_%282018_soundtrack%29.png" alt="album by Lady Gaga and Bradley Cooper"> <div> A Star Is Born </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/b/b5/ImagineDragonsEvolve.jpg" alt="album by Imagine Dragons"> <div> Evolve </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/9/96/Adele_-_25_%28Official_Album_Cover%29.png" alt="album by Adele"> <div> 25 </div> </div>
+          <div> <img src="https://upload.wikimedia.org/wikipedia/en/9/9f/Katy_Perry_-_Witness_%28Official_Album_Cover%29.png" alt="album by  Katy Perry"> <div>Witness </div> </div>
+        </div>
+      </div>
+
+      <div class="fullPage blue-grey darken-4"></div>
 
     </div>
   </div>
@@ -100,6 +141,13 @@
   }
   .space{
     height: 3em;
+  }
+
+  .fullPage{
+    height: 100%;
+    width: 100%;
+
+    position: fixed;
   }
 
 </style>
