@@ -91,8 +91,8 @@
     justify-content: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .exposant{
     position: relative;
@@ -137,9 +137,11 @@
       z-index: 2;
     }
     #albumCard{
-      height: 100vw;
+      height: 95vw;
       max-height: 440px;
       min-height: 300px;
+      padding: 0;
+      margin-top: 20px;
     }
   }
 
