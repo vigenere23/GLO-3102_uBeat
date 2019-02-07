@@ -1,8 +1,6 @@
 <template>
     <div id="album">
-      <v-app id="inspire" class="blue-grey darken-4 full-height-page">
-        <h1>Album</h1>
-        <div>GLO-3102 Album page</div>
+      <v-app>
         <v-card id="albumCard" class="blue-grey darken-4 full-height-page">
           <v-img
             src="https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/4e/26/d5/4e26d5f3-2d62-1b5c-689a-e8de4e6f3797/00602577465284.rgb.jpg/400x400bb.jpeg"
@@ -33,6 +31,7 @@
           <v-list-tile
             v-for="item in items"
             :key="item.number"
+            id="test"
           >
 
             <v-list-tile-avatar id="songsNumber">
@@ -82,8 +81,6 @@
 </script>
 
 <style>
-  #inspire{
-  }
   #albumCover{
     width: 40%;
     max-width: 400px;
@@ -91,7 +88,8 @@
   #albumCard{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
   .exposant{
     position: relative;
@@ -118,5 +116,12 @@
     color: white;
     font-size: 20px;
   }
+  .album{
+
+  }
+  #test{
+    border-top: solid white 1px;
+  }
+
 
 </style>
