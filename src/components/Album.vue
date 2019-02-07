@@ -1,6 +1,6 @@
 <template>
     <div id="album">
-      <v-app>
+      <v-app class="blue-grey darken-4 full-height-page">
         <v-card id="albumCard" class="blue-grey darken-4 full-height-page">
           <v-img
             src="https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/4e/26/d5/4e26d5f3-2d62-1b5c-689a-e8de4e6f3797/00602577465284.rgb.jpg/400x400bb.jpeg"
@@ -26,12 +26,12 @@
             </div>
             </v-card-title>
         </v-card>
-        <v-list two-line subheader="Songs" class="blue-grey darken-3 full-height-page">
+        <v-list two-line subheader class="blue-grey darken-3 full-height-page">
           <v-subheader inset id="listeTitle">Songs</v-subheader>
           <v-list-tile
             v-for="item in items"
             :key="item.number"
-            id="test"
+            id="linesBetweenSongs"
           >
 
             <v-list-tile-avatar id="songsNumber">
@@ -81,6 +81,7 @@
 </script>
 
 <style>
+
   #albumCover{
     width: 40%;
     max-width: 400px;
@@ -90,6 +91,8 @@
     justify-content: center;
     padding-top: 20px;
     padding-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
   }
   .exposant{
     position: relative;
@@ -116,12 +119,28 @@
     color: white;
     font-size: 20px;
   }
-  .album{
 
-  }
-  #test{
+  #linesBetweenSongs{
     border-top: solid white 1px;
   }
 
+  @media (max-width: 600px){
+    #albumCover{
+      width: 90vw;
+      max-width: 400px;
+      position: absolute;
+      filter: blur(2px);
+      opacity: 0.5;
+      z-index: 1;
+    }
+    #infoAlbum{
+      z-index: 2;
+    }
+    #albumCard{
+      height: 100vw;
+      max-height: 440px;
+      min-height: 300px;
+    }
+  }
 
 </style>
