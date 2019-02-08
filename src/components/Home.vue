@@ -9,7 +9,7 @@
     <div class="space"></div>
 
 
-    <div>
+    <div class="padding">
 
 
       <div> <h2> Psychedelic rock </h2>
@@ -117,13 +117,17 @@
     color: white;
   }
 
-  .albums div:hover{
-    opacity: 0.6;
-    transition: all 100ms ease-in-out;
+  .albums div img{
+    width: 200px;
   }
 
   .albums div:active{
     transform: scale(0.97);
+    transition: all 100ms ease-in-out;
+  }
+
+  .albums div:hover{
+    opacity: 0.6;
     transition: all 100ms ease-in-out;
   }
 
@@ -132,22 +136,26 @@
     padding-right: 32px;
   }
 
-  .albums div img{
-    width: 200px;
-  }
-
-  .littleSpace{
-    height: 1em;
-  }
-  .space{
-    height: 3em;
-  }
-
   .fullPage{
     height: 100%;
     width: 100%;
 
     position: fixed;
+  }
+
+  .littleSpace{
+    height: 1em;
+  }
+
+  .padding{
+    max-width: 1000px;
+    padding: 16px;
+    margin:auto;
+
+  }
+
+  .space{
+    height: 3em;
   }
 
 </style>
