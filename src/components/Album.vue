@@ -1,59 +1,51 @@
 <template>
-    <div id="album">
-      <v-app class="blue-grey darken-4 full-height-page">
-        <v-card id="albumCard" class="blue-grey darken-4 full-height-page">
-          <v-img
-            src="https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/4e/26/d5/4e26d5f3-2d62-1b5c-689a-e8de4e6f3797/00602577465284.rgb.jpg/400x400bb.jpeg"
-            id="albumCover"
-          ></v-img>
-          <v-card-title primary-title>
-            <div id="infoAlbum">
-              <h1>
-                Thank You, Next
-              </h1>
-              <h2>
-                Ariana Grande
-              </h2>
-              <h3>
-                Release date: February 10<span class="exposant">th</span>, 2019
-              </h3>
-              <h4>
-                Pop &bull; 12 songs
-              </h4>
-              <v-card-actions id="AppleMusicLink">
-                <a href="https://geo.itunes.apple.com/us/album/thank-u-next/1450330588?mt=1&app=music" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2019-02-08&kind=album&bubble=apple_music) no-repeat;width:158px;height:45px;"></a>
-              </v-card-actions>
-            </div>
-            </v-card-title>
-        </v-card>
-        <v-list two-line subheader class="blue-grey darken-3 full-height-page">
-          <v-subheader inset id="listeTitle">Songs</v-subheader>
-          <v-list-tile
-            v-for="item in items"
-            :key="item.number"
-            id="linesBetweenSongs"
-          >
+  <div id="album-page full-height-page">
+    <v-app class="blue-grey darken-4">
+      <v-card id="album-card" class="blue-grey darken-4">
+        <v-img
+          src="https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/4e/26/d5/4e26d5f3-2d62-1b5c-689a-e8de4e6f3797/00602577465284.rgb.jpg/400x400bb.jpeg"
+          id="album-cover"
+        ></v-img>
+        <v-card-title primary-title>
+          <div id="info-album">
+            <h1>Thank You, Next</h1>
+            <h2>Ariana Grande</h2>
+            <h3>Release date: February 10<span class="exposant">th</span>, 2019</h3>
+            <h4>Pop &bull; 12 songs</h4>
+            <v-card-actions id="apple-music-link">
+              <a href="https://geo.itunes.apple.com/us/album/thank-u-next/1450330588?mt=1&app=music" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2019-02-08&kind=album&bubble=apple_music) no-repeat;width:158px;height:45px;"></a>
+            </v-card-actions>
+          </div>
+          </v-card-title>
+      </v-card>
+      <v-list two-line subheader class="blue-grey darken-3">
+        <v-subheader inset id="liste-title">Songs</v-subheader>
+        <v-list-tile
+          v-for="item in items"
+          :key="item.number"
+          id="lines-between-songs"
+        >
 
-            <v-list-tile-avatar id="songsNumber">
-              <v-list-tile-title>{{item.number}}</v-list-tile-title>
-            </v-list-tile-avatar>
+          <v-list-tile-avatar id="songs-number">
+            <v-list-tile-title>{{item.number}}</v-list-tile-title>
+          </v-list-tile-avatar>
 
-            <v-list-tile-content>
-              <v-list-tile-title id="songsTitle">{{item.title}}</v-list-tile-title>
-              <v-list-tile-sub-title id="songsLenght">{{item.time}}</v-list-tile-sub-title>
-            </v-list-tile-content>
+          <v-list-tile-content>
+            <v-list-tile-title id="songs-title">{{item.title}}</v-list-tile-title>
+            <v-list-tile-sub-title id="songs-lenght">{{item.time}}</v-list-tile-sub-title>
+          </v-list-tile-content>
 
-            <v-list-tile-action>
-              <v-btn icon ripple>
-                <v-icon color="white">play_arrow</v-icon>
-              </v-btn>
-            </v-list-tile-action>
+          <v-list-tile-action>
+            <v-btn icon ripple>
+              <v-icon color="white">play_arrow</v-icon>
+            </v-btn>
+          </v-list-tile-action>
 
-          </v-list-tile>
-        </v-list>
-      </v-app>
+        </v-list-tile>
+      </v-list>
+    </v-app>
 
-    </div>
+  </div>
 </template>
 
 <script>
@@ -82,11 +74,12 @@
 
 <style>
 
-  #albumCover{
+  #album-cover {
     width: 40%;
     max-width: 400px;
   }
-  #albumCard{
+
+  #album-card {
     display: flex;
     justify-content: center;
     padding-top: 20px;
@@ -94,7 +87,8 @@
     padding-left: 20px;
     padding-right: 20px;
   }
-  .exposant{
+
+  .exposant {
     position: relative;
     bottom: 1px;
     font-size: .8em;
@@ -102,30 +96,37 @@
     vertical-align:super;
     text-decoration:none;
   }
-  #AppleMusicLink{
+
+  #apple-music-link {
     margin-top: 30px;
   }
-  #infoAlbum{
+
+  #info-album {
     display: flex;
     flex-direction: column;
     color: white;
-
   }
-  #songsNumber, #songsTitle, #songsLenght{
+
+  #songs-number, #songs-title, #songs-lenght {
     color: white;
   }
 
-  #listeTitle{
+  #liste-title {
     color: white;
     font-size: 20px;
   }
 
-  #linesBetweenSongs{
+  #lines-between-songs {
     border-top: solid white 1px;
   }
 
-  @media (max-width: 600px){
-    #albumCover{
+  .full-height-page {
+    min-height: 100%;
+  }
+
+  @media (max-width: 600px) {
+
+    #album-cover {
       width: 90vw;
       max-width: 400px;
       position: absolute;
@@ -133,10 +134,12 @@
       opacity: 0.5;
       z-index: 1;
     }
-    #infoAlbum{
+
+    #info-album {
       z-index: 2;
     }
-    #albumCard{
+
+    #album-card {
       height: 95vw;
       max-height: 440px;
       min-height: 300px;
