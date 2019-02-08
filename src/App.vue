@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <div id="app">
+    <div id="app" class="full-height-page">
       <nav-menu></nav-menu>
       <router-view></router-view>
     </div>
@@ -20,4 +20,19 @@ export default {
 </script>
 
 <style>
+.centered-page {
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  padding: 16px;
+  margin: auto;
+}
+
+.full-height-page {
+  min-height: 100%;
+}
+
+a {
+  text-decoration: inherit;
+}
 </style>
