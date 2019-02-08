@@ -1,5 +1,5 @@
 <template>
-  <div class="blue-grey darken-4 full-height-page">
+  <div class="blue-grey darken-4 fullPage">
     <div class="littleSpace"></div>
     <div class="littleSpace"></div>
 
@@ -84,8 +84,6 @@
         </div>
       </div>
 
-      <div class="fullPage blue-grey darken-4"></div>
-
     </div>
   </div>
 </template>
@@ -139,7 +137,6 @@
   .fullPage{
     height: 100%;
     width: 100%;
-
     position: fixed;
   }
 
