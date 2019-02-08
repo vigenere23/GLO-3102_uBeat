@@ -1,5 +1,5 @@
 <template>
-  <div id="artist-page" class="blue-grey darken-4 full-height-page">
+  <div id="artist-page" class="blue-grey darken-4">
     <div class="centered-page">
 
       <div id="title">
@@ -10,7 +10,7 @@
 
       <div class="cover-list">
         <h3>Popular Songs</h3>
-        <ul>
+        <ul class="better-scrollbar">
           <li>
             <a href="javascript:">
               <img src="https://static.stereogum.com/uploads/2014/08/Tame-Impala-Feels-Like-We-Only-Go-Backwards-compressed.jpeg">
@@ -51,7 +51,7 @@
 
       <div class="cover-list">
         <h3>Albums</h3>
-        <ul>
+        <ul class="better-scrollbar">
           <li>
             <a href="javascript:">
               <img src="https://payload.cargocollective.com/1/4/158872/9666476/Tame-Impala-Currents-final-packshot-1200px_800.jpg">
@@ -78,7 +78,7 @@
 
       <div class="cover-list">
         <h3>Playlists</h3>
-        <ul>
+        <ul class="better-scrollbar">
           <li>
             <a href="javascript:">
               <img src="https://is4-ssl.mzstatic.com/image/thumb/Features125/v4/fe/66/15/fe661571-ae43-3ffa-5739-f6da4893a4a5/source/320x320sr.jpg">
@@ -105,7 +105,7 @@
 
       <div class="cover-list">
         <h3>Singles &amp; EP</h3>
-        <ul>
+        <ul class="better-scrollbar">
           <li>
             <a href="javascript:">
               <img src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/27/57/8d/27578d4e-8692-483f-c6c4-df948cdce0ab/855230008308.jpg/320x0w.jpg">
@@ -204,10 +204,6 @@
     overflow-x: auto;
     padding: 8px 0;
     list-style: none;
-  }
-
-  .cover-list ul::-webkit-scrollbar { 
-    display: none; 
   }
 
   .cover-list li {
