@@ -9,29 +9,30 @@
                          @click.stop="drawer.open = !drawer.open">
     </v-toolbar-side-icon>
     <v-toolbar-title
+      min-width="200px"
       v-if="windowWidth > 600">
       <v-btn
         flat
         :to="home.path"
-        large
+        small
         active-class=""
         color="white">
         <v-icon>headset</v-icon>
         UBeat
       </v-btn>
     </v-toolbar-title>
-    <v-spacer></v-spacer>
+    <v-spacer v-if="windowWidth >= 1264"></v-spacer>
     <v-text-field
       id="searchField"
       flat
       solo
       hide-details
-      style="max-width: 800px; width: 500px;"
+      style="max-width: 750px;"
       clearable
       append-icon='search'
       placeholder="Search">
     </v-text-field>
-    <v-spacer></v-spacer>
+    <v-spacer v-if="windowWidth >= 1264"></v-spacer>
   </v-toolbar>
 </template>
 <script>
