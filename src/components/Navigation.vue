@@ -4,6 +4,7 @@
     <toolbar :drawer="drawer" :toolbar="toolbar" :window-width="windowWidth"/>
     <v-navigation-drawer
       app
+      dark
       disable-resize-watcher
       class="secondary"
       :clipped="drawer.clipped"
@@ -104,7 +105,9 @@
           fixed: true,
           permanent: true,
           mini: this.windowWidth > 600 && this.windowWidth < 1264,
-          debounce: this.windowWidth > 600 && this.windowWidth < 1264,
+          debounceMobile: this.windowWidth <= 600,
+          debounceTablet: this.windowWidth > 600 && this.windowWidth < 1264,
+          debounceDesktop: this.windowWidth >= 1264,
         },
         toolbar: {
           fixed: true,
@@ -129,7 +132,8 @@
       this.windowWidth = window.innerWidth;
       this.$nextTick(() => {
         window.onresize = () => {
-          if (this.windowWidth <= 600 && this.drawer.debounce === true) {
+          this.windowWidth = window.innerWidth;
+          if (this.windowWidth <= 600 && this.drawer.debounceMobile === false) {
             this.drawer.open = false;
             this.drawer.clipped = false;
             this.drawer.fixed = false;
@@ -137,26 +141,32 @@
             this.drawer.mini = false;
             this.toolbar.fixed = true;
             this.toolbar.clippedLeft = true;
-            this.drawer.debounce = false;
+            this.drawer.debounceMobile = true;
+            this.drawer.debounceTablet = false;
+            this.drawer.debounceDesktop = false;
           } else if (this.windowWidth > 600 && this.windowWidth < 1264 &&
-                                        this.drawer.debounce === false) {
+                                        this.drawer.debounceTablet === false) {
             this.drawer.clipped = false;
             this.drawer.fixed = true;
             this.drawer.permanent = true;
             this.drawer.mini = true;
             this.toolbar.fixed = true;
             this.toolbar.clippedLeft = false;
-            this.drawer.debounce = true;
-          } else if (this.windowWidth >= 1264 && this.drawer.debounce === true) {
+            this.drawer.debounceMobile = false;
+            this.drawer.debounceTablet = true;
+            this.drawer.debounceDesktop = false;
+          } else if (this.windowWidth >= 1264 && this.drawer.debounceDesktop === false) {
+            this.drawer.open = true;
             this.drawer.clipped = true;
             this.drawer.fixed = true;
             this.drawer.permanent = true;
             this.drawer.mini = false;
             this.toolbar.fixed = false;
             this.toolbar.clippedLeft = true;
-            this.drawer.debounce = false;
+            this.drawer.debounceMobile = false;
+            this.drawer.debounceTablet = false;
+            this.drawer.debounceDesktop = true;
           }
-          this.windowWidth = window.innerWidth;
         };
       });
     },
