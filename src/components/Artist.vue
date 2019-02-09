@@ -275,7 +275,7 @@
     }
 
     .cover-list li {
-      flex-basis: 40%;
+      flex-basis: 28%;
     }
 
     .cover-list p.name {
