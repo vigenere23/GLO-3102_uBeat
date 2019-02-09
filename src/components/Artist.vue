@@ -257,7 +257,7 @@
     width: 100%;
   }
 
-  @media screen and (min-width: 601px) and (max-width: 1263px) {
+  @media screen and (max-width: 1263px) {
     #artist-page #title h1 {
       font-size: 54px;
     }
