@@ -209,7 +209,7 @@
   .cover-list li {
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 23%;
+    flex-basis: 20%;
   }
 
   .cover-list li:not(:last-child) {
@@ -275,7 +275,7 @@
     }
 
     .cover-list li {
-      flex-basis: 46%;
+      flex-basis: 40%;
     }
 
     .cover-list p.name {
@@ -313,7 +313,7 @@
     }
 
     .cover-list li {
-      flex-basis: 100%;
+      flex-basis: 50%;
     }
 
     .cover-list p.name {
