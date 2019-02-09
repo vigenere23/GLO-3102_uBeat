@@ -94,7 +94,7 @@
     data() {
       return {
         screenSize: '',
-        windowWidth: 0,
+        windowWidth: 1920,
         drawer: {
           open: false,
           clipped: true,
@@ -116,41 +116,11 @@
           { title: 'Settings', icon: 'settings', ref: '/settings' },
           { title: 'Logout', icon: 'logout', ref: '/logout' }
         ],
-        toggleMiniDrawer() {
-
-        },
-        setDesktopMode() {
-          this.drawer.clipped = true;
-          this.drawer.fixed = true;
-          this.drawer.permanent = true;
-          this.drawer.mini = false;
-        },
-        setTabletMode() {
-          this.drawer.clipped = true;
-          this.drawer.fixed = true;
-          this.drawer.permanent = true;
-          this.drawer.mini = true;
-        },
-        setPhoneMode() {
-          this.drawer.open = false;
-          this.drawer.clipped = false;
-          this.drawer.fixed = false;
-          this.drawer.permanent = false;
-          this.drawer.mini = false;
-        },
-        /*toggleMini() {
-          if (this.windowWidth > 600 && this.windowWidth < 1264) {
-            if ()
-          } else {
-            this.drawer.open = !this.drawer.open;
-          }
-        },*/
       };
     },
     mounted() {
       this.$nextTick(() => {
         window.onresize = () => {
-          console.log('RESIZE EVENT');
           if (this.windowWidth > 600 && this.windowWidth < 1264 && this.drawer.debounce === false) {
             this.drawer.mini = true;
             this.drawer.debounce = true;
