@@ -209,7 +209,7 @@
   .cover-list li {
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 23%;
+    flex-basis: 200px;
   }
 
   .cover-list li:not(:last-child) {
@@ -257,7 +257,7 @@
     width: 100%;
   }
 
-  @media screen and (min-width: 601px) and (max-width: 1263px) {
+  @media screen and (min-width: 561px) and (max-width: 820px) {
     #artist-page #title h1 {
       font-size: 54px;
     }
@@ -275,7 +275,7 @@
     }
 
     .cover-list li {
-      flex-basis: 46%;
+      flex-basis: 180px;
     }
 
     .cover-list p.name {
@@ -287,7 +287,7 @@
     }
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 560px) {
     #artist-page {
       padding-top: 24px;
     }
@@ -313,7 +313,7 @@
     }
 
     .cover-list li {
-      flex-basis: 100%;
+      flex-basis: 140px;
     }
 
     .cover-list p.name {

@@ -26,7 +26,7 @@
 <style>
   .centered-page {
     width: 100%;
-    // max-width: 1000px;
+    max-width: 1000px;
     box-sizing: border-box;
     padding: 16px;
     margin: auto;
