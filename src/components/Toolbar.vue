@@ -5,8 +5,10 @@
     color="primary"
     :fixed="toolbar.fixed"
     :clipped-left="toolbar.clippedLeft">
-    <v-toolbar-side-icon v-if="windowWidth <= 600"
-                         @click.stop="drawer.open = !drawer.open">
+    <v-toolbar-side-icon
+      dark
+      v-if="windowWidth <= 600"
+      @click.stop="drawer.open = !drawer.open">
     </v-toolbar-side-icon>
     <v-toolbar-title
       min-width="200px"

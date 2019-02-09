@@ -287,7 +287,7 @@
     }
   }
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 600px) {
     #artist-page {
       padding-top: 24px;
     }
