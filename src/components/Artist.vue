@@ -257,7 +257,7 @@
     width: 100%;
   }
 
-  @media screen and (min-width: 561px) and (max-width: 820px) {
+  @media screen and (max-width: 1263px) {
     #artist-page #title h1 {
       font-size: 54px;
     }
@@ -287,7 +287,7 @@
     }
   }
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 600px) {
     #artist-page {
       padding-top: 24px;
     }
