@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <div id="app" class="full-height-page">
+    <div id="app" class="blue-grey darken-4">
       <nav-menu></nav-menu>
       <v-content>
         <v-flex shrink>
@@ -32,8 +32,22 @@
     margin: auto;
   }
 
-  .full-height-page {
+  #app {
     min-height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 64px;
+  }
+
+  .better-scrollbar::-webkit-scrollbar {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    height: 10px;
+    width: 10px;
+  }
+
+  .better-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
   }
 
   a {
