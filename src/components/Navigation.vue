@@ -5,6 +5,7 @@
     <v-navigation-drawer
       app
       dark
+      floating
       disable-resize-watcher
       class="secondary"
       :clipped="drawer.clipped"
@@ -42,6 +43,8 @@
       <v-list>
         <v-divider></v-divider>
         <v-list-tile
+          active-class="blue-grey darken-4"
+          :class="item.path === $route.path ? 'blue-grey darken-4' : ''"
           v-for="item in navigationDrawerItems"
           :key="item.title"
           :to="item.path">
@@ -60,6 +63,8 @@
           HELPER
         </v-list-tile>
         <v-list-tile
+          active-class="blue-grey darken-4"
+          :class="item.path === $route.path ? 'blue-grey darken-4' : ''"
           v-for="item in correctionHelper"
           :key="item.title"
           :to="item.path">
@@ -74,6 +79,8 @@
       <v-list dense>
         <v-divider></v-divider>
         <v-list-tile
+          active-class="blue-grey darken-4"
+          :class="item.path === $route.path ? 'blue-grey darken-4' : ''"
           v-for="item in userMenuItem"
           :key="item.title"
           :to="item.path">
@@ -172,4 +179,3 @@
     },
   };
 </script>
-

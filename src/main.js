@@ -12,9 +12,8 @@ Vue.use(Vuetify, {
   theme: {
     primary: '#0D2029',
     secondary: '#182A33',
-    // secondary: '#40525B',
     accent: '#FFFAEC',
-    menuText: 'BAAD8C',
+    selected: 'colors.blue-grey.darken-4',
   }
 });
 
