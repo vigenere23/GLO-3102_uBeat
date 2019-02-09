@@ -2,37 +2,41 @@
   <v-app id="inspire">
     <div id="app" class="full-height-page">
       <nav-menu></nav-menu>
-      <router-view></router-view>
+      <v-content>
+        <v-flex shrink>
+          <router-view></router-view>
+        </v-flex>
+      </v-content>
     </div>
   </v-app>
 </template>
 
 <script>
-import 'typeface-roboto/index.css';
-import Navigation from '@/components/Navigation';
+  import 'typeface-roboto/index.css';
+  import Navigation from '@/components/Navigation';
 
-export default {
-  name: 'app',
-  components: {
-    'nav-menu': Navigation
-  }
-};
+  export default {
+    name: 'app',
+    components: {
+      'nav-menu': Navigation
+    }
+  };
 </script>
 
 <style>
-.centered-page {
-  width: 100%;
-  max-width: 1000px;
-  box-sizing: border-box;
-  padding: 16px;
-  margin: auto;
-}
+  .centered-page {
+    width: 100%;
+    max-width: 1000px;
+    box-sizing: border-box;
+    padding: 16px;
+    margin: auto;
+  }
 
-.full-height-page {
-  min-height: 100%;
-}
+  .full-height-page {
+    min-height: 100%;
+  }
 
-a {
-  text-decoration: inherit;
-}
+  a {
+    text-decoration: inherit;
+  }
 </style>

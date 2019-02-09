@@ -8,7 +8,14 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#182A33',
+    secondary: '#40525B',
+    accent: '#FFFAEC',
+    menuText: 'BAAD8C',
+  }
+});
 
 /* eslint-disable no-new */
 new Vue({

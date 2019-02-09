@@ -1,42 +1,17 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css"/>
 <template id="navigation-template">
   <div id="navigationContainer">
-    <v-toolbar
-      dark
-      app
-      height="64px"
-      :fixed="toolbar.fixed"
-      :clipped-left="toolbar.clippedLeft">
-      <v-toolbar-side-icon v-if="windowWidth <= 600"
-        @click.stop="drawer.open = !drawer.open">
-      </v-toolbar-side-icon>
-      <v-toolbar-title v-if="windowWidth > 600">
-        <v-btn flat>
-          <v-icon>headset</v-icon>
-          UBeat
-        </v-btn>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-text-field
-        id="searchField"
-        flat
-        solo
-        hide-details
-        style="max-width: 800px; width: 500px;"
-        clearable
-        append-icon='search'
-        placeholder="Search">
-      </v-text-field>
-      <v-spacer></v-spacer>
-    </v-toolbar>
+    <toolbar :drawer="drawer" :toolbar="toolbar" :window-width="windowWidth"/>
     <v-navigation-drawer
       app
-      dark
-      :clipped="windowWidth > 600"
-      :fixed="windowWidth > 600"
-      :permanent="windowWidth > 600"
+      disable-resize-watcher
+      class="secondary"
+      :clipped="drawer.clipped"
+      :fixed="drawer.fixed"
+      :permanent="drawer.permanent"
       :mini-variant.sync="drawer.mini"
-      v-model="drawer.open">
+      v-model="drawer.open"
+    >
       <v-toolbar flat class="transparent">
         <v-list>
           <v-list-tile avatar>
@@ -53,6 +28,13 @@
                 <v-icon>chevron_left</v-icon>
               </v-btn>
             </v-list-tile-action>
+            <v-list-tile-action v-if="windowWidth <= 600">
+              <v-btn
+                icon
+                @click.stop="drawer.open = !drawer.open">
+                <v-icon>chevron_left</v-icon>
+              </v-btn>
+            </v-list-tile-action>
           </v-list-tile>
         </v-list>
       </v-toolbar>
@@ -61,12 +43,30 @@
         <v-list-tile
           v-for="item in navigationDrawerItems"
           :key="item.title"
-          @click="">
+          :to="item.path">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+      <!-- TODO: Remove this div for release 2, these are helper for correction -->
+      <v-list id="correctionHelper">
+        <v-divider></v-divider>
+        <v-list-tile>
+          HELPER
+        </v-list-tile>
+        <v-list-tile
+          v-for="item in correctionHelper"
+          :key="item.title"
+          :to="item.path">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.name }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -75,12 +75,12 @@
         <v-list-tile
           v-for="item in userMenuItem"
           :key="item.title"
-          @click="">
+          :to="item.path">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title>{{ item.name }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -89,46 +89,71 @@
 </template>
 
 <script>
+  import Toolbar from './Toolbar';
+
   export default {
+    components: { Toolbar },
     tempplate: '#navigation-template',
     data() {
       return {
         screenSize: '',
-        windowWidth: 1920,
+        windowWidth: null,
         drawer: {
           open: false,
           clipped: true,
           fixed: true,
           permanent: true,
-          mini: false,
-          debounce: false,
+          mini: this.windowWidth > 600 && this.windowWidth < 1264,
+          debounce: this.windowWidth > 600 && this.windowWidth < 1264,
         },
         toolbar: {
           fixed: true,
           clippedLeft: true,
         },
         navigationDrawerItems: [
-          { title: 'Home', icon: 'dashboard', ref: '/' },
-          { title: 'Playlists', icon: 'queue_music', ref: '/playlists' }
+          { name: 'Home', icon: 'dashboard', path: '/' },
+          { name: 'Playlists', icon: 'queue_music', path: '/playlists' }
+        ],
+        correctionHelper: [
+          { name: 'Artist', icon: 'dashboard', path: '/artist' },
+          { name: 'Album', icon: 'queue_music', path: '/album' }
         ],
         userMenuItem: [
-          { title: 'Profile', icon: 'person', ref: '/profile' },
-          { title: 'Settings', icon: 'settings', ref: '/settings' },
-          { title: 'Logout', icon: 'logout', ref: '/logout' }
+          { name: 'Profile', icon: 'person', path: '/profile' },
+          { name: 'Settings', icon: 'settings', path: '/settings' },
+          { name: 'Logout', icon: 'logout', path: '/logout' }
         ],
       };
     },
     mounted() {
+      this.windowWidth = window.innerWidth;
       this.$nextTick(() => {
         window.onresize = () => {
-          if (this.windowWidth > 600 && this.windowWidth < 1264 && this.drawer.debounce === false) {
+          if (this.windowWidth <= 600 && this.drawer.debounce === true) {
+            this.drawer.open = false;
+            this.drawer.clipped = false;
+            this.drawer.fixed = false;
+            this.drawer.permanent = false;
+            this.drawer.mini = false;
+            this.toolbar.fixed = true;
+            this.toolbar.clippedLeft = true;
+            this.drawer.debounce = false;
+          } else if (this.windowWidth > 600 && this.windowWidth < 1264 &&
+                                        this.drawer.debounce === false) {
+            this.drawer.clipped = false;
+            this.drawer.fixed = true;
+            this.drawer.permanent = true;
             this.drawer.mini = true;
+            this.toolbar.fixed = true;
+            this.toolbar.clippedLeft = false;
             this.drawer.debounce = true;
           } else if (this.windowWidth >= 1264 && this.drawer.debounce === true) {
+            this.drawer.clipped = true;
+            this.drawer.fixed = true;
+            this.drawer.permanent = true;
             this.drawer.mini = false;
-            this.drawer.debounce = false;
-          } else if (this.windowWidth <= 600) {
-            this.drawer.mini = false;
+            this.toolbar.fixed = false;
+            this.toolbar.clippedLeft = true;
             this.drawer.debounce = false;
           }
           this.windowWidth = window.innerWidth;
@@ -138,8 +163,3 @@
   };
 </script>
 
-<style>
-  html {
-    overflow-y: hidden;
-  }
-</style>
