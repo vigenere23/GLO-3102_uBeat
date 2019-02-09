@@ -12,6 +12,9 @@
       v-if="windowWidth > 600">
       <v-btn
         flat
+        :to="home.path"
+        large
+        active-class=""
         color="accent">
         <v-icon>headset</v-icon>
         UBeat
@@ -35,6 +38,11 @@
 <script>
   export default {
     name: 'toolbar',
+    data() {
+      return {
+        home: { name: 'Home', icon: 'dashboard', path: '/' }
+      };
+    },
     props: {
       drawer: {},
       toolbar: {},
