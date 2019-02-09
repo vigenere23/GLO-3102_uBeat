@@ -15,7 +15,7 @@
         :to="home.path"
         large
         active-class=""
-        color="accent">
+        color="white">
         <v-icon>headset</v-icon>
         UBeat
       </v-btn>
@@ -26,7 +26,6 @@
       flat
       solo
       hide-details
-      background-color="accent"
       style="max-width: 800px; width: 500px;"
       clearable
       append-icon='search'
