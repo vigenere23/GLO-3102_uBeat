@@ -91,8 +91,8 @@
     bottom: 1px;
     font-size: .8em;
     line-height: .8em;
-    vertical-align:super;
-    text-decoration:none;
+    vertical-align: super;
+    text-decoration: none;
   }
 
   #apple-music-link {
