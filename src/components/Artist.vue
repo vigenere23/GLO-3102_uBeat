@@ -1,13 +1,11 @@
 <template>
   <div id="artist-page" class="blue-grey darken-4">
     <div class="centered-page">
-
       <div id="title">
         <h1>Tame Impala</h1>
         <h2>Psychedelic rock</h2>
         <a target="_blank" href="https://geo.itunes.apple.com/ca/artist/tame-impala/290242959?mt=1&app=music" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music) no-repeat;width:158px;height:45px;"></a>
       </div>
-
       <div class="cover-list">
         <h3>Popular Songs</h3>
         <ul class="better-scrollbar">
@@ -48,7 +46,6 @@
           </li>
         </ul>
       </div>
-
       <div class="cover-list">
         <h3>Albums</h3>
         <ul class="better-scrollbar">
@@ -75,7 +72,6 @@
           </li>
         </ul>
       </div>
-
       <div class="cover-list">
         <h3>Playlists</h3>
         <ul class="better-scrollbar">
@@ -102,7 +98,6 @@
           </li>
         </ul>
       </div>
-
       <div class="cover-list">
         <h3>Singles &amp; EP</h3>
         <ul class="better-scrollbar">
@@ -150,179 +145,6 @@
           </li>
         </ul>
       </div>
-
     </div>
   </div>
 </template>
-
-<style>
-
-  #artist-page {
-    width: 100%;
-    padding-top: 56px;
-    color: white;
-  }
-
-  #artist-page #title {
-    text-align: center;
-    margin-bottom: 56px;
-  }
-
-  #artist-page #title h1 {
-    margin-bottom: 0.1em;
-    font-size: 96px;
-    font-weight: 300;
-    line-height: 1em;
-    letter-spacing: -.04em;
-  }
-
-  #artist-page #title h2 {
-    font-size: 36px;
-    line-height: 1.5em;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.68);
-  }
-
-  #artist-page #title a {
-    margin-top: 16px;
-  }
-
-  .cover-list {
-    width: 100%;
-    margin-top: 64px;
-  }
-
-  .cover-list h3 {
-    margin-bottom: 16px;
-    font-size: 34px;
-    font-weight: 400;
-    line-height: 1.2em;
-  }
-
-  .cover-list ul {
-    display: flex;
-    overflow-x: auto;
-    padding: 8px 0;
-    list-style: none;
-  }
-
-  .cover-list li {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 20%;
-  }
-
-  .cover-list li:not(:last-child) {
-    margin-right: 32px;
-  }
-
-  .cover-list a {
-    display: block;
-    color: white;
-    transition: all 200ms ease-in-out;
-  }
-
-  .cover-list a:hover {
-    opacity: 0.6;
-    transition: all 100ms ease-in-out;
-  }
-
-  .cover-list a:active {
-    transform: scale(0.97);
-    transition: all 100ms ease-in-out;
-  }
-
-  .cover-list a:focus {
-    outline: none;
-  }
-
-  .cover-list p.name {
-    margin: 0;
-    margin-top: 8px;
-    text-transform: capitalize;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.25em;
-  }
-
-  .cover-list p.year {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .cover-list img {
-    display: block;
-    width: 100%;
-  }
-
-  @media screen and (max-width: 1263px) {
-    #artist-page #title h1 {
-      font-size: 54px;
-    }
-
-    #artist-page #title h2 {
-      font-size: 24px;
-    }
-
-    .cover-list {
-      margin-top: 38px;
-    }
-
-    .cover-list h3 {
-      font-size: 28px;
-    }
-
-    .cover-list li {
-      flex-basis: 28%;
-    }
-
-    .cover-list p.name {
-      font-size: 15px;
-    }
-
-    .cover-list p.year {
-      font-size: 14px;
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    #artist-page {
-      padding-top: 24px;
-    }
-
-    #artist-page #title {
-      margin-bottom: 32px;
-    }
-
-    #artist-page #title h1 {
-      font-size: 42px;
-    }
-
-    #artist-page #title h2 {
-      font-size: 20px;
-    }
-
-    .cover-list {
-      margin-top: 32px;
-    }
-
-    .cover-list h3 {
-      font-size: 24px;
-    }
-
-    .cover-list li {
-      flex-basis: 50%;
-    }
-
-    .cover-list p.name {
-      font-size: 14px;
-    }
-
-    .cover-list p.year {
-      font-size: 13px;
-    }
-  }
-
-</style>
