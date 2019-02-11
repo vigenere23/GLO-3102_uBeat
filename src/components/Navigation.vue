@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="../css/style.css"/>
 <template id="navigation-template">
   <div id="navigationContainer">
     <toolbar :drawer="drawer" :toolbar="toolbar" :window-width="windowWidth"/>
