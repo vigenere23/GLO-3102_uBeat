@@ -8,8 +8,8 @@
         :key="i"
         :title="coverList.title"
         :type="coverList.type"
-        :covers="coverList.covers">
-      </cover-list>
+        :covers="coverList.covers"
+      />
 
     </div>
   </div>

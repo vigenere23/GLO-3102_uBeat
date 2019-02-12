@@ -66,11 +66,6 @@ export default [
       {
         name: 'Influences',
         imageSrc: 'https://is2-ssl.mzstatic.com/image/thumb/Features118/v4/54/27/bf/5427bf24-e70f-5ac2-72fe-ea90ed6075f1/source/320x320sr.jpg'
-      },
-      {
-        name: '',
-        desc: 2012,
-        imageSrc: ''
       }
     ]
   },

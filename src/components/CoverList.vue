@@ -3,34 +3,40 @@
     <h3>{{ title }}</h3>
     <ul class="better-scrollbar">
       <li v-for="(cover, i) in covers" :key="i">
-        <cover
+        <cover-list-item
           :type="cover.type || type"
           :name="cover.name"
           :desc="cover.desc"
-          :imageSrc="cover.imageSrc">
-        </cover>
+          :image-src="cover.imageSrc"
+        />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Cover from '@/components/Cover';
+import CoverListItem from '@/components/CoverListItem';
 
 export default {
-  name: 'cover-list',
+  name: 'CoverList',
   components: {
-    Cover
+    CoverListItem
   },
   props: {
-    title: String,
+    title: {
+      type: String,
+      required: true
+    },
     type: String,
-    covers: Array
+    covers: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .cover-list {
   width: 100%;
   margin-top: 64px;
@@ -54,10 +60,7 @@ export default {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 20%;
-
-    &:not(:last-child) {
-      margin-right: 32px;
-    }
+    margin-right: 32px;
   }
 }
 

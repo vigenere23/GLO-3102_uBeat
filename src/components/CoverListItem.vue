@@ -9,17 +9,23 @@
 
 <script>
 export default {
-  name: 'cover',
+  name: 'CoverListItem',
   props: {
     type: String,
-    name: String,
+    name: {
+      type: String,
+      required: true
+    },
     desc: String,
-    imageSrc: String
+    imageSrc: {
+      type: String,
+      required: true
+    }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .cover {
   display: block;
   color: white;
