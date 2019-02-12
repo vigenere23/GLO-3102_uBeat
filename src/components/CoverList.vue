@@ -6,7 +6,7 @@
         <cover
           :type="cover.type || type"
           :name="cover.name"
-          :year="cover.year"
+          :desc="cover.desc"
           :imageSrc="cover.imageSrc">
         </cover>
       </li>
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import cover from '@/components/Cover';
+import Cover from '@/components/Cover';
 
 export default {
   name: 'cover-list',
   components: {
-    cover
+    Cover
   },
   props: {
     title: String,

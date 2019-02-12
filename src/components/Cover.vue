@@ -3,7 +3,7 @@
   <a class="cover" href="javascript:">
     <img :src=imageSrc>
     <p class="name">{{ name }}</p>
-    <p class="year">{{ year }}</p>
+    <p class="desc" v-if="desc">{{ desc }}</p>
   </a>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   props: {
     type: String,
     name: String,
-    year: Number,
+    desc: String,
     imageSrc: String
   }
 };
@@ -50,7 +50,7 @@ export default {
       line-height: 1.25em;
     }
 
-    &.year {
+    &.desc {
       font-size: 14px;
       color: rgba(255, 255, 255, 0.5);
     }
@@ -69,7 +69,7 @@ export default {
       font-size: 15px;
     }
 
-    p.year {
+    p.desc {
       font-size: 14px;
     }
   }
@@ -82,7 +82,7 @@ export default {
       font-size: 14px;
     }
 
-    p.year {
+    p.desc {
       font-size: 13px;
     }
   }
