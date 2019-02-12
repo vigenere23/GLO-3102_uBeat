@@ -107,7 +107,7 @@ export default {
           ]
         },
         {
-          title: 'Singles &amp; EPs',
+          title: 'Singles & EPs',
           covers: [
             {
               name: 'Whiplash',
