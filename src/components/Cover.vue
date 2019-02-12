@@ -1,6 +1,7 @@
 <template>
+  <!-- TODO : replace href by "/{{ type }}/{{ id or name }}" -->
   <a class="cover" href="javascript:">
-    <img src="{{ imageSrc }}">
+    <img :src=imageSrc>
     <p class="name">{{ name }}</p>
     <p class="year">{{ year }}</p>
   </a>
@@ -8,17 +9,17 @@
 
 <script>
 export default {
-  name: "cover",
-  porps: {
+  name: 'cover',
+  props: {
     type: String,
     name: String,
     year: Number,
     imageSrc: String
   }
-}
+};
 </script>
 
-<style lang="sass">
+<style lang="scss">
 .cover {
   display: block;
   color: white;

@@ -4,32 +4,33 @@
     <ul class="better-scrollbar">
       <li v-for="(cover, i) in covers" :key="i">
         <cover
-          :type="cover.type"
+          :type="cover.type || type"
           :name="cover.name"
           :year="cover.year"
-          :imageSrc="cover.imageSrc"
-        >
+          :imageSrc="cover.imageSrc">
+        </cover>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Cover from '@/components/Cover.vue'
+import cover from '@/components/Cover';
 
 export default {
-  name: "cover-list",
+  name: 'cover-list',
   components: {
-    "cover": Cover
+    cover
   },
   props: {
     title: String,
+    type: String,
     covers: Array
   }
-}
+};
 </script>
 
-<style lang="sass">
+<style lang="scss">
 .cover-list {
   width: 100%;
   margin-top: 64px;
