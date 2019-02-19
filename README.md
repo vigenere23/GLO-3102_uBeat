@@ -1,43 +1,44 @@
-# vue-starter
+# UBeat
 
-Kit de départ préconfiguré incluant [VueJS](https://github.com/vuejs/vue), [Babel](https://babeljs.io/), [Webpack](https://webpack.js.org/) et [ESLint](https://eslint.org/) pour le cours GLO-3102.
-
-## Prérequis
-- Git [Windows](http://www.git-scm.com/book/en/Getting-Started-Installing-Git#Installing-on-Windows), [Mac](http://www.git-scm.com/book/en/Getting-Started-Installing-Git#Installing-on-Mac), [Linux](http://www.git-scm.com/book/en/Getting-Started-Installing-Git#Installing-on-Linux)
-- [Node.js](https://nodejs.org/en/) (version LTS recommandée)
-
-Vérifier que Node est installé avec la commande:
-```bash
-node -v
-```
-Vérifier que Node est installé avec la commande:
-```bash
-npm -v
-```
+Bienvenue au projet UBeat, la plateforme musicale moderne et efficace! 
 
 ## Installation
 
+Pour démarrer le projet, voici quelques étapes à accomplir:
+
+### Prérequis
+
+1. Installer [Node]()
+2. Cloner le projet
+3. Dans le dossier du projet, exécutez `npm install`
+
+### Démarrage
+
+Pour démarrer l'application, allez dans le dossier du projet, puis:
+
 ```bash
-# install dependencies
-npm install
+npm run start
 ```
 
-## Développement
+Pour activer le "hot-reloading" :
+
 ```bash
-# serve with hot reload at localhost:8080
-npm start
+npm run dev
 ```
 
-## Livrable 1
-Faites vos modifications aux fichiers `Album.vue`, `Artist.vue`, `Home.vue` et `Navigation.vue`. Ajoutez votre HTML dans la balise `<template>` et votre CSS dans la balise `<style>` de chacun des components.
+## Informations importantes
 
-## Livrable 2-3
-Libre à vous de modifier la structure des fichiers.
+### Livrable 2
 
+Voici quelques informations importante concernant le livrable 2 du projet :
 
-## Notes
-### Vue
-Ce projet a été généré avec [vue-cli](https://github.com/vuejs/vue-cli) en suivant le template webpack. Voir le [guide](http://vuejs-templates.github.io/webpack/) et la [documentation de vue-loader](http://vuejs.github.io/vue-loader) pour plus de détails.
+1. Routes existantes:
+   1. `/` : affiche quelques albums selon les genres.
+   2. `/artist/:id` : affiche les informations de l'artiste à cet `id`.
+   3. `/artist` : redirige vers la page `/artist/290242959` (Tame Impala) afin d'éviter d'avoir à connaître un id.
+   4. `/album/:id` : affiche les informations de l'album à cet `id`.
+   5. `/album` : redirige vers la page `/album/` (Thank U, Next) afin d'éviter d'avoir à connaître un id.
+2. Boutons d'accès rapide (HELPER) dans la navigation :
+   1. `Artist` : Permet d'accéder à la page `/artist`
+   2. `Album` : Permet d'accéder à la page `/album`
 
-### ESLint
-ESLint est configuré afin de respecter un certain standard de code à travers votre équipe. Il est basé sur la [configuration airbnb](https://github.com/airbnb/javascript) qui rassemble les règles de base populaires. Libre à vous de modifier cette configuration via `.eslintrc.js`.
