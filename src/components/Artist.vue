@@ -5,7 +5,7 @@
       <div id="title">
         <h1>{{ artistName }}</h1>
         <h2>{{ artistGenre }}</h2>
-        <a target="_blank" href="https://geo.itunes.apple.com/ca/artist/tame-impala/290242959?mt=1&app=music' style='display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music) no-repeat;width:158px;height:45px;"></a>
+        <a id="itunes-link" target="_blank" :href="itunesLink"></a>
       </div>
 
       <cover-list
@@ -51,7 +51,8 @@ export default {
       eps: [],
       singles: [],
       artistName: '',
-      artistGenre: ''
+      artistGenre: '',
+      itunesLink: ''
     };
   },
   async mounted() {
@@ -63,6 +64,7 @@ export default {
       const infos = await helpers.getArtistInfos(this.artistId);
       this.artistName = infos.artistName;
       this.artistGenre = infos.primaryGenreName;
+      this.itunesLink = helpers.getItunesLink(infos.artistLinkUrl);
     },
     async loadAlbums() {
       const albums = await helpers.getAlbumsOfArtist(this.artistId);

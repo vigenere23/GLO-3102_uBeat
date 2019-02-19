@@ -32,6 +32,10 @@ export default {
     return `${baseUrl}${size}x${size}bb.jpg`;
   },
 
+  getItunesLink(baseLink) {
+    return `${baseLink.replace(/\/us\//, '/ca/')}&app=music`;
+  },
+
   async getAlbumsOfArtist(artistId) {
     const url = `${consts.API_URL}/artists/${artistId}/albums`;
     const data = await getFromApi(url);

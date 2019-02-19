@@ -29,6 +29,15 @@ a {
   text-decoration: inherit;
 }
 
+#itunes-link {
+  display: inline-block;
+  overflow: hidden;
+  background-image: url('https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music');
+  background-repeat: no-repeat;
+  width: 158px;
+  height: 45px;
+}
+
 #home-page h1 {
   color: white;
   font-size: 96px;
