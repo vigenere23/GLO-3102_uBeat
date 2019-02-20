@@ -8,7 +8,7 @@ Pour démarrer le projet, voici quelques étapes à accomplir:
 
 ### Prérequis
 
-1. Installer [Node]()
+1. Installer [Node](https://nodejs.org/)
 2. Cloner le projet
 3. Dans le dossier du projet, exécutez `npm install`
 
