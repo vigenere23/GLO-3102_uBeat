@@ -1,6 +1,6 @@
 <template>
   <cover-list-item
-    :name="name"
+    :name="nameWithAdvisory"
     :desc="year"
     :image="imageHd"
     :link="link"
@@ -25,6 +25,7 @@ export default {
       type: Number,
       required: true
     },
+    advisory: String,
     image: {
       type: String,
       required: true
@@ -35,6 +36,9 @@ export default {
     }
   },
   computed: {
+    nameWithAdvisory() {
+      return this.advisory ? `${this.name} [${this.advisory}]` : this.name;
+    },
     link() {
       return `/album/${this.albumId}`;
     },

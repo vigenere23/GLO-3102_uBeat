@@ -6,6 +6,7 @@
         <cover-list-album-year
           :name="cover.collectionName"
           :year="new Date(cover.releaseDate).getFullYear()"
+          :advisory="cover.contentAdvisoryRating"
           :albumId="cover.collectionId"
           :image="cover.artworkUrl100"
         />

@@ -9,18 +9,21 @@
       </div>
 
       <cover-list
+        v-if="albums.length"
         title="Albums"
         type="year-album"
         :covers="albums"
       />
 
       <cover-list
+        v-if="singles.length"
         title="Singles"
         type="year-album"
         :covers="singles"
       />
 
       <cover-list
+        v-if="eps.length"
         title="EPs"
         type="year-album"
         :covers="eps"
@@ -39,12 +42,6 @@ export default {
   components: {
     CoverList
   },
-  props: {
-    artistId: {
-      type: Number,
-      required: true
-    }
-  },
   data() {
     return {
       albums: [],
@@ -56,18 +53,34 @@ export default {
     };
   },
   async mounted() {
-    this.loadArtistInfos();
-    this.loadAlbums();
+    this.loadPage(this.$route.params.artistId);
+  },
+  async beforeRouteUpdate(to, from, next) {
+    await this.loadPage(to.params.artistId);
+    next();
   },
   methods: {
-    async loadArtistInfos() {
-      const infos = await helpers.getArtistInfos(this.artistId);
+    async loadPage(artistId) {
+      this.resetPage();
+      this.loadArtistInfos(artistId);
+      this.loadAlbums(artistId);
+    },
+    resetPage() {
+      this.albums = [];
+      this.eps = [];
+      this.singles = [];
+      this.artistName = '';
+      this.artistGenre = '';
+      this.itunesLink = '';
+    },
+    async loadArtistInfos(artistId) {
+      const infos = await helpers.getArtistInfos(artistId);
       this.artistName = infos.artistName;
       this.artistGenre = infos.primaryGenreName;
       this.itunesLink = helpers.getItunesLink(infos.artistLinkUrl);
     },
-    async loadAlbums() {
-      const albums = await helpers.getAlbumsOfArtist(this.artistId);
+    async loadAlbums(artistId) {
+      const albums = await helpers.getAlbumsOfArtist(artistId);
 
       albums.forEach((result) => {
         if (/EP$/.test(result.collectionName)) {
