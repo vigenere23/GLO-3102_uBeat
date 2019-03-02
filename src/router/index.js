@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import Album from '@/components/Album';
 import Artist from '@/components/Artist';
+import Playlists from '@/components/Playlists';
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/album',
       name: 'Album',
       component: Album
+    },
+    {
+      path: '/playlists',
+      name: 'Playlists',
+      component: Playlists
     }
   ],
 });
