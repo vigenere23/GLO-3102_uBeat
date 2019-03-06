@@ -36,6 +36,7 @@ a {
   background-repeat: no-repeat;
   width: 158px;
   height: 45px;
+  margin-top: 30px;
 }
 
 #home-page h1 {
@@ -53,22 +54,6 @@ a {
   margin-bottom: 8px;
 }
 
-/* Album.vue */
-
-#album-cover {
- width: 40%;
- max-width: 400px;
-}
-
-#album-card {
- display: flex;
- justify-content: center;
- padding-top: 20px;
- padding-bottom: 20px;
- padding-left: 20px;
- padding-right: 20px;
-}
-
 .exposant {
  position: relative;
  bottom: 1px;
@@ -76,53 +61,6 @@ a {
  line-height: .8em;
  vertical-align: super;
  text-decoration: none;
-}
-
-#apple-music-link {
- margin-top: 30px;
-}
-
-#info-album {
- display: flex;
- flex-direction: column;
- color: white;
-}
-
-#songs-number, #songs-title, #songs-lenght {
- color: white;
-}
-
-#liste-title {
- color: white;
- font-size: 20px;
-}
-
-#lines-between-songs {
- border-top: solid white 1px;
-}
-
-@media (max-width: 600px) {
-
- #album-cover {
-   width: 90vw;
-   max-width: 400px;
-   position: absolute;
-   filter: blur(2px);
-   opacity: 0.5;
-   z-index: 1;
- }
-
- #info-album {
-   z-index: 2;
- }
-
- #album-card {
-   height: 95vw;
-   max-height: 440px;
-   min-height: 300px;
-   padding: 0;
-   margin-top: 20px;
- }
 }
 
 /* Artist.vue */

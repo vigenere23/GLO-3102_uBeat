@@ -13,41 +13,24 @@
           <h3>Release on {{ releaseDate }}</h3>
           <h4>{{ infos.primaryGenreName }} &bull; {{ numberOfTracksText }}</h4>
           <h4>{{ infos.contentAdvisoryRating }}</h4>
-          <v-card-actions id="apple-music-link">
-            <a class="itunes-link" target="_blank" :href="itunesLink"></a>
-          </v-card-actions>
+          <a class="itunes-link" target="_blank" :href="itunesLink"></a>
         </div>
       </v-card-title>
     </v-card>
-    <v-list two-line subheader class="blue-grey darken-3">
-      <v-subheader inset id="liste-title">Songs</v-subheader>
-      <v-list-tile
-        v-for="item in items"
-        :key="item.number"
-        id="lines-between-songs">
-        <v-list-tile-avatar id="songs-number">
-          <v-list-tile-title>{{item.number}}</v-list-tile-title>
-        </v-list-tile-avatar>
-        <v-list-tile-content>
-          <v-list-tile-title id="songs-title">{{item.title}}</v-list-tile-title>
-          <v-list-tile-sub-title id="songs-lenght">{{item.time}}</v-list-tile-sub-title>
-        </v-list-tile-content>
-        <v-list-tile-action>
-          <v-btn icon ripple>
-            <v-icon color="white">play_arrow</v-icon>
-          </v-btn>
-        </v-list-tile-action>
-      </v-list-tile>
-    </v-list>
+    <album-tracks-list :tracks="tracks"></album-tracks-list>
   </div>
 </template>
 
 <script>
 import api from '@/js/api';
 import helper from '@/js/helper';
+import AlbumTracksList from '@/components/AlbumTracksList';
 
 export default {
   name: 'album',
+  components: {
+    AlbumTracksList
+  },
   data() {
     return {
       infos: {},
@@ -55,21 +38,7 @@ export default {
       itunesLink: '',
       numberOfTracks: 0,
       releaseDate: '',
-      imageUrl: '',
-      items: [
-        { number: '1', title: 'Imagine', time: '3:32' },
-        { number: '2', title: 'Needy', time: '2:51' },
-        { number: '3', title: 'NASA', time: '2:52' },
-        { number: '4', title: 'Bloodline', time: '3:35' },
-        { number: '5', title: 'Fake smile', time: '3:28' },
-        { number: '6', title: 'Bad idea', time: '4:26' },
-        { number: '7', title: 'Make up', time: '2:20' },
-        { number: '8', title: 'Ghostin', time: '4:30' },
-        { number: '9', title: 'In my head', time: '3:42' },
-        { number: '10', title: '7 rings', time: '2:59' },
-        { number: '11', title: 'Thank u, next', time: '3:27' },
-        { number: '12', title: 'Break up with your girlfriend, i\'m bored', time: '3:09' },
-      ]
+      imageUrl: ''
     };
   },
   computed: {
@@ -107,3 +76,48 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+#album-card {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  #album-cover {
+    width: 40%;
+    max-width: 400px;
+  }
+
+  #info-album {
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+}
+
+@media (max-width: 600px) {
+  #album-card {
+    height: 95vw;
+    max-height: 440px;
+    min-height: 300px;
+    padding: 0;
+    margin-top: 20px;
+
+    #album-cover {
+      width: 90vw;
+      max-width: 400px;
+      position: absolute;
+      filter: blur(2px);
+      opacity: 0.5;
+      z-index: 1;
+    }
+
+    #info-album {
+      z-index: 2;
+    }
+  }
+}
+</style>
