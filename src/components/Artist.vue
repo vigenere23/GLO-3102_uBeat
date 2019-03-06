@@ -34,7 +34,8 @@
 </template>
 
 <script>
-import helpers from '@/js/helpers';
+import api from '@/js/api';
+import helper from '@/js/helper';
 import CoverList from '@/components/CoverList';
 
 export default {
@@ -74,13 +75,13 @@ export default {
       this.itunesLink = '';
     },
     async loadArtistInfos(artistId) {
-      const infos = await helpers.getArtistInfos(artistId);
+      const infos = await api.getArtistInfos(artistId);
       this.artistName = infos.artistName;
       this.artistGenre = infos.primaryGenreName;
-      this.itunesLink = helpers.getItunesLink(infos.artistLinkUrl);
+      this.itunesLink = helper.getItunesLink(infos.artistLinkUrl);
     },
     async loadAlbums(artistId) {
-      const albums = await helpers.getAlbumsOfArtist(artistId);
+      const albums = await api.getAlbumsOfArtist(artistId);
 
       albums.forEach((result) => {
         if (/EP$/.test(result.collectionName)) {
