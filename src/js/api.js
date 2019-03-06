@@ -1,5 +1,6 @@
-import consts from '@/js/constants';
 import axios from 'axios';
+
+const API_URL = 'https://ubeat.herokuapp.com/unsecure';
 
 async function getFromApi(url) {
   try {
@@ -27,24 +28,15 @@ function sortAlbumsDesc(albums) {
 }
 
 export default {
-  getImageUrlOfSize(url, size) {
-    const baseUrl = url.substring(0, url.indexOf('/source/') + '/source/'.length);
-    return `${baseUrl}${size}x${size}bb.jpg`;
-  },
-
-  getItunesLink(baseLink) {
-    return `${baseLink.replace(/\/us\//, '/ca/')}&app=music`;
-  },
-
   async getAlbumsOfArtist(artistId) {
-    const url = `${consts.API_URL}/artists/${artistId}/albums`;
+    const url = `${API_URL}/artists/${artistId}/albums`;
     const data = await getFromApi(url);
     const albums = extractMultipleResults(data);
     return sortAlbumsDesc(albums);
   },
 
   async getArtistInfos(artistId) {
-    const url = `${consts.API_URL}/artists/${artistId}`;
+    const url = `${API_URL}/artists/${artistId}`;
     const data = await getFromApi(url);
     return extractSingleResult(data);
   }
