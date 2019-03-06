@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import helpers from '@/js/helpers';
+import helper from '@/js/helper';
 import CoverListItem from '@/components/CoverListItem';
 
 export default {
@@ -43,7 +43,7 @@ export default {
       return `/album/${this.albumId}`;
     },
     imageHd() {
-      return helpers.getImageUrlOfSize(this.image, 200);
+      return helper.getImageUrlOfSize(this.image, 200);
     }
   }
 };
