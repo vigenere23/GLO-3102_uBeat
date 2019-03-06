@@ -2,15 +2,17 @@
   <div id="album-page">
     <v-card id="album-card" class="blue-grey darken-4">
       <v-img
-        src="https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/4e/26/d5/4e26d5f3-2d62-1b5c-689a-e8de4e6f3797/00602577465284.rgb.jpg/400x400bb.jpeg"
-        id="album-cover">
+        id="album-cover"
+        :src="imageUrl"
+      >
       </v-img>
       <v-card-title primary-title>
         <div id="info-album">
           <h1>{{ infos.collectionName }}</h1>
           <h2>{{ infos.artistName }}</h2>
           <h3>Release on {{ releaseDate }}</h3>
-          <h4>{{ infos.primaryGenreName }} &bull; {{ numberOfTracks }} songs</h4>
+          <h4>{{ infos.primaryGenreName }} &bull; {{ numberOfTracksText }}</h4>
+          <h4>{{ infos.contentAdvisoryRating }}</h4>
           <v-card-actions id="apple-music-link">
             <a class="itunes-link" target="_blank" :href="itunesLink"></a>
           </v-card-actions>
@@ -53,6 +55,7 @@ export default {
       itunesLink: '',
       numberOfTracks: 0,
       releaseDate: '',
+      imageUrl: '',
       items: [
         { number: '1', title: 'Imagine', time: '3:32' },
         { number: '2', title: 'Needy', time: '2:51' },
@@ -68,6 +71,12 @@ export default {
         { number: '12', title: 'Break up with your girlfriend, i\'m bored', time: '3:09' },
       ]
     };
+  },
+  computed: {
+    numberOfTracksText() {
+      const songText = this.numberOfTracks > 1 ? 'songs' : 'song';
+      return `${this.numberOfTracks} ${songText}`;
+    }
   },
   async mounted() {
     this.loadPage(this.$route.params.albumId);
@@ -89,6 +98,7 @@ export default {
       this.infos = await api.getAlbumInfos(albumId);
       this.itunesLink = helper.getItunesLink(this.infos.collectionViewUrl);
       this.releaseDate = helper.getPrettyDate(this.infos.releaseDate);
+      this.imageUrl = helper.getImageUrlOfSize(this.infos.artworkUrl100, 400);
     },
     async loadTracks(albumId) {
       this.tracks = await api.getAlbumTracks(albumId);
