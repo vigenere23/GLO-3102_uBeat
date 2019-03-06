@@ -29,7 +29,7 @@ a {
   text-decoration: inherit;
 }
 
-#itunes-link {
+.itunes-link {
   display: inline-block;
   overflow: hidden;
   background-image: url('https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music');

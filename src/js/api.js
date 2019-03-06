@@ -39,5 +39,17 @@ export default {
     const url = `${API_URL}/artists/${artistId}`;
     const data = await getFromApi(url);
     return extractSingleResult(data);
+  },
+
+  async getAlbumInfos(albumId) {
+    const url = `${API_URL}/albums/${albumId}`;
+    const data = await getFromApi(url);
+    return extractSingleResult(data);
+  },
+
+  async getAlbumTracks(albumId) {
+    const url = `${API_URL}/albums/${albumId}/tracks`;
+    const data = await getFromApi(url);
+    return extractMultipleResults(data);
   }
 };

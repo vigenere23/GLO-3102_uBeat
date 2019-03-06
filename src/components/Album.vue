@@ -7,13 +7,12 @@
       </v-img>
       <v-card-title primary-title>
         <div id="info-album">
-          <h1>Thank You, Next</h1>
-          <h2>Ariana Grande</h2>
-          <h3>Release date: February 10<span class="exposant">th</span>, 2019</h3>
-          <h4>Pop &bull; 12 songs</h4>
+          <h1>{{ infos.collectionName }}</h1>
+          <h2>{{ infos.artistName }}</h2>
+          <h3>Release on {{ releaseDate }}</h3>
+          <h4>{{ infos.primaryGenreName }} &bull; {{ numberOfTracks }} songs</h4>
           <v-card-actions id="apple-music-link">
-            <a target="_blank" href="https://geo.itunes.apple.com/us/album/thank-u-next/1450330588?mt=1&app=music"
-               style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2019-02-08&kind=album&bubble=apple_music) no-repeat;width:158px;height:45px;"></a>
+            <a class="itunes-link" target="_blank" :href="itunesLink"></a>
           </v-card-actions>
         </div>
       </v-card-title>
@@ -40,25 +39,61 @@
     </v-list>
   </div>
 </template>
+
 <script>
-  export default {
-    data() {
-      return {
-        items: [
-          { number: '1', title: 'Imagine', time: '3:32' },
-          { number: '2', title: 'Needy', time: '2:51' },
-          { number: '3', title: 'NASA', time: '2:52' },
-          { number: '4', title: 'Bloodline', time: '3:35' },
-          { number: '5', title: 'Fake smile', time: '3:28' },
-          { number: '6', title: 'Bad idea', time: '4:26' },
-          { number: '7', title: 'Make up', time: '2:20' },
-          { number: '8', title: 'Ghostin', time: '4:30' },
-          { number: '9', title: 'In my head', time: '3:42' },
-          { number: '10', title: '7 rings', time: '2:59' },
-          { number: '11', title: 'Thank u, next', time: '3:27' },
-          { number: '12', title: 'Break up with your girlfriend, i\'m bored', time: '3:09' },
-        ]
-      };
+import api from '@/js/api';
+import helper from '@/js/helper';
+
+export default {
+  name: 'album',
+  data() {
+    return {
+      infos: {},
+      tracks: [],
+      itunesLink: '',
+      numberOfTracks: 0,
+      releaseDate: '',
+      items: [
+        { number: '1', title: 'Imagine', time: '3:32' },
+        { number: '2', title: 'Needy', time: '2:51' },
+        { number: '3', title: 'NASA', time: '2:52' },
+        { number: '4', title: 'Bloodline', time: '3:35' },
+        { number: '5', title: 'Fake smile', time: '3:28' },
+        { number: '6', title: 'Bad idea', time: '4:26' },
+        { number: '7', title: 'Make up', time: '2:20' },
+        { number: '8', title: 'Ghostin', time: '4:30' },
+        { number: '9', title: 'In my head', time: '3:42' },
+        { number: '10', title: '7 rings', time: '2:59' },
+        { number: '11', title: 'Thank u, next', time: '3:27' },
+        { number: '12', title: 'Break up with your girlfriend, i\'m bored', time: '3:09' },
+      ]
+    };
+  },
+  async mounted() {
+    this.loadPage(this.$route.params.albumId);
+  },
+  async beforeRouteUpdate(to, from, next) {
+    await this.loadPage(to.params.albumId);
+    next();
+  },
+  methods: {
+    resetPage() {
+      this.tracks = [];
+    },
+    loadPage(albumId) {
+      this.resetPage();
+      this.loadAlbumInfos(albumId);
+      this.loadTracks(albumId);
+    },
+    async loadAlbumInfos(albumId) {
+      this.infos = await api.getAlbumInfos(albumId);
+      this.itunesLink = helper.getItunesLink(this.infos.collectionViewUrl);
+      this.releaseDate = helper.getPrettyDate(this.infos.releaseDate);
+    },
+    async loadTracks(albumId) {
+      this.tracks = await api.getAlbumTracks(albumId);
+      this.numberOfTracks = this.tracks.length;
     }
-  };
+  }
+};
 </script>
