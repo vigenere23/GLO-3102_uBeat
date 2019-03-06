@@ -1,6 +1,6 @@
 <template>
   <router-link class="cover" :to="link || ''" tag="a">
-    <img :src="image">
+    <v-img class="cover-image" :src="image"></v-img>
     <p class="name">{{ name }}</p>
     <p class="desc" v-if="desc">{{ desc }}</p>
   </router-link>
@@ -61,7 +61,7 @@ export default {
     }
   }
 
-  img {
+  .cover-image {
     display: block;
     width: 100%;
   }
