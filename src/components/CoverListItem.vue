@@ -66,6 +66,7 @@ export default {
 
 @media screen and (max-width: 1263px) {
   .cover {
+    padding: 8px 0;
 
     p.name {
       font-size: 15px;

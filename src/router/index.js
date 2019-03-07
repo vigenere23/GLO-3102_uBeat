@@ -32,6 +32,11 @@ export default new Router({
     },
     {
       path: '/playlists',
+      redirect: '/playlists/5be872a1e495370004798456'
+      // 5c81361ad6f63a0004c26542 Our user id
+    },
+    {
+      path: '/playlists/:userId',
       name: 'Playlists',
       component: Playlists
     }
