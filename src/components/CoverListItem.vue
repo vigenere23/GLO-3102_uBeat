@@ -1,7 +1,7 @@
 <template>
   <router-link class="cover" :to="link || ''" tag="a">
     <img :src="image || '/static/blank-album-200.png'">
-    <p class="name">{{ name }}</p>
+    <p class="name">{{ name || "untitled" }}</p>
     <p class="desc" v-if="desc">{{ desc }}</p>
   </router-link>
 </template>
