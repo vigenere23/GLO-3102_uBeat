@@ -5,7 +5,7 @@
       <div class="centered-title">
         <h1 class="large-thin-title">{{ artistName }}</h1>
         <h2 class="large-thin-subtitle">{{ artistGenre }}</h2>
-        <a id="itunes-link" target="_blank" :href="itunesLink"></a>
+        <a class="itunes-link" target="_blank" :href="itunesLink"></a>
       </div>
 
       <cover-list

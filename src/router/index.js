@@ -27,6 +27,10 @@ export default new Router({
     },
     {
       path: '/album',
+      redirect: '/album/1450330588'
+    },
+    {
+      path: '/album/:albumId',
       name: 'Album',
       component: Album
     },
