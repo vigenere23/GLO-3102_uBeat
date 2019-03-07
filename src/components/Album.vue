@@ -1,51 +1,39 @@
 <template>
   <div id="album-page">
-    <v-card id="album-card" class="blue-grey darken-4">
-      <v-img
-        id="album-cover"
-        :src="imageUrl"
-      >
-      </v-img>
-      <v-card-title primary-title>
-        <div id="info-album">
-          <h1>{{ infos.collectionName }}</h1>
-          <h2>{{ infos.artistName }}</h2>
-          <h3>Release on {{ releaseDate }}</h3>
-          <h4>{{ infos.primaryGenreName }} &bull; {{ numberOfTracksText }}</h4>
-          <h4>{{ infos.contentAdvisoryRating }}</h4>
-          <a class="itunes-link" target="_blank" :href="itunesLink"></a>
-        </div>
-      </v-card-title>
-    </v-card>
-    <album-tracks-list :tracks="tracks"></album-tracks-list>
+    <album-infos
+      :title="infos.collectionName"
+      :subtitle="infos.artistName"
+      :release-date="releaseDate"
+      :genre="infos.primaryGenreName"
+      :number-of-tracks="tracks.length"
+      :advisory="infos.contentAdvisoryRating"
+      :itunes-link="itunesLink"
+      :image-url="imageUrl"
+    ></album-infos>
+    <track-list :tracks="tracks"></track-list>
   </div>
 </template>
 
 <script>
 import api from '@/js/api';
 import helper from '@/js/helper';
-import AlbumTracksList from '@/components/AlbumTracksList';
+import TrackList from '@/components/TrackList';
+import AlbumInfos from '@/components/AlbumInfos';
 
 export default {
   name: 'album',
   components: {
-    AlbumTracksList
+    TrackList,
+    AlbumInfos
   },
   data() {
     return {
       infos: {},
       tracks: [],
       itunesLink: '',
-      numberOfTracks: 0,
       releaseDate: '',
       imageUrl: ''
     };
-  },
-  computed: {
-    numberOfTracksText() {
-      const songText = this.numberOfTracks > 1 ? 'songs' : 'song';
-      return `${this.numberOfTracks} ${songText}`;
-    }
   },
   async mounted() {
     this.loadPage(this.$route.params.albumId);
@@ -71,7 +59,6 @@ export default {
     },
     async loadTracks(albumId) {
       this.tracks = await api.getAlbumTracks(albumId);
-      this.numberOfTracks = this.tracks.length;
     }
   }
 };
