@@ -25,6 +25,7 @@ export default {
     title: String,
     subtitle: String,
     releaseDate: String,
+    genre: String,
     numberOfTracks: Number,
     advisory: String,
     itunesLink: String,
