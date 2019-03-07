@@ -5,7 +5,7 @@
     </v-list-tile-avatar>
     <v-list-tile-content>
       <v-list-tile-title class="song-title">{{ title }}</v-list-tile-title>
-      <v-list-tile-sub-title class="song-duration">{{ duration || '' }}</v-list-tile-sub-title>
+      <v-list-tile-sub-title class="song-duration">{{ durationText || '' }}</v-list-tile-sub-title>
     </v-list-tile-content>
     <v-list-tile-action>
       <v-btn icon ripple>
@@ -16,12 +16,19 @@
 </template>
 
 <script>
+import helper from '@/js/helper';
+
 export default {
   name: 'album-tracks-list-item',
   props: {
     title: String,
-    duration: String,
+    duration: Number,
     number: Number
+  },
+  computed: {
+    durationText() {
+      return helper.getPrettyDuration(this.duration);
+    }
   }
 };
 </script>
@@ -29,6 +36,9 @@ export default {
 <style lang="scss">
 .album-tracks-list-item {
   border-top: solid white 1px;
-  color: white;
+}
+
+.song-number, .song-title, .song-duration {
+  color: white !important;
 }
 </style>

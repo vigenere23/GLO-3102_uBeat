@@ -16,5 +16,13 @@ export default {
     const month = MONTHS[date.getMonth()];
     const dayNumber = date.getDate();
     return `${month} ${dayNumber}th, ${year}`;
+  },
+
+  getPrettyDuration(timeInMillis) {
+    const time = new Date(timeInMillis);
+    const minutes = time.getMinutes();
+    let seconds = time.getSeconds();
+    if (seconds < 10) seconds = `0${seconds}`;
+    return `${minutes}:${seconds}`;
   }
 };

@@ -6,6 +6,7 @@
       :key="track.trackId"
       :title="track.trackName"
       :number="i + 1"
+      :duration="track.trackTimeMillis"
     ></track-list-item>
   </v-list>
 </template>
