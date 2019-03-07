@@ -7,7 +7,7 @@
     </v-img>
     <v-card-title primary-title>
       <div id="info-album">
-        <h1>{{ title }}</h1>
+        <h1>{{ title || 'Untitled' }}</h1>
         <h2>{{ subtitle }}</h2>
         <h3 v-if="releaseDate">Release on {{ releaseDate }}</h3>
         <h4><span v-if="genre">{{ genre }} &bull; </span>{{ numberOfTracksText }}</h4>
