@@ -8,7 +8,7 @@
       </div>
 
       <cover-list
-        title="All playlists"
+        type="playlist"
         :covers="playlists"
         :wrap="true"
       ></cover-list>

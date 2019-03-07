@@ -4,6 +4,7 @@ import Home from '@/components/Home';
 import Album from '@/components/Album';
 import Artist from '@/components/Artist';
 import Playlists from '@/components/Playlists';
+import PlaylistAlbum from '@/components/PlaylistAlbum';
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
@@ -43,6 +44,11 @@ export default new Router({
       path: '/users/:userId/playlists',
       name: 'Playlists',
       component: Playlists
+    },
+    {
+      path: '/playlists/:playlistId',
+      name: 'PlaylistAlbum',
+      component: PlaylistAlbum
     }
   ],
 });

@@ -1,7 +1,7 @@
 <template>
   <div class="cover-list">
 
-    <h3>{{ title }}</h3>
+    <h3 v-if="title">{{ title }}</h3>
 
     <ul class="better-scrollbar" :class="{ wrap }" v-if="type === 'year-album'">
       <li v-for="(cover, i) in covers" :key="i">
@@ -11,6 +11,16 @@
           :advisory="cover.contentAdvisoryRating"
           :albumId="cover.collectionId"
           :image="cover.artworkUrl100"
+        />
+      </li>
+    </ul>
+
+    <ul class="better-scrollbar" :class="{ wrap }" v-if="type === 'playlist'">
+      <li v-for="(cover, i) in covers" :key="i">
+        <cover-list-item
+          :name="cover.name"
+          :link="`/playlists/${cover.id}`"
+          image="/static/blank-album-200.png"
         />
       </li>
     </ul>
@@ -48,10 +58,7 @@ export default {
     CoverListAlbumYear
   },
   props: {
-    title: {
-      type: String,
-      required: true
-    },
+    title: String,
     type: String,
     covers: {
       type: Array,

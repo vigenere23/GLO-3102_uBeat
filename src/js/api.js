@@ -66,5 +66,10 @@ export default {
     const url = `${API_URL}/albums/${albumId}/tracks`;
     const data = await getFromApi(url);
     return extractMultipleResults(data);
+  },
+
+  async getPlaylistInfosAndTracks(playlistId) {
+    const url = `${API_URL}/playlists/${playlistId}`;
+    return getFromApi(url);
   }
 };

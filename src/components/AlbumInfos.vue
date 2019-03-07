@@ -2,7 +2,7 @@
   <v-card id="album-card" class="blue-grey darken-4">
     <v-img
       id="album-cover"
-      :src="imageUrl"
+      :src="imageUrl || '/static/blank-album-400.png'"
     >
     </v-img>
     <v-card-title primary-title>
@@ -12,7 +12,7 @@
         <h3 v-if="releaseDate">Release on {{ releaseDate }}</h3>
         <h4><span v-if="genre">{{ genre }} &bull; </span>{{ numberOfTracksText }}</h4>
         <h4>{{ advisory }}</h4>
-        <a class="itunes-link" target="_blank" :href="itunesLink"></a>
+        <a v-if="itunesLink" class="itunes-link" target="_blank" :href="itunesLink"></a>
       </div>
     </v-card-title>
   </v-card>
