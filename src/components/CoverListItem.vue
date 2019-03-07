@@ -1,6 +1,6 @@
 <template>
   <router-link class="cover" :to="link || ''" tag="a">
-    <img :src="image">
+    <img :src="image || '/static/blank-album-200.png'">
     <p class="name">{{ name }}</p>
     <p class="desc" v-if="desc">{{ desc }}</p>
   </router-link>
@@ -15,10 +15,7 @@ export default {
       required: true
     },
     desc: [String, Number],
-    image: {
-      type: String,
-      required: true
-    },
+    image: String,
     link: String
   }
 };
