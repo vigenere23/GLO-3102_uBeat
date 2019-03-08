@@ -3,26 +3,40 @@
     <div class="centered-page">
 
       <div id="title">
-        <h1>Tame Impala</h1>
-        <h2>Psychedelic rock</h2>
-        <a target="_blank" href="https://geo.itunes.apple.com/ca/artist/tame-impala/290242959?mt=1&app=music' style='display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music) no-repeat;width:158px;height:45px;"></a>
+        <h1>{{ artistName }}</h1>
+        <h2>{{ artistGenre }}</h2>
+        <a id="itunes-link" target="_blank" :href="itunesLink"></a>
       </div>
 
       <cover-list
-        v-for="(coverList, i) in coverLists"
-        :key="i"
-        :title="coverList.title"
-        :type="coverList.type"
-        :covers="coverList.covers"
+        v-if="albums.length"
+        title="Albums"
+        type="year-album"
+        :covers="albums"
       />
-      
+
+      <cover-list
+        v-if="singles.length"
+        title="Singles"
+        type="year-album"
+        :covers="singles"
+      />
+
+      <cover-list
+        v-if="eps.length"
+        title="EPs"
+        type="year-album"
+        :covers="eps"
+      />
+
     </div>
   </div>
 </template>
 
 <script>
+import api from '@/js/api';
+import helper from '@/js/helper';
 import CoverList from '@/components/CoverList';
-import ArtistAlbumList from '@/js/ArtistAlbumList';
 
 export default {
   name: 'artist',
@@ -31,8 +45,54 @@ export default {
   },
   data() {
     return {
-      coverLists: ArtistAlbumList
+      albums: [],
+      eps: [],
+      singles: [],
+      artistName: '',
+      artistGenre: '',
+      itunesLink: ''
     };
+  },
+  async mounted() {
+    this.loadPage(this.$route.params.artistId);
+  },
+  async beforeRouteUpdate(to, from, next) {
+    await this.loadPage(to.params.artistId);
+    next();
+  },
+  methods: {
+    async loadPage(artistId) {
+      this.resetPage();
+      this.loadArtistInfos(artistId);
+      this.loadAlbums(artistId);
+    },
+    resetPage() {
+      this.albums = [];
+      this.eps = [];
+      this.singles = [];
+      this.artistName = '';
+      this.artistGenre = '';
+      this.itunesLink = '';
+    },
+    async loadArtistInfos(artistId) {
+      const infos = await api.getArtistInfos(artistId);
+      this.artistName = infos.artistName;
+      this.artistGenre = infos.primaryGenreName;
+      this.itunesLink = helper.getItunesLink(infos.artistLinkUrl);
+    },
+    async loadAlbums(artistId) {
+      const albums = await api.getAlbumsOfArtist(artistId);
+
+      albums.forEach((result) => {
+        if (/EP$/.test(result.collectionName)) {
+          this.eps.push(result);
+        } else if (/Single$/.test(result.collectionName)) {
+          this.singles.push(result);
+        } else {
+          this.albums.push(result);
+        }
+      });
+    }
   }
 };
 </script>

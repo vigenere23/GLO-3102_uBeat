@@ -1,26 +1,25 @@
 <template>
-  <!-- TODO : replace href by "/{{ type }}/{{ id or name }}" -->
-  <a class="cover" href="javascript:">
-    <img :src=imageSrc>
+  <router-link class="cover" :to="link || ''" tag="a">
+    <v-img class="cover-image" :src="image"></v-img>
     <p class="name">{{ name }}</p>
     <p class="desc" v-if="desc">{{ desc }}</p>
-  </a>
+  </router-link>
 </template>
 
 <script>
 export default {
   name: 'CoverListItem',
   props: {
-    type: String,
     name: {
       type: String,
       required: true
     },
-    desc: String,
-    imageSrc: {
+    desc: [String, Number],
+    image: {
       type: String,
       required: true
-    }
+    },
+    link: String
   }
 };
 </script>
@@ -62,7 +61,7 @@ export default {
     }
   }
 
-  img {
+  .cover-image {
     display: block;
     width: 100%;
   }

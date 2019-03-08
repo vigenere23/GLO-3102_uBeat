@@ -14,11 +14,17 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
-    }, {
+    },
+    {
       path: '/artist',
+      redirect: '/artist/290242959'
+    },
+    {
+      path: '/artist/:artistId',
       name: 'Artist',
       component: Artist
-    }, {
+    },
+    {
       path: '/album',
       name: 'Album',
       component: Album

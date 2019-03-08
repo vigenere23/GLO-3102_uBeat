@@ -1,13 +1,24 @@
 <template>
   <div class="cover-list">
     <h3>{{ title }}</h3>
-    <ul class="better-scrollbar">
+    <ul class="better-scrollbar" v-if="type === 'year-album'">
+      <li v-for="(cover, i) in covers" :key="i">
+        <cover-list-album-year
+          :name="cover.collectionName"
+          :year="new Date(cover.releaseDate).getFullYear()"
+          :advisory="cover.contentAdvisoryRating"
+          :albumId="cover.collectionId"
+          :image="cover.artworkUrl100"
+        />
+      </li>
+    </ul>
+    <ul class="better-scrollbar" v-else>
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-item
-          :type="cover.type || type"
           :name="cover.name"
           :desc="cover.desc"
-          :image-src="cover.imageSrc"
+          :link="cover.link"
+          :image="cover.image"
         />
       </li>
     </ul>
@@ -16,11 +27,13 @@
 
 <script>
 import CoverListItem from '@/components/CoverListItem';
+import CoverListAlbumYear from '@/components/CoverListAlbumYear';
 
 export default {
   name: 'CoverList',
   components: {
-    CoverListItem
+    CoverListItem,
+    CoverListAlbumYear
   },
   props: {
     title: {
