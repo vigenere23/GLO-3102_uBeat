@@ -1,5 +1,5 @@
-<template id="navigation-template">
-  <div id="navigationContainer">
+<template>
+  <div id="navigation">
     <toolbar :drawer="drawer" :toolbar="toolbar" :window-width="windowWidth"/>
     <v-navigation-drawer
       app
@@ -100,7 +100,6 @@
 
   export default {
     components: { Toolbar },
-    tempplate: '#navigation-template',
     data() {
       return {
         screenSize: '',
