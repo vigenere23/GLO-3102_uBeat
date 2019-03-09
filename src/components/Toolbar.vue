@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar
+  <v-toolbar id="toolbar"
     app
     height="64px"
     color="primary"

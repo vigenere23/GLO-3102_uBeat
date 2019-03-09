@@ -18,17 +18,9 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/artist',
-      redirect: '/artist/290242959'
-    },
-    {
       path: '/artist/:artistId',
       name: 'Artist',
       component: Artist
-    },
-    {
-      path: '/album',
-      redirect: '/album/1450330588'
     },
     {
       path: '/album/:albumId',
