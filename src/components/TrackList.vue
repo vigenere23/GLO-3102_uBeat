@@ -7,6 +7,7 @@
       :title="track.trackName"
       :number="i + 1"
       :duration="track.trackTimeMillis"
+      :preview="track.previewUrl"
     ></track-list-item>
   </v-list>
 </template>
