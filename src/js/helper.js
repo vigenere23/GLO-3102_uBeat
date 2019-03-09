@@ -26,11 +26,18 @@ export default {
   },
 
   getPrettyDuration(timeInMillis) {
-    const time = new Date(timeInMillis);
-    const hours = time.getHours();
-    const minutes = time.getMinutes();
+    const time = new Date(0);
+    time.setHours(0);
+    time.setMilliseconds(timeInMillis);
+
     let seconds = time.getSeconds();
+    let minutes = time.getMinutes();
+    let hours = time.getHours();
+
     if (seconds < 10) seconds = `0${seconds}`;
+    if (minutes < 10) minutes = `0${minutes}`;
+    if (hours && hours < 10) hours = `0${hours}`;
+
     return hours ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
   }
 };

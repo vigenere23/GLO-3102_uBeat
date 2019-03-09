@@ -15,7 +15,7 @@
       </li>
     </ul>
 
-    <ul class="better-scrollbar" :class="{ wrap }" v-if="type === 'playlist'">
+    <ul class="better-scrollbar" :class="{ wrap }" v-else-if="type === 'playlist'">
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-item
           :name="cover.name"
