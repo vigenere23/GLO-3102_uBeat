@@ -36,30 +36,7 @@ Permet de retourner la liste d'albums triés selon leur date de sortie (décrois
 
 ### private `filterPlaylistsByUser(playlists, userId)`
 
-Puisque la seule requête GET possible pour les playlists retourne l'entièreté des playlists pour tous les utilisateurs, il est utile de pouvoir sélectionner seulement celles appartenant à un utilisateur en particulier. 
-
-Exemple de réponse:
-
-```json
-[
-  {
-    "owner": {
-      "name": "Team18",
-      "email": "test@test.com",
-      "id": "5be872a1e495370004798456"
-    },
-    "name": "Best 80 music",
-    "id": "5be8f945e495370004799523",
-    "tracks": [
-      {
-        //see tracks response
-      },
-      ...
-    ]
-  },
-  ...
-]
-```
+Puisque la seule requête GET possible pour les playlists retourne l'entièreté des playlists pour tous les utilisateurs, il est utile de pouvoir sélectionner seulement celles appartenant à un utilisateur en particulier.
 
 ### `async getArtistInfos(artistId)`
 
@@ -122,7 +99,16 @@ Retourne les informations d'un utilisateur.
 Exemple de réponse:
 
 ```json
-
+[
+  {
+    "id": "5c81361ad6f63a0004c26542",
+    "name": "Team18",
+    "email": "test@test.com",
+    "following": [
+      ...
+    ]
+  }
+]
 ```
 
 *Note: puisque les utilisateurs ne sont pas associés à iTunes, cette méthode ne fait pas appel à `extractSingleResult`. 
@@ -134,7 +120,24 @@ Permet d'obtenir les playlists créée par un utilisateur.
 Exemple de réponse:
 
 ```json
-
+[
+  {
+    "owner": {
+      "name": "Team18",
+      "email": "test@test.com",
+      "id": "5be872a1e495370004798456"
+    },
+    "name": "Best 80 music",
+    "id": "5be8f945e495370004799523",
+    "tracks": [
+      {
+        //see tracks response
+      },
+      ...
+    ]
+  },
+  ...
+]
 ```
 
 *Note: puisque les utilisateurs ne sont pas associés à iTunes, cette méthode ne fait pas appel à `extractMultipleResults`. 
@@ -146,7 +149,29 @@ Permet d'obtenir les information d'un album.
 Exemple de réponse:
 
 ```json
-
+{
+  "wrapperType": "collection",
+  "collectionType": "Album",
+  "artistId": 116851,
+  "collectionId": 1125488753,
+  "amgArtistId": 211247,
+  "artistName": "Blink-182",
+  "collectionName": "Enema of the State",
+  "collectionCensoredName": "Enema of the State",
+  "artistViewUrl": "https://itunes.apple.com/us/artist/blink-182/id116851?uo=4",
+  "collectionViewUrl": "https://itunes.apple.com/us/album/enema-of-the-state/id325483?uo=4",
+  "artworkUrl60": "http://a3.mzstatic.com/us/r30/Features/cb/72/0e/dj.aoonomrr.60x60-50.jpg",
+  "artworkUrl100": "http://a2.mzstatic.com/us/r30/Features/cb/72/0e/dj.aoonomrr.100x100-75.jpg",
+  "collectionPrice": 9.99,
+  "collectionExplicitness": "explicit",
+  "contentAdvisoryRating": "Explicit",
+  "trackCount": 12,
+  "copyright": "℗ 1999 Geffen Records",
+  "country": "USA",
+  "currency": "USD",
+  "releaseDate": "1999-05-25T07:00:00Z",
+  "primaryGenreName": "Alternative"
+}
 ```
 
 ### `async getAlbumTracks(albumId)`
@@ -156,7 +181,41 @@ Permet d'obtenir les chansons d'un album.
 Example de réponse:
 
 ```json
-
+[
+  {
+    "wrapperType": "track",
+    "kind": "song",
+    "artistId": 461932,
+    "collectionId": 196480323,
+    "trackId": 196480329,
+    "artistName": "Europe",
+    "collectionName": "The Final Countdown",
+    "trackName": "The Final Countdown",
+    "collectionCensoredName": "The Final Countdown",
+    "trackCensoredName": "The Final Countdown",
+    "artistViewUrl": "https://itunes.apple.com/us/artist/europe/id461932?uo=4",
+    "collectionViewUrl": "https://itunes.apple.com/us/album/the-final-countdown/id196480323?i=196480329&uo=4",
+    "trackViewUrl": "https://itunes.apple.com/us/album/the-final-countdown/id196480323?i=196480329&uo=4",
+    "previewUrl": "http://a1815.phobos.apple.com/us/r1000/101/Music/70/f0/fd/mzm.hhpjhkpl.aac.p.m4a",
+    "artworkUrl30": "http://a5.mzstatic.com/us/r30/Music/fc/4c/f5/mzi.jpmevzoi.30x30-50.jpg",
+    "artworkUrl60": "http://a4.mzstatic.com/us/r30/Music/fc/4c/f5/mzi.jpmevzoi.60x60-50.jpg",
+    "artworkUrl100": "http://a3.mzstatic.com/us/r30/Music/fc/4c/f5/mzi.jpmevzoi.100x100-75.jpg",
+    "collectionPrice": 9.99,
+    "trackPrice": 1.29,
+    "releaseDate": "1988-09-16T07:00:00Z",
+    "collectionExplicitness": "notExplicit",
+    "trackExplicitness": "notExplicit",
+    "discCount": 1,
+    "discNumber": 1,
+    "trackCount": 13,
+    "trackNumber": 1,
+    "trackTimeMillis": 310333,
+    "country": "USA",
+    "currency": "USD",
+    "primaryGenreName": "Rock",
+    "radioStationUrl": "https://itunes.apple.com/station/idra.196480329"
+  }
+]
 ```
 
 ### `async getPlaylistInfosAndTracks(playlistId)`
@@ -166,7 +225,21 @@ Permet d'obtenir les informations ET les chansons contenues dans une playliste.
 Example de réponse:
 
 ```json
-
+{
+  "owner": {
+    "name": "Team18",
+    "email": "test@test.com",
+    "id": "5be872a1e495370004798456"
+  },
+  "name": "Best 80 music",
+  "id": "5be8f945e495370004799523",
+  "tracks": [
+    {
+      //see tracks response
+    },
+    ...
+  ]
+}
 ```
 
 *Note: puisque les utilisateurs ne sont pas associés à iTunes, cette méthode ne fait pas appel à `extractSingleResult`. 
