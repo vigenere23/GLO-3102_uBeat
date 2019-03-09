@@ -174,7 +174,7 @@ export default [
       {
         name: 'Dua Lipa',
         desc: 'Dua Lipa',
-        image: 'https://upload.wikimedia.org/wikipedia/en/2/20/Dua_Lipa_%28album%29.pn'
+        image: 'https://upload.wikimedia.org/wikipedia/en/2/20/Dua_Lipa_%28album%29.png'
       },
       {
         name: 'A Star Is Born',

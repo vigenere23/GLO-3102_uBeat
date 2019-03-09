@@ -5,7 +5,7 @@
       <div id="title">
         <h1>{{ artistName }}</h1>
         <h2>{{ artistGenre }}</h2>
-        <a id="itunes-link" target="_blank" :href="itunesLink"></a>
+        <a class="itunes-link" target="_blank" :href="itunesLink"></a>
       </div>
 
       <cover-list
