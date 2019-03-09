@@ -15,14 +15,22 @@ export default {
     const year = date.getFullYear();
     const month = MONTHS[date.getMonth()];
     const dayNumber = date.getDate();
-    return `${month} ${dayNumber}th, ${year}`;
+
+    let suffix = '';
+    if (dayNumber === 1) suffix = 'st';
+    else if (dayNumber === 2) suffix = 'nd';
+    else if (dayNumber === 3) suffix = 'rd';
+    else suffix = 'th';
+
+    return `${month} ${dayNumber}${suffix}, ${year}`;
   },
 
   getPrettyDuration(timeInMillis) {
     const time = new Date(timeInMillis);
+    const hours = time.getHours();
     const minutes = time.getMinutes();
     let seconds = time.getSeconds();
     if (seconds < 10) seconds = `0${seconds}`;
-    return `${minutes}:${seconds}`;
+    return hours ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
   }
 };
