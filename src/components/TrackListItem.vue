@@ -2,14 +2,14 @@
   <v-hover>
     <v-list-tile class="album-tracks-list-item" slot-scope="{ hover }">
       <v-list-tile-avatar class="song-number">
-        <overlayable>
+        <div>
           <v-list-tile-title v-if="!hover">{{ number }}</v-list-tile-title>
           <v-list-tile-title v-else class="play-arrow" v-on:click="play">
             <v-btn icon ripple>
               <v-icon color="white">play_arrow</v-icon>
             </v-btn>
           </v-list-tile-title>
-        </overlayable>
+        </div>
       </v-list-tile-avatar>
       <v-list-tile-content>
         <v-list-tile-title class="song-title">{{ title }}</v-list-tile-title>
