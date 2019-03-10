@@ -123,8 +123,8 @@
           { name: 'Playlists', icon: 'queue_music', path: '/playlists' }
         ],
         correctionHelper: [
-          { name: 'Artist', icon: 'dashboard', path: '/artist' },
-          { name: 'Album', icon: 'queue_music', path: '/album' }
+          { name: 'Artist', icon: 'dashboard', path: '/artist/290242959' },
+          { name: 'Album', icon: 'queue_music', path: '/album/1450330588' }
         ],
         userMenuItem: [
           { name: 'Profile', icon: 'person', path: '/profile' },

@@ -1,14 +1,9 @@
 <template>
   <div id="album-page">
     <album-infos
-      :title="infos.collectionName"
-      :subtitle="infos.artistName"
-      :release-date="releaseDate"
-      :genre="infos.primaryGenreName"
-      :number-of-tracks="infos.trackCount"
-      :advisory="infos.contentAdvisoryRating"
-      :itunes-link="itunesLink"
-      :image-url="imageUrl"
+      :title="infos.name"
+      :number-of-tracks="tracks.length"
+      image-url="/static/blank-album-400.png"
     ></album-infos>
     <track-list :tracks="tracks"></track-list>
   </div>
@@ -16,12 +11,11 @@
 
 <script>
 import api from '@/js/api';
-import helper from '@/js/helper';
 import TrackList from '@/components/TrackList';
 import AlbumInfos from '@/components/AlbumInfos';
 
 export default {
-  name: 'album',
+  name: 'playlist-album',
   components: {
     TrackList,
     AlbumInfos
@@ -30,16 +24,14 @@ export default {
     return {
       infos: {},
       tracks: [],
-      itunesLink: '',
-      releaseDate: '',
       imageUrl: ''
     };
   },
   async mounted() {
-    this.loadPage(this.$route.params.albumId);
+    this.loadPage(this.$route.params.playlistId);
   },
   async beforeRouteUpdate(to, from, next) {
-    await this.loadPage(to.params.albumId);
+    await this.loadPage(to.params.playlistId);
     next();
   },
   methods: {
@@ -47,19 +39,13 @@ export default {
       this.tracks = [];
       this.imageUrl = '';
     },
-    loadPage(albumId) {
+    loadPage(playlistId) {
       this.resetPage();
-      this.loadAlbumInfos(albumId);
-      this.loadTracks(albumId);
+      this.loadPlaylistInfosAndTracks(playlistId);
     },
-    async loadAlbumInfos(albumId) {
-      this.infos = await api.getAlbumInfos(albumId);
-      this.itunesLink = helper.getItunesLink(this.infos.collectionViewUrl);
-      this.releaseDate = helper.getPrettyDate(this.infos.releaseDate);
-      this.imageUrl = helper.getImageUrlOfSize(this.infos.artworkUrl100, 400);
-    },
-    async loadTracks(albumId) {
-      this.tracks = await api.getAlbumTracks(albumId);
+    async loadPlaylistInfosAndTracks(playlistId) {
+      this.infos = await api.getPlaylistInfosAndTracks(playlistId);
+      this.tracks = this.infos.tracks;
     }
   }
 };

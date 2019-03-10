@@ -27,6 +27,10 @@ function sortAlbumsDesc(albums) {
   });
 }
 
+function filterPlaylistsByUser(playlists, userId) {
+  return playlists.filter(playlist => playlist.owner && playlist.owner.id === userId);
+}
+
 export default {
   async getAlbumsOfArtist(artistId) {
     const url = `${API_URL}/artists/${artistId}/albums`;
@@ -41,6 +45,17 @@ export default {
     return extractSingleResult(data);
   },
 
+  async getUserInfos(userId) {
+    const url = `${API_URL}/users/${userId}`;
+    return getFromApi(url);
+  },
+
+  async getUserPlaylists(userId) {
+    const url = `${API_URL}/playlists`;
+    const data = await getFromApi(url);
+    return filterPlaylistsByUser(data, userId);
+  },
+
   async getAlbumInfos(albumId) {
     const url = `${API_URL}/albums/${albumId}`;
     const data = await getFromApi(url);
@@ -51,5 +66,10 @@ export default {
     const url = `${API_URL}/albums/${albumId}/tracks`;
     const data = await getFromApi(url);
     return extractMultipleResults(data);
+  },
+
+  async getPlaylistInfosAndTracks(playlistId) {
+    const url = `${API_URL}/playlists/${playlistId}`;
+    return getFromApi(url);
   }
 };
