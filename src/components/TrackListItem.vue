@@ -4,7 +4,7 @@
       <v-list-tile-avatar class="song-number">
         <overlayable>
           <v-list-tile-title v-if="!hover">{{ number }}</v-list-tile-title>
-          <v-list-tile-title v-else class="play-arrow" v-on:click="playSong">
+          <v-list-tile-title v-else class="play-arrow" v-on:click="play">
             <v-btn icon ripple>
               <v-icon color="white">play_arrow</v-icon>
             </v-btn>
@@ -27,6 +27,7 @@
 
 <script>
 import helper from '@/js/helper';
+import MusicControl from '@/js/MusicControl';
 
 export default {
   name: 'album-tracks-list-item',
@@ -42,11 +43,12 @@ export default {
     }
   },
   methods: {
-    playSong() {
-      const audio = new Audio(this.preview);
-      audio.play();
+    play() {
+      MusicControl.stopSong();
+      MusicControl.playSong(this.preview);
     }
   }
+
 };
 </script>
 
@@ -61,4 +63,8 @@ export default {
   .play-arrow{
     height: 100%;
   }
+
+v-list-tile-title{
+  position: relative;
+}
 </style>
