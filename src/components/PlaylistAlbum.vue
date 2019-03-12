@@ -5,8 +5,12 @@
       :number-of-tracks="tracks.length"
       image-url="/static/blank-album-400.png"
     ></album-infos>
+    <div class="centerButton">
+      <input class="inputStyle" type="text" v-model="newName">
+      <v-btn v-on:click="changeName"> Change playlist name </v-btn>
+    </div>
     <div>
-      <v-btn class="deleteButton" v-on:click="deletePlaylists"> delete playlist </v-btn>
+      <v-btn class="centerButton" v-on:click="deletePlaylist"> delete playlist </v-btn>
     </div>
     <track-list :tracks="tracks"></track-list>
   </div>
@@ -27,7 +31,8 @@ export default {
     return {
       infos: {},
       tracks: [],
-      imageUrl: ''
+      imageUrl: '',
+      newName: 'new name'
     };
   },
   async mounted() {
@@ -50,9 +55,15 @@ export default {
       this.infos = await api.getPlaylistInfosAndTracks(playlistId);
       this.tracks = this.infos.tracks;
     },
-    async deletePlaylists() {
-      api.deletePlaylists(this.$route.params.playlistId);
-      this.$router.push('Playlists');
+    async deletePlaylist() {
+      await api.deletePlaylists(this.$route.params.playlistId);
+      await this.loadPlaylists(this.$route.params.userId);
+      /* doit envoyer à page playlist */
+    },
+    async changeName() {
+      const infos = await api.getPlaylistInfosAndTracks(this.$route.params.playlistId);
+      await api.changeNamePlaylist(this.$route.params.playlistId, this.newName, infos.owner.email);
+      /* doit reload la page */
     }
   }
 };
@@ -60,7 +71,7 @@ export default {
 
 <style lang="scss">
 
-  .deleteButton{
+  .centerButton{
     display: table;
     margin: 0 auto;
   }

@@ -60,6 +60,9 @@ export default {
     async loadPlaylists(userId) {
       const playlists = await api.getUserPlaylists(userId);
       this.playlists = playlists;
+      for (let i = 0; i < this.playlists.length; i += 1) {
+        console.log(playlists[i].id);
+      }
     },
     async addPlaylist() {
       const infos = await api.getUserInfos(this.$route.params.userId);
@@ -70,9 +73,4 @@ export default {
 };
 </script>
 
-<style>
-  .inputStyle{
-    background-color: white;
-    color: black;
-  }
-</style>
+

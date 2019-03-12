@@ -85,5 +85,13 @@ export default {
   async deletePlaylists(playlistId) {
     const url = `${API_URL}/playlists/${playlistId}`;
     axios.delete(url);
+  },
+
+  async changeNamePlaylist(playlistId, newName, newOwner) {
+    const url = `${API_URL}/playlists/${playlistId}`;
+    axios.put(url, {
+      name: newName,
+      owner: newOwner,
+    });
   }
 };
