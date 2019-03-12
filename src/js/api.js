@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'https://ubeat.herokuapp.com/unsecure';
 
+
 async function getFromApi(url) {
   try {
     const response = await axios.get(url);
@@ -71,5 +72,18 @@ export default {
   async getPlaylistInfosAndTracks(playlistId) {
     const url = `${API_URL}/playlists/${playlistId}`;
     return getFromApi(url);
+  },
+
+  async addPlaylist(newName, newOwner) {
+    const url = `${API_URL}/playlists`;
+    axios.post(url, {
+      name: newName,
+      owner: newOwner,
+    });
+  },
+
+  async deletePlaylists(playlistId) {
+    const url = `${API_URL}/playlists/${playlistId}`;
+    axios.delete(url);
   }
 };

@@ -5,6 +5,9 @@
       :number-of-tracks="tracks.length"
       image-url="/static/blank-album-400.png"
     ></album-infos>
+    <div>
+      <v-btn class="deleteButton" v-on:click="deletePlaylists"> delete playlist </v-btn>
+    </div>
     <track-list :tracks="tracks"></track-list>
   </div>
 </template>
@@ -46,12 +49,22 @@ export default {
     async loadPlaylistInfosAndTracks(playlistId) {
       this.infos = await api.getPlaylistInfosAndTracks(playlistId);
       this.tracks = this.infos.tracks;
+    },
+    async deletePlaylists() {
+      api.deletePlaylists(this.$route.params.playlistId);
+      this.$router.push('Playlists');
     }
   }
 };
 </script>
 
 <style lang="scss">
+
+  .deleteButton{
+    display: table;
+    margin: 0 auto;
+  }
+
 #album-card {
   display: flex;
   justify-content: center;

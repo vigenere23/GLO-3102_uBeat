@@ -5,6 +5,9 @@
       <div class="centered-title">
         <h1 class="large-thin-title">Playlists</h1>
         <h2 class="large-thin-subtitle">for {{username}}</h2>
+        <input class="inputStyle" type="text" v-model="newPlayList">
+        <v-btn v-on:click="addPlaylist "> Add playlist </v-btn>
+
       </div>
 
       <cover-list
@@ -29,7 +32,8 @@ export default {
   data() {
     return {
       username: '',
-      playlists: []
+      playlists: [],
+      newPlayList: 'new playlist'
     };
   },
   async mounted() {
@@ -56,7 +60,19 @@ export default {
     async loadPlaylists(userId) {
       const playlists = await api.getUserPlaylists(userId);
       this.playlists = playlists;
-    }
+    },
+    async addPlaylist() {
+      const infos = await api.getUserInfos(this.$route.params.userId);
+      api.addPlaylist(this.newPlayList, infos.email);
+      this.loadPlaylists(this.$route.params.userId);
+    },
   }
 };
 </script>
+
+<style>
+  .inputStyle{
+    background-color: white;
+    color: black;
+  }
+</style>
