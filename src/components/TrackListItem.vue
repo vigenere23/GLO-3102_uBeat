@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-hover>
     <v-list-tile class="album-tracks-list-item" slot-scope="{ hover }">
       <v-list-tile-avatar class="song-number">
@@ -15,11 +15,25 @@
         <v-list-tile-title class="song-title">{{ title }}</v-list-tile-title>
         <v-list-tile-sub-title class="song-duration">{{ durationText || '' }}</v-list-tile-sub-title>
       </v-list-tile-content>
+
       <v-list-tile-action>
-        <v-btn icon ripple>
-          <v-icon color="white">add</v-icon>
-        </v-btn>
+        <v-menu>
+          <v-btn icon ripple>
+            <v-icon color="white">add</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile
+              v-for="(item, i) in items"
+              :key="i"
+              @click=""
+            >
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+
       </v-list-tile-action>
+
     </v-list-tile>
   </v-hover>
 
@@ -35,7 +49,8 @@ export default {
     title: String,
     duration: Number,
     number: Number,
-    preview: String
+    preview: String,
+    items: ['Allo', 'boo']
   },
   computed: {
     durationText() {
@@ -46,6 +61,9 @@ export default {
     play() {
       MusicControl.stopSong();
       MusicControl.playSong(this.preview);
+    },
+    addToPlaylist() {
+      console.log('send help');
     }
   }
 
