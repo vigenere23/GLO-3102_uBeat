@@ -4,7 +4,7 @@
 
       <div class="centered-title">
         <h1 class="large-thin-title">Playlists</h1>
-        <h2 class="large-thin-subtitle">for {{username}}</h2>
+        <h2 class="large-thin-subtitle">{{username}}</h2>
       </div>
 
       <cover-list

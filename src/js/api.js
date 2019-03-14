@@ -71,5 +71,16 @@ export default {
   async getPlaylistInfosAndTracks(playlistId) {
     const url = `${API_URL}/playlists/${playlistId}`;
     return getFromApi(url);
+  },
+
+  async deleteSongTrackFromPlaylist(playlistId, songId) {
+    const url = `${API_URL}/playlists/${playlistId}/tracks/${songId}`;
+    axios.delete(url)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 };

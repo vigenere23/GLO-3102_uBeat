@@ -5,7 +5,10 @@
       :number-of-tracks="tracks.length"
       image-url="/static/blank-album-400.png"
     ></album-infos>
-    <track-list :tracks="tracks"></track-list>
+    <track-list
+      :listType=listType
+      :playlistID=playlistID
+      :tracks="tracks"></track-list>
   </div>
 </template>
 
@@ -23,8 +26,10 @@ export default {
   data() {
     return {
       infos: {},
+      listType: 'playlist',
       tracks: [],
-      imageUrl: ''
+      imageUrl: '',
+      playlistID: ''
     };
   },
   async mounted() {
@@ -46,6 +51,7 @@ export default {
     async loadPlaylistInfosAndTracks(playlistId) {
       this.infos = await api.getPlaylistInfosAndTracks(playlistId);
       this.tracks = this.infos.tracks;
+      this.playlistID = playlistId;
     }
   }
 };

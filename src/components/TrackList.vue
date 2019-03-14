@@ -3,7 +3,10 @@
     <v-subheader inset class="track-list-title">Songs</v-subheader>
     <track-list-item
       v-for="(track, i) in tracks"
+      :listType=listType
+      :playlistID=playlistID
       :key="track.trackId"
+      :trackKey=String(track.trackId)
       :title="track.trackName"
       :number="i + 1"
       :duration="track.trackTimeMillis"
@@ -21,7 +24,9 @@ export default {
     TrackListItem
   },
   props: {
-    tracks: Array
+    tracks: Array,
+    listType: String,
+    playlistID: String
   }
 };
 </script>
