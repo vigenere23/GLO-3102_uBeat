@@ -5,6 +5,8 @@
       :title="infos.name"
       :number-of-tracks="tracks.length"
       image-url="/static/blank-album-400.png"
+      :deleteButton="true"
+      @delete="deletePlaylist"
     ></album-infos>
 
     <div class="simple-input-field">
@@ -16,10 +18,6 @@
         v-model="newPlayListName"
       ></v-text-field>
       <v-btn v-on:click="changeName">Rename playlist</v-btn>
-    </div>
-
-    <div>
-      <v-btn class="centerButton" v-on:click="deletePlaylist"> delete playlist </v-btn>
     </div>
 
     <track-list :tracks="tracks"></track-list>
@@ -89,54 +87,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-
-  .centerButton{
-    display: table;
-    margin: 0 auto;
-  }
-
-#album-card {
-  display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-
-  #album-cover {
-    width: 40%;
-    max-width: 400px;
-  }
-
-  #info-album {
-    display: flex;
-    flex-direction: column;
-    color: white;
-  }
-}
-
-@media (max-width: 600px) {
-  #album-card {
-    height: 95vw;
-    max-height: 440px;
-    min-height: 300px;
-    padding: 0;
-    margin-top: 20px;
-
-    #album-cover {
-      width: 90vw;
-      max-width: 400px;
-      position: absolute;
-      filter: blur(2px);
-      opacity: 0.5;
-      z-index: 1;
-    }
-
-    #info-album {
-      z-index: 2;
-    }
-  }
-}
-</style>
