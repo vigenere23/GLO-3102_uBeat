@@ -27,7 +27,7 @@
 
 <script>
 import helper from '@/js/helper';
-import MusicControl from '@/js/MusicControl';
+import SongPlayer from '../js/MusicControl';
 
 export default {
   name: 'album-tracks-list-item',
@@ -44,8 +44,9 @@ export default {
   },
   methods: {
     play() {
-      MusicControl.stopSong();
-      MusicControl.playSong(this.preview);
+      const song = SongPlayer.instance;
+      song.addSong(this.preview);
+      song.playSong();
     }
   }
 
