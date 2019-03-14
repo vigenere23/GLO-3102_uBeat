@@ -24,6 +24,8 @@
         :wrap="true"
       ></cover-list>
 
+      <loading-center v-if="loading"></loading-center>
+
     </div>
   </div>
 </template>
@@ -31,17 +33,20 @@
 <script>
 import api from '@/js/api';
 import CoverList from '@/components/CoverList';
+import LoadingCenter from '@/components/LoadingCenter';
 
 export default {
   name: 'playlists',
   components: {
-    CoverList
+    CoverList,
+    LoadingCenter
   },
   data() {
     return {
       user: {},
       playlists: [],
-      newPlayListName: ''
+      newPlayListName: '',
+      loading: true
     };
   },
   async mounted() {
@@ -54,6 +59,7 @@ export default {
   methods: {
     async loadPage(userId) {
       this.resetPage();
+      this.loading = true;
       this.loadUserInfos(userId);
       this.loadPlaylists(userId);
     },
@@ -63,11 +69,11 @@ export default {
     },
     async loadUserInfos(userId) {
       const user = await api.getUserInfos(userId);
-      console.log(user);
       this.user = user;
     },
     async loadPlaylists(userId) {
       const playlists = await api.getUserPlaylists(userId);
+      this.loading = false;
       this.playlists = playlists;
     },
     async addPlaylist() {
