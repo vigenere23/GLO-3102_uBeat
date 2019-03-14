@@ -2,10 +2,10 @@
   <v-list two-line subheader class="blue-grey darken-3 track-list">
     <v-subheader inset class="track-list-title">Songs</v-subheader>
     <track-list-item
-      v-for="(track, i) in tracks"
+      v-for="track in tracks"
       :key="track.trackId"
       :title="track.trackName"
-      :number="i + 1"
+      :number="track.trackNumber"
       :duration="track.trackTimeMillis"
       :preview="track.previewUrl"
     ></track-list-item>
