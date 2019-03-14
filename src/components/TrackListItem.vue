@@ -1,4 +1,4 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
   <v-hover>
     <v-list-tile class="album-tracks-list-item" slot-scope="{ hover }">
       <v-list-tile-avatar class="song-number">
@@ -15,30 +15,21 @@
         <v-list-tile-title class="song-title">{{ title }}</v-list-tile-title>
         <v-list-tile-sub-title class="song-duration">{{ durationText || '' }}</v-list-tile-sub-title>
       </v-list-tile-content>
-
       <v-list-tile-action>
-        <v-menu>
-          <v-btn icon ripple>
-            <v-icon color="white">add</v-icon>
-          </v-btn>
-          <v-list>
-            <v-list-tile
-              v-for="(item, i) in items"
-              :key="i"
-              @click=""
-            >
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-
+        <v-container>
+          <v-menu offset-y>
+            <v-btn icon ripple slot="activator"><v-icon color="white">add</v-icon></v-btn>
+            <v-list dense>
+              <v-list-tile v-for="i in 4" :key="i" @click="">
+                <v-list-tile-title>{{ i }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </v-container>
       </v-list-tile-action>
-
     </v-list-tile>
   </v-hover>
-
 </template>
-
 <script>
 import helper from '@/js/helper';
 import MusicControl from '@/js/MusicControl';
@@ -49,8 +40,12 @@ export default {
     title: String,
     duration: Number,
     number: Number,
-    preview: String,
-    items: ['Allo', 'boo']
+    preview: String
+  },
+  data() {
+    return {
+      items: ['Allo', 'boo']
+    };
   },
   computed: {
     durationText() {
