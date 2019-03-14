@@ -1,11 +1,27 @@
 <template>
   <div id="album-page">
+
     <album-infos
       :title="infos.name"
       :number-of-tracks="tracks.length"
       image-url="/static/blank-album-400.png"
+      :deleteButton="true"
+      @delete="deletePlaylist"
     ></album-infos>
+
+    <div class="simple-input-field">
+      <v-text-field
+        label="playlist-name"
+        placeholder="New name..."
+        solo
+        hide-details
+        v-model="newPlayListName"
+      ></v-text-field>
+      <v-btn v-on:click="changeName">Rename playlist</v-btn>
+    </div>
+
     <track-list :tracks="tracks"></track-list>
+
   </div>
 </template>
 
@@ -24,7 +40,8 @@ export default {
     return {
       infos: {},
       tracks: [],
-      imageUrl: ''
+      imageUrl: '',
+      newPlayListName: ''
     };
   },
   async mounted() {
@@ -46,52 +63,27 @@ export default {
     async loadPlaylistInfosAndTracks(playlistId) {
       this.infos = await api.getPlaylistInfosAndTracks(playlistId);
       this.tracks = this.infos.tracks;
+    },
+    async deletePlaylist() {
+      await api.deletePlaylists(this.$route.params.playlistId);
+      setTimeout(this.goToPlaylists, 100);
+    },
+    async goToPlaylists() {
+      await this.$router.push('/playlists');
+    },
+    async changeName() {
+      if (this.newPlayListName) {
+        const newInfos = await api.changeNamePlaylist(
+          this.$route.params.playlistId,
+          this.newPlayListName,
+          this.infos.owner.email
+        );
+        if (newInfos) {
+          this.infos = newInfos;
+          this.newPlayListName = '';
+        }
+      }
     }
   }
 };
 </script>
-
-<style lang="scss">
-#album-card {
-  display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-
-  #album-cover {
-    width: 40%;
-    max-width: 400px;
-  }
-
-  #info-album {
-    display: flex;
-    flex-direction: column;
-    color: white;
-  }
-}
-
-@media (max-width: 600px) {
-  #album-card {
-    height: 95vw;
-    max-height: 440px;
-    min-height: 300px;
-    padding: 0;
-    margin-top: 20px;
-
-    #album-cover {
-      width: 90vw;
-      max-width: 400px;
-      position: absolute;
-      filter: blur(2px);
-      opacity: 0.5;
-      z-index: 1;
-    }
-
-    #info-album {
-      z-index: 2;
-    }
-  }
-}
-</style>
