@@ -2,12 +2,40 @@ import axios from 'axios';
 
 const API_URL = 'https://ubeat.herokuapp.com/unsecure';
 
-async function getFromApi(url) {
+
+async function get(url) {
   try {
     const response = await axios.get(url);
     return response.data;
   } catch (err) {
-    return {};
+    return null;
+  }
+}
+
+async function post(url, body) {
+  try {
+    const response = await axios.post(url, body);
+    return response.data;
+  } catch (err) {
+    return null;
+  }
+}
+
+async function put(url, body) {
+  try {
+    const response = await axios.put(url, body);
+    return response.data;
+  } catch (err) {
+    return null;
+  }
+}
+
+async function deleteFromApi(url) {
+  try {
+    const response = await axios.delete(url, body);
+    return response.data;
+  } catch (err) {
+    return null;
   }
 }
 
@@ -34,53 +62,69 @@ function filterPlaylistsByUser(playlists, userId) {
 export default {
   async getAlbumsOfArtist(artistId) {
     const url = `${API_URL}/artists/${artistId}/albums`;
-    const data = await getFromApi(url);
+    const data = await get(url);
     const albums = extractMultipleResults(data);
     return sortAlbumsDesc(albums);
   },
 
   async getArtistInfos(artistId) {
     const url = `${API_URL}/artists/${artistId}`;
-    const data = await getFromApi(url);
+    const data = await get(url);
     return extractSingleResult(data);
   },
 
   async getUserInfos(userId) {
     const url = `${API_URL}/users/${userId}`;
-    return getFromApi(url);
+    return get(url);
   },
 
   async getUserPlaylists(userId) {
     const url = `${API_URL}/playlists`;
-    const data = await getFromApi(url);
+    const data = await get(url);
     return filterPlaylistsByUser(data, userId);
   },
 
   async getAlbumInfos(albumId) {
     const url = `${API_URL}/albums/${albumId}`;
-    const data = await getFromApi(url);
+    const data = await get(url);
     return extractSingleResult(data);
   },
 
   async getAlbumTracks(albumId) {
     const url = `${API_URL}/albums/${albumId}/tracks`;
-    const data = await getFromApi(url);
+    const data = await get(url);
     return extractMultipleResults(data);
   },
 
   async getPlaylistInfosAndTracks(playlistId) {
     const url = `${API_URL}/playlists/${playlistId}`;
-    return getFromApi(url);
+    return get(url);
+  },
+
+  async addPlaylist(newName, newOwner) {
+    const url = `${API_URL}/playlists`;
+    return post(url, {
+      name: newName,
+      owner: newOwner,
+    });
+  },
+
+  async deletePlaylists(playlistId) {
+    const url = `${API_URL}/playlists/${playlistId}`;
+    return deleteFromApi(url);
+  },
+
+  async changeNamePlaylist(playlistId, newName, newOwner) {
+    const url = `${API_URL}/playlists/${playlistId}`;
+    return put(url, {
+      name: newName,
+      owner: newOwner,
+    });
   },
 
   async deleteSongTrackFromPlaylist(playlistId, songId) {
     const url = `${API_URL}/playlists/${playlistId}/tracks/${songId}`;
-    axios.delete(url)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    return deleteFromApi(url);
   }
+
 };

@@ -29,8 +29,7 @@ export default new Router({
     },
     {
       path: '/playlists',
-      redirect: '/users/5be872a1e495370004798456/playlists'
-      // 5c81361ad6f63a0004c26542 Our user id
+      redirect: '/users/5c81361ad6f63a0004c26542/playlists'
     },
     {
       path: '/users/:userId/playlists',

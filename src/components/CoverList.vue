@@ -36,14 +36,6 @@
       </li>
     </ul>
 
-    <div v-if="!covers.length" class="loading-center">
-      <v-progress-circular
-        indeterminate
-        color="blue"
-        :size="60"
-        :width="6"
-      ></v-progress-circular>
-    </div>
   </div>
 </template>
 
@@ -98,10 +90,6 @@ export default {
     flex-shrink: 0;
     flex-basis: 20%;
     margin-right: 32px;
-  }
-
-  .loading-center {
-    text-align: center;
   }
 }
 
