@@ -6,7 +6,7 @@
       image-url="/static/blank-album-400.png"
     ></album-infos>
     <div class="centerButton">
-      <input class="inputStyle" type="text" v-model="newName">
+      <input class="inputStyle" type="text" placeholder="New name" v-model="newName">
       <v-btn v-on:click="changeName"> Change playlist name </v-btn>
     </div>
     <div>
@@ -32,7 +32,7 @@ export default {
       infos: {},
       tracks: [],
       imageUrl: '',
-      newName: 'new name'
+      newName: ''
     };
   },
   async mounted() {
@@ -57,13 +57,23 @@ export default {
     },
     async deletePlaylist() {
       await api.deletePlaylists(this.$route.params.playlistId);
-      await this.loadPlaylists(this.$route.params.userId);
-      /* doit envoyer à page playlist */
+      setTimeout(this.goToPlaylists, 100);
+    },
+    async goToPlaylists() {
+      await this.$router.push('/playlists');
     },
     async changeName() {
-      const infos = await api.getPlaylistInfosAndTracks(this.$route.params.playlistId);
-      await api.changeNamePlaylist(this.$route.params.playlistId, this.newName, infos.owner.email);
-      /* doit reload la page */
+      if (this.newName === '') {
+        return false;
+      } else if (this.newName !== '') {
+        const infos = await api.getPlaylistInfosAndTracks(this.$route.params.playlistId);
+        await api.changeNamePlaylist(this.$route.params.playlistId, this.newName,
+          infos.owner.email);
+        this.infos.name = this.newName;
+        this.newName = '';
+        return true;
+      }
+      return false;
     }
   }
 };

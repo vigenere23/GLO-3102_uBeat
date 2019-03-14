@@ -89,7 +89,7 @@ export default {
 
   async changeNamePlaylist(playlistId, newName, newOwner) {
     const url = `${API_URL}/playlists/${playlistId}`;
-    axios.put(url, {
+    await axios.put(url, {
       name: newName,
       owner: newOwner,
     });

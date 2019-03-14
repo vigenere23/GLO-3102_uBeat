@@ -5,7 +5,7 @@
       <div class="centered-title">
         <h1 class="large-thin-title">Playlists</h1>
         <h2 class="large-thin-subtitle">for {{username}}</h2>
-        <input class="inputStyle" type="text" v-model="newPlayList">
+        <input class="inputStyle" type="text" v-model="newPlayList" placeholder="new Playlist">
         <v-btn v-on:click="addPlaylist "> Add playlist </v-btn>
 
       </div>
@@ -33,7 +33,7 @@ export default {
     return {
       username: '',
       playlists: [],
-      newPlayList: 'new playlist'
+      newPlayList: ''
     };
   },
   async mounted() {
@@ -60,15 +60,22 @@ export default {
     async loadPlaylists(userId) {
       const playlists = await api.getUserPlaylists(userId);
       this.playlists = playlists;
-      for (let i = 0; i < this.playlists.length; i += 1) {
-        console.log(playlists[i].id);
-      }
     },
     async addPlaylist() {
-      const infos = await api.getUserInfos(this.$route.params.userId);
-      api.addPlaylist(this.newPlayList, infos.email);
-      this.loadPlaylists(this.$route.params.userId);
+      if (this.newPlayList === '') {
+        return false;
+      } else if (this.newPlayList !== '') {
+        const infos = await api.getUserInfos(this.$route.params.userId);
+        await api.addPlaylist(this.newPlayList, infos.email);
+        this.newPlayList = '';
+        setTimeout(this.refreshPage, 100);
+        return true;
+      }
+      return false;
     },
+    async refreshPage() {
+      await this.loadPage(this.$route.params.userId);
+    }
   }
 };
 </script>
