@@ -18,9 +18,9 @@
       <v-list-tile-action>
         <v-container>
           <v-menu offset-y>
-            <v-btn icon ripple slot="activator"><v-icon color="white">add</v-icon></v-btn>
+            <v-btn icon ripple slot="activator"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
             <v-list dense>
-              <v-list-tile v-for="i in 4" :key="i" @click="">
+              <v-list-tile v-on:click="addToPlaylist" v-for="i in 4" :key="i" @click="">
                 <v-list-tile-title>{{ i }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -57,8 +57,11 @@ export default {
       MusicControl.stopSong();
       MusicControl.playSong(this.preview);
     },
+    getPlaylistsNames() {
+      console.log('getAllPlaylistNames has been called');
+    },
     addToPlaylist() {
-      console.log('send help');
+      console.log('addToPlaylist has been called');
     }
   }
 
