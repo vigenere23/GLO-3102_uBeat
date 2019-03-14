@@ -59,6 +59,23 @@ a {
   color: black;
 }
 
+.simple-input-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.simple-input-field button {
+  flex-shrink: 0;
+}
+
+.simple-input-field .v-input {
+  max-width: 300px;
+  min-width: 100px
+}
+
 .itunes-link {
   display: inline-block;
   overflow: hidden;

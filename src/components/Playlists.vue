@@ -7,7 +7,7 @@
         <h2 class="large-thin-subtitle">for {{ user.name }}</h2>
       </div>
 
-      <div class="add-playlist">
+      <div class="simple-input-field">
         <v-text-field
           label="playlist-name"
           placeholder="Name..."
@@ -15,7 +15,7 @@
           hide-details
           v-model="newPlayListName"
         ></v-text-field>
-        <v-btn v-on:click="addPlaylist"> Add playlist </v-btn>
+        <v-btn v-on:click="addPlaylist">Add playlist</v-btn>
       </div>
 
       <cover-list
@@ -89,21 +89,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-.add-playlist {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  button {
-    flex-shrink: 0;
-  }
-
-  .v-input {
-    max-width: 300px;
-    min-width: 100px
-  }
-}
-</style>

@@ -1,18 +1,29 @@
 <template>
   <div id="album-page">
+
     <album-infos
       :title="infos.name"
       :number-of-tracks="tracks.length"
       image-url="/static/blank-album-400.png"
     ></album-infos>
-    <div class="centerButton">
-      <input class="inputStyle" type="text" placeholder="New name" v-model="newName">
-      <v-btn v-on:click="changeName"> Change playlist name </v-btn>
+
+    <div class="simple-input-field">
+      <v-text-field
+        label="playlist-name"
+        placeholder="New name..."
+        solo
+        hide-details
+        v-model="newPlayListName"
+      ></v-text-field>
+      <v-btn v-on:click="changeName">Rename playlist</v-btn>
     </div>
+
     <div>
       <v-btn class="centerButton" v-on:click="deletePlaylist"> delete playlist </v-btn>
     </div>
+
     <track-list :tracks="tracks"></track-list>
+
   </div>
 </template>
 
@@ -32,7 +43,7 @@ export default {
       infos: {},
       tracks: [],
       imageUrl: '',
-      newName: ''
+      newPlayListName: ''
     };
   },
   async mounted() {
@@ -63,17 +74,17 @@ export default {
       await this.$router.push('/playlists');
     },
     async changeName() {
-      if (this.newName === '') {
-        return false;
-      } else if (this.newName !== '') {
-        const infos = await api.getPlaylistInfosAndTracks(this.$route.params.playlistId);
-        await api.changeNamePlaylist(this.$route.params.playlistId, this.newName,
-          infos.owner.email);
-        this.infos.name = this.newName;
-        this.newName = '';
-        return true;
+      if (this.newPlayListName) {
+        const newInfos = await api.changeNamePlaylist(
+          this.$route.params.playlistId,
+          this.newPlayListName,
+          this.infos.owner.email
+        );
+        if (newInfos) {
+          this.infos = newInfos;
+          this.newPlayListName = '';
+        }
       }
-      return false;
     }
   }
 };

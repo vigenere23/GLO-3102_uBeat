@@ -8,7 +8,7 @@ async function get(url) {
     const response = await axios.get(url);
     return response.data;
   } catch (err) {
-    return {};
+    return null;
   }
 }
 
@@ -17,7 +17,7 @@ async function post(url, body) {
     const response = await axios.post(url, body);
     return response.data;
   } catch (err) {
-    return {};
+    return null;
   }
 }
 
@@ -26,7 +26,7 @@ async function put(url, body) {
     const response = await axios.put(url, body);
     return response.data;
   } catch (err) {
-    return {};
+    return null;
   }
 }
 
@@ -35,7 +35,7 @@ async function deleteFromApi(url, body) {
     const response = await axios.delete(url, body);
     return response.data;
   } catch (err) {
-    return {};
+    return null;
   }
 }
 
