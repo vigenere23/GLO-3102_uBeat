@@ -79,13 +79,11 @@ export default {
     async addPlaylist() {
       if (this.newPlayListName !== '') {
         const infos = await api.getUserInfos(this.$route.params.userId);
-        await api.addPlaylist(this.newPlayListName, infos.email);
-        this.playlists.push({
-          name: this.newPlayListName,
-          owner: this.user,
-          tracks: []
-        });
-        this.newPlayListName = '';
+        const newPlaylist = await api.addPlaylist(this.newPlayListName, infos.email);
+        if (newPlaylist) {
+          this.playlists.push(newPlaylist);
+          this.newPlayListName = '';
+        }
       }
     }
   }
