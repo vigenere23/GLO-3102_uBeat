@@ -32,7 +32,7 @@ async function put(url, body) {
 
 async function deleteFromApi(url) {
   try {
-    const response = await axios.delete(url, body);
+    const response = await axios.delete(url);
     return response.data;
   } catch (err) {
     return null;

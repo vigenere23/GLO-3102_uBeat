@@ -39,7 +39,7 @@ export default {
   props: {
     title: String,
     listType: String,
-    trackId: String,
+    trackId: [String, Number],
     playlistID: String,
     duration: Number,
     number: Number,
