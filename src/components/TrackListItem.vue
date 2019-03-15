@@ -48,7 +48,6 @@ export default {
   props: {
     title: String,
     listType: String,
-    tracks: Array,
     trackId: [String, Number],
     userId: String,
     playlistID: String,
@@ -65,7 +64,9 @@ export default {
     return {
       deleted: false,
       playlistsname: [],
-      name: String
+      tracks: [],
+      name: String,
+      trackName: String
     };
   },
   methods: {
@@ -80,11 +81,13 @@ export default {
         this.playlistsname.push(test);
       }
     },
-    addToPlaylist(i) {
-      console.log(i);
-      console.log('');
-      console.log('Ceci est le PlaylistId : ', i[1]);
-      console.log('Nom de la chanson à ajouter :', this.title, 'et son id est :', this.trackId);
+    async addToPlaylist(trackToAdd) {
+      this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
+      for (let i = 0; i < this.tracks.length; i += 1) {
+        if (this.tracks[i].trackName === this.title) {
+          api.addSongToPlaylist(trackToAdd[1], this.tracks[i]);
+        }
+      }
     },
     async deleteSong() {
       await api.deleteSongTrackFromPlaylist(this.playlistID, this.trackId);

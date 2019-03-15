@@ -30,13 +30,6 @@ export default {
     playlistID: String,
     userId: String
   },
-  data() {
-    return {
-      deleted: false,
-      playlistsname: [],
-      name: String
-    };
-  },
 };
 </script>
 
