@@ -4,7 +4,7 @@
     <track-list-item
       v-for="(track, i) in tracks"
       :listType="listType"
-      :userID="userID"
+      :userId="userId"
       :playlistID="playlistID"
       :key="track.trackId"
       :trackId="track.trackId"
@@ -28,7 +28,7 @@ export default {
     tracks: Array,
     listType: String,
     playlistID: String,
-    userID: String
+    userId: String
   }
 };
 </script>

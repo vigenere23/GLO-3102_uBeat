@@ -27,7 +27,7 @@
               <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
               <v-list dense>
                 <v-list-tile v-on:click="addToPlaylist" v-for="i in playlistsname" :key="i" @click="">
-                  <v-list-tile-title>{{ i }}</v-list-tile-title>
+                  <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
                 </v-list-tile>
               </v-list>
             </v-menu>
@@ -49,7 +49,7 @@ export default {
     title: String,
     listType: String,
     trackId: [String, Number],
-    userID: String,
+    userId: String,
     playlistID: String,
     duration: Number,
     number: Number,
@@ -63,7 +63,8 @@ export default {
   data() {
     return {
       deleted: false,
-      playlistsname: ['Allo', 'boo']
+      playlistsname: [],
+      name: String
     };
   },
   methods: {
@@ -72,10 +73,13 @@ export default {
       MusicControl.playSong(this.preview);
     },
     async getPlaylistsNames() {
-      console.log('getAllPlaylistNames has been called');
-      const playlists = await api.getUserPlaylists(this.userID);
-      this.playlistsname = playlists.name;
-      console.log(await api.getUserPlaylists(this.userID));
+      const playlists = await api.getUserPlaylists('5c81361ad6f63a0004c26542');
+      console.log(playlists);
+      for (let i = 0; i < playlists.length; i += 1) {
+        const test = [playlists[i].name, playlists[i].id];
+        this.playlistsname.push(test);
+        console.log(this.playlistsname);
+      }
     },
     addToPlaylist() {
       console.log('addToPlaylist has been called');
