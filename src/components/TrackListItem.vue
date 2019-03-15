@@ -49,6 +49,7 @@ export default {
     title: String,
     listType: String,
     trackId: [String, Number],
+    userID: String,
     playlistID: String,
     duration: Number,
     number: Number,
@@ -72,9 +73,9 @@ export default {
     },
     async getPlaylistsNames() {
       console.log('getAllPlaylistNames has been called');
-      const playlists = await api.getUserPlaylists(this.$route.params.userId);
+      const playlists = await api.getUserPlaylists(this.userID);
       this.playlistsname = playlists.name;
-      console.log(await api.getUserPlaylists(this.$route.params.userId));
+      console.log(await api.getUserPlaylists(this.userID));
     },
     addToPlaylist() {
       console.log('addToPlaylist has been called');

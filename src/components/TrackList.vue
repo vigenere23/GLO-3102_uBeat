@@ -4,6 +4,7 @@
     <track-list-item
       v-for="(track, i) in tracks"
       :listType="listType"
+      :userID="userID"
       :playlistID="playlistID"
       :key="track.trackId"
       :trackId="track.trackId"
@@ -11,7 +12,7 @@
       :number="track.trackNumber"
       :duration="track.trackTimeMillis"
       :preview="track.previewUrl"
-    ></track-list-item
+    ></track-list-item>
   </v-list>
 </template>
 
@@ -26,7 +27,8 @@ export default {
   props: {
     tracks: Array,
     listType: String,
-    playlistID: String
+    playlistID: String,
+    userID: String
   }
 };
 </script>
