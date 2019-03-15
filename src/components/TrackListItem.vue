@@ -26,7 +26,7 @@
             <v-menu offset-y>
               <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
               <v-list dense>
-                <v-list-tile v-on:click="addToPlaylist" v-for="i in playlistsname" :key="i" @click="">
+                <v-list-tile v-on:click="addToPlaylist(i)" v-for="i in playlistsname" :key="i" @click="">
                   <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
                 </v-list-tile>
               </v-list>
@@ -74,15 +74,14 @@ export default {
     },
     async getPlaylistsNames() {
       const playlists = await api.getUserPlaylists('5c81361ad6f63a0004c26542');
-      console.log(playlists);
       for (let i = 0; i < playlists.length; i += 1) {
         const test = [playlists[i].name, playlists[i].id];
         this.playlistsname.push(test);
-        console.log(this.playlistsname);
       }
     },
-    addToPlaylist() {
+    addToPlaylist(i) {
       console.log('addToPlaylist has been called');
+      console.log(i);
     },
     async deleteSong() {
       await api.deleteSongTrackFromPlaylist(this.playlistID, this.trackId);
