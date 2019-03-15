@@ -24,7 +24,7 @@
         <v-list-tile-action>
           <v-container>
             <v-menu offset-y>
-              <v-btn icon ripple slot="activator"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
+              <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
               <v-list dense>
                 <v-list-tile v-on:click="addToPlaylist" v-for="i in playlistsname" :key="i" @click="">
                   <v-list-tile-title>{{ i }}</v-list-tile-title>
