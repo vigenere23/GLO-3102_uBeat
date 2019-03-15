@@ -6,29 +6,27 @@
           <div>
             <v-list-tile-title v-if="!hover">{{ number }}</v-list-tile-title>
             <v-list-tile-title v-else class="play-arrow" v-on:click="play">
-             <v-btn icon ripple>
-               <v-icon color="white">play_arrow</v-icon>
-             </v-btn>
+              <v-btn icon ripple>
+                <v-icon color="white">play_arrow</v-icon>
+              </v-btn>
             </v-list-tile-title>
           </div>
         </v-list-tile-avatar>
         <v-list-tile-content>
-         <v-list-tile-title class="song-title">{{ title }}</v-list-tile-title>
-         <v-list-tile-sub-title class="song-duration">{{ durationText || '' }}</v-list-tile-sub-title>
+          <v-list-tile-title class="song-title">{{ title }}</v-list-tile-title>
+          <v-list-tile-sub-title class="song-duration">{{ durationText || '' }}</v-list-tile-sub-title>
         </v-list-tile-content>
-       <v-list-tile-action v-on:click="deleteSong">
-         <v-btn icon ripple v-if="listType === 'playlist'">
+        <v-list-tile-action v-on:click="deleteSong">
+          <v-btn icon ripple v-if="listType === 'playlist'">
             <v-icon color="white">remove</v-icon>
           </v-btn>
           <v-btn icon ripple v-else>
             <v-icon color="white">add</v-icon>
          </v-btn>
-       </v-list-tile-action>
-     </v-list-tile>
-   </v-hover>
+        </v-list-tile-action>
+      </v-list-tile>
+    </v-hover>
   </div>
-
-
 </template>
 
 <script>
@@ -41,7 +39,7 @@ export default {
   props: {
     title: String,
     listType: String,
-    trackKey: String,
+    trackId: String,
     playlistID: String,
     duration: Number,
     number: Number,
@@ -63,7 +61,7 @@ export default {
       MusicControl.playSong(this.preview);
     },
     async deleteSong() {
-      await api.deleteSongTrackFromPlaylist(this.playlistID, this.trackKey);
+      await api.deleteSongTrackFromPlaylist(this.playlistID, this.trackId);
       this.deleted = true;
     }
   }
@@ -79,11 +77,8 @@ export default {
 .song-number, .song-title, .song-duration {
   color: white !important;
 }
-  .play-arrow{
-    height: 100%;
-  }
-
-v-list-tile-title{
-  position: relative;
+  
+.play-arrow {
+  height: 100%;
 }
 </style>
