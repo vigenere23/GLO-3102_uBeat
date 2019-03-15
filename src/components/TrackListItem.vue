@@ -20,7 +20,7 @@
           <v-menu offset-y>
             <v-btn icon ripple slot="activator"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
             <v-list dense>
-              <v-list-tile v-on:click="addToPlaylist" v-for="i in 4" :key="i" @click="">
+              <v-list-tile v-on:click="addToPlaylist" v-for="i in playlistsname" :key="i" @click="">
                 <v-list-tile-title>{{ i }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -30,9 +30,11 @@
     </v-list-tile>
   </v-hover>
 </template>
+
 <script>
 import helper from '@/js/helper';
 import MusicControl from '@/js/MusicControl';
+import api from '@/js/api';
 
 export default {
   name: 'album-tracks-list-item',
@@ -44,7 +46,7 @@ export default {
   },
   data() {
     return {
-      items: ['Allo', 'boo']
+      playlistsname: ['Allo', 'boo']
     };
   },
   computed: {
@@ -57,8 +59,11 @@ export default {
       MusicControl.stopSong();
       MusicControl.playSong(this.preview);
     },
-    getPlaylistsNames() {
+    async getPlaylistsNames() {
       console.log('getAllPlaylistNames has been called');
+      const playlists = await api.getUserPlaylists(this.$route.params.userId);
+      this.playlistsname = playlists.name;
+      console.log(await api.getUserPlaylists(this.$route.params.userId));
     },
     addToPlaylist() {
       console.log('addToPlaylist has been called');
