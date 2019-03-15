@@ -8,10 +8,10 @@
       :key="track.trackId"
       :trackId="track.trackId"
       :title="track.trackName"
-      :number="i + 1"
+      :number="track.trackNumber"
       :duration="track.trackTimeMillis"
       :preview="track.previewUrl"
-    ></track-list-item>
+    ></track-list-item
   </v-list>
 </template>
 
