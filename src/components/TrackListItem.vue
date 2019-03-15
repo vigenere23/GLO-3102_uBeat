@@ -88,6 +88,7 @@ export default {
           api.addSongToPlaylist(trackToAdd[1], this.tracks[i]);
         }
       }
+      this.playlistsname.length = 0;
     },
     async deleteSong() {
       await api.deleteSongTrackFromPlaylist(this.playlistID, this.trackId);
