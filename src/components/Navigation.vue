@@ -92,14 +92,16 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
+    <MusicPlayer></MusicPlayer>
   </div>
 </template>
 
 <script>
   import Toolbar from './Toolbar';
+  import MusicPlayer from './MusicPlayer';
 
   export default {
-    components: { Toolbar },
+    components: { Toolbar, MusicPlayer },
     data() {
       return {
         screenSize: '',

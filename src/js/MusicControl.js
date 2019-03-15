@@ -1,18 +1,3 @@
-/* let songPlaying;
-export default {
-  async playSong(url) {
-    const audio = new Audio(url);
-    songPlaying = audio;
-    songPlaying.play();
-  },
-  async stopSong() {
-    if (songPlaying !== undefined) {
-      songPlaying.pause();
-    }
-  }
-}; */
-
-
 export default class SongPlayer {
   constructor() {
     if (!SongPlayer.instance) {
@@ -22,19 +7,23 @@ export default class SongPlayer {
     }
     return SongPlayer.instance;
   }
-  addSong(url) {
-    this.listOfSongs.push(url);
+  addSong(song) {
+    this.listOfSongs.push(song);
   }
   deleteSong(songNumberInList) {
     this.listOfSongs.splice(songNumberInList, 1);
   }
+  deleteElementsInArray() {
+    this.listOfSongs = [];
+  }
   playSong() {
-    global.audio = new Audio(this.listOfSongs[0]);
+    global.audio = new Audio(this.listOfSongs[0].preview);
     global.audio.play();
   }
   playPastSong() {
-    global.audio = new Audio(this.listOfPastSongs.pop());
-    global.audio.play();
+    const pastSong = this.listOfPastSongs.pop();
+    this.listOfSongs.splice(0, 0, pastSong);
+    this.playSong();
   }
   pauseSong() {
     if (this.listOfSongs.length > 0) {
@@ -59,5 +48,7 @@ export default class SongPlayer {
       this.playPastSong();
     }
   }
+  getNumberOfItemsInListOfSongs() {
+    return this.listOfSongs.length;
+  }
 }
-
