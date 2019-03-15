@@ -17,8 +17,10 @@ export default class SongPlayer {
     this.listOfSongs = [];
   }
   playSong() {
+    if (global.audio) global.audio.removeEventListener('ended');
     global.audio = new Audio(this.listOfSongs[0].preview);
     global.audio.play();
+    global.audio.addEventListener('ended', this.playNextSong);
   }
   playPastSong() {
     const pastSong = this.listOfPastSongs.pop();
