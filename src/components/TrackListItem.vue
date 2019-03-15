@@ -17,6 +17,11 @@
       </v-list-tile-content>
       <v-list-tile-action>
         <v-btn icon ripple v-on:click="add">
+          <v-icon color="white">accessible_forward</v-icon> <!-- playlist_add -->
+        </v-btn>
+      </v-list-tile-action>
+      <v-list-tile-action>
+        <v-btn icon ripple>
           <v-icon color="white">add</v-icon>
         </v-btn>
       </v-list-tile-action>
