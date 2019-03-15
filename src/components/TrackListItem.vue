@@ -48,6 +48,7 @@ export default {
   props: {
     title: String,
     listType: String,
+    tracks: Array,
     trackId: [String, Number],
     userId: String,
     playlistID: String,
@@ -80,8 +81,10 @@ export default {
       }
     },
     addToPlaylist(i) {
-      console.log('addToPlaylist has been called');
       console.log(i);
+      console.log('');
+      console.log('Ceci est le PlaylistId : ', i[1]);
+      console.log('Nom de la chanson à ajouter :', this.title, 'et son id est :', this.trackId);
     },
     async deleteSong() {
       await api.deleteSongTrackFromPlaylist(this.playlistID, this.trackId);

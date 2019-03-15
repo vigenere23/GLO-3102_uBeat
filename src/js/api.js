@@ -125,6 +125,11 @@ export default {
   async deleteSongTrackFromPlaylist(playlistId, songId) {
     const url = `${API_URL}/playlists/${playlistId}/tracks/${songId}`;
     return deleteFromApi(url);
+  },
+
+  async addSongToPlaylist(playlistId, track) {
+    const url = `${API_URL}/playlists/${playlistId}/tracks`;
+    return post(url, track);
   }
 
 };

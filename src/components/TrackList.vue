@@ -29,7 +29,14 @@ export default {
     listType: String,
     playlistID: String,
     userId: String
-  }
+  },
+  data() {
+    return {
+      deleted: false,
+      playlistsname: [],
+      name: String
+    };
+  },
 };
 </script>
 
