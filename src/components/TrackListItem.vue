@@ -16,7 +16,7 @@
           <v-list-tile-title class="song-title">{{ title }}</v-list-tile-title>
           <v-list-tile-sub-title class="song-duration">{{ durationText || '' }}</v-list-tile-sub-title>
         </v-list-tile-content>
-        <v-list-tile-action v-on:click="deleteSong">
+        <v-list-tile-action v-on:click="deleteSong" v-if="listType === 'playlist'">
           <v-btn icon ripple v-if="listType === 'playlist'">
             <v-icon color="white">remove</v-icon>
           </v-btn>
@@ -26,7 +26,7 @@
             <v-menu offset-y>
               <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
               <v-list dense>
-                <v-list-tile v-on:click="addToPlaylist(i)" v-for="i in playlistsname" :key="i" @click="">
+                <v-list-tile v-on:click="addToPlaylist(i)" v-for="i in playlistsname" @click="">
                   <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
                 </v-list-tile>
               </v-list>
@@ -75,6 +75,7 @@ export default {
       MusicControl.playSong(this.preview);
     },
     async getPlaylistsNames() {
+      this.playlistsname.length = 0;
       const playlists = await api.getUserPlaylists('5c81361ad6f63a0004c26542');
       for (let i = 0; i < playlists.length; i += 1) {
         const test = [playlists[i].name, playlists[i].id];
