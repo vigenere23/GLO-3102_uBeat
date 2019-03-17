@@ -1,7 +1,7 @@
 <template>
   <router-link class="cover" :to="link || ''" tag="a">
     <v-img :src="image || '/static/blank-album-200.png'"></v-img>
-    <p class="name">{{ name || "untitled" }}</p>
+    <p class="name">{{ nameWithAdvisory || "untitled" }}</p>
     <p class="desc" v-if="desc">{{ desc }}</p>
   </router-link>
 </template>
@@ -14,9 +14,15 @@ export default {
       type: String,
       required: true
     },
+    advisory: String,
     desc: [String, Number],
     image: String,
     link: String
+  },
+  computed: {
+    nameWithAdvisory() {
+      return this.advisory ? `${this.name} [${this.advisory}]` : this.name;
+    }
   }
 };
 </script>

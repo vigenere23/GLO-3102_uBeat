@@ -2,8 +2,11 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 
 export default {
   getImageUrlOfSize(url, size) {
-    const baseUrl = url.substring(0, url.indexOf('/source/') + '/source/'.length);
-    return `${baseUrl}${size}x${size}bb.jpg`;
+    if (url && size) {
+      const baseUrl = url.substring(0, url.indexOf('/source/') + '/source/'.length);
+      return `${baseUrl}${size}x${size}bb.jpg`;
+    }
+    return url;
   },
 
   getItunesLink(baseLink) {
