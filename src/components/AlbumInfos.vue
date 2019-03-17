@@ -1,10 +1,10 @@
 <template>
   <v-card id="album-card" class="blue-grey darken-4">
-    <v-img
+    <img
       id="album-cover"
       :src="imageUrl || '/static/blank-album-400.png'"
     >
-    </v-img>
+    
     <v-card-title primary-title>
       <div id="info-album">
         <h1>{{ title || 'Untitled' }}</h1>
