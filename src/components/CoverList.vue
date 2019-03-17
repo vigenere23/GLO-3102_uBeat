@@ -83,6 +83,7 @@ export default {
 
   ul.wrap {
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   li {

@@ -1,6 +1,6 @@
 <template>
   <router-link class="cover" :to="link || ''" tag="a">
-    <v-img :src="image || '/static/blank-album-200.png'"></v-img>
+    <img class="cover-image" :src="image || '/static/blank-album-200.png'">
     <p class="name">{{ name || "untitled" }}</p>
     <p class="desc" v-if="desc">{{ desc }}</p>
   </router-link>
