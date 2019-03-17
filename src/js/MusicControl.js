@@ -28,7 +28,7 @@ export default class SongPlayer {
   playSong() {
     global.audio = new Audio(this.listOfSongs[0].preview);
     global.audio.play();
-    global.audio.addEventListener('ended', SongPlayer.instance.playNextSong);
+    global.audio.addEventListener('ended', this.playNextSong);
     this.setBottomBarVisibleOrNot();
     bus.$emit('musicStarted');
     bus.$emit('changeTitleOfSongPlaying', this.listOfSongs[0].title);
@@ -48,21 +48,19 @@ export default class SongPlayer {
       bus.$emit('musicStopped');
     }
   }
-
-  static playNextSong() {
+  /* eslint-disable */
+  playNextSong() {
+    SongPlayer.instance.pauseSong();
+    SongPlayer.instance.listOfPastSongs.push(SongPlayer.instance.listOfSongs[0]);
+    SongPlayer.instance.deleteSong(0);
     if (SongPlayer.instance.listOfSongs.length > 1) {
-      SongPlayer.instance.pauseSong();
-      SongPlayer.instance.listOfPastSongs.push(SongPlayer.instance.listOfSongs[0]);
-      SongPlayer.instance.deleteSong(0);
       SongPlayer.instance.playSong();
     } else {
-      SongPlayer.instance.pauseSong();
-      SongPlayer.instance.listOfPastSongs.push(SongPlayer.instance.listOfSongs[0]);
-      SongPlayer.instance.deleteSong(0);
+      global.audio.currentTime = 0;
       SongPlayer.instance.setBottomBarVisibleOrNot();
     }
   }
-
+  /* eslint-enable */
   restartSongOrPrevious() {
     if (global.audio.currentTime > 5) {
       global.audio.currentTime = 0;

@@ -47,6 +47,7 @@
 import helper from '@/js/helper';
 import api from '@/js/api';
 import SongPlayer from '@/js/MusicControl';
+import { bus } from '@/main';
 
 export default {
   name: 'album-tracks-list-item',
@@ -93,6 +94,9 @@ export default {
     add() {
       const song = new SongPlayer();
       song.addSong(this.thisSong);
+      if (song.listOfSongs.length === 1) {
+        bus.$emit('firstElementInArray', song.listOfSongs[0].title);
+      }
     },
     async addToPlaylist(trackToAdd) {
       this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
