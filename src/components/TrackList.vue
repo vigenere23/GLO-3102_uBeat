@@ -3,8 +3,8 @@
     <v-subheader inset class="track-list-title">Songs
       <v-spacer></v-spacer>
       <v-list-tile-action>
-        <v-menu offset-overflow v-if="listType !== 'playlist'">
-          <v-btn ripple slot="activator" v-on:click="getPlaylistsNames">Add All</v-btn>
+        <v-menu offset-x left v-if="listType !== 'playlist'">
+          <v-btn ripple slot="activator">Add All</v-btn>
           <v-list dense>
             <v-list-tile v-on:click="addAllToPlaylist(i)" v-for="i in playlistsname" @click="">
               <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
@@ -37,6 +37,9 @@
     components: {
       TrackListItem
     },
+    mounted() {
+      this.getPlaylistsNames();
+    },
     data() {
       return {
         playlistsname: [],
@@ -57,7 +60,6 @@
         for (let i = 0; i < this.tracks.length; i += 1) {
           api.addSongToPlaylist(trackToAdd[1], this.tracks[i]);
         }
-        this.playlistsname.length = 0;
       },
     },
     props: {

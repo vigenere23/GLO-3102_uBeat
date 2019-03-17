@@ -23,7 +23,7 @@
         </v-list-tile-action>
         <v-list-tile-action>
           <v-container>
-            <v-menu offset-overflow left>
+            <v-menu offset-x left>
               <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
               <v-list dense>
                 <v-list-tile v-on:click="addToPlaylist(i)" v-for="i in playlistsname" @click="">
@@ -60,6 +60,9 @@ export default {
       return helper.getPrettyDuration(this.duration);
     }
   },
+  mounted() {
+    this.getPlaylistsNames();
+  },
   data() {
     return {
       deleted: false,
@@ -90,7 +93,6 @@ export default {
           api.addSongToPlaylist(trackToAdd[1], this.tracks[i]);
         }
       }
-      this.playlistsname.length = 0;
     },
     async deleteSong() {
       await api.deleteSongTrackFromPlaylist(this.playlistID, this.trackId);
