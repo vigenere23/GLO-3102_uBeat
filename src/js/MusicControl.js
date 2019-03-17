@@ -1,6 +1,7 @@
 import { bus } from '@/main';
 
 export default class SongPlayer {
+
   constructor() {
     if (!SongPlayer.instance) {
       this.listOfSongs = [];
@@ -9,17 +10,21 @@ export default class SongPlayer {
     }
     return SongPlayer.instance;
   }
+
   addSong(song) {
     this.listOfSongs.push(song);
     this.setBottomBarVisibleOrNot();
   }
+
   deleteSong(songNumberInList) {
     this.listOfSongs.splice(songNumberInList, 1);
   }
+
   deleteElementsInArray() {
     this.listOfSongs = [];
     this.listOfPastSongs = [];
   }
+
   playSong() {
     global.audio = new Audio(this.listOfSongs[0].preview);
     global.audio.play();
@@ -28,6 +33,7 @@ export default class SongPlayer {
     bus.$emit('musicStarted');
     bus.$emit('changeTitleOfSongPlaying', this.listOfSongs[0].title);
   }
+
   playPastSong() {
     if (this.listOfPastSongs.length > 0) {
       const pastSong = this.listOfPastSongs.pop();
@@ -35,14 +41,15 @@ export default class SongPlayer {
       this.playSong();
     }
   }
+
   pauseSong() {
     if (this.listOfSongs.length > 0) {
       global.audio.pause();
       bus.$emit('musicStopped');
     }
   }
-  /* eslint-disable */
-  playNextSong() {
+
+  static playNextSong() {
     if (SongPlayer.instance.listOfSongs.length > '1') {
       SongPlayer.instance.pauseSong();
       SongPlayer.instance.listOfPastSongs.push(SongPlayer.instance.listOfSongs[0]);
@@ -55,7 +62,7 @@ export default class SongPlayer {
       SongPlayer.instance.setBottomBarVisibleOrNot();
     }
   }
-  /* eslint-enable */
+
   restartSongOrPrevious() {
     if (global.audio.currentTime > 5) {
       global.audio.currentTime = 0;
@@ -64,9 +71,11 @@ export default class SongPlayer {
       this.playPastSong();
     }
   }
+
   getNumberOfItemsInListOfSongs() {
     return this.listOfSongs.length;
   }
+
   setBottomBarVisibleOrNot() {
     if (this.listOfSongs.length > 0) {
       bus.$emit('showBottomBar');
@@ -74,4 +83,5 @@ export default class SongPlayer {
       bus.$emit('hideBottomBar');
     }
   }
+
 }

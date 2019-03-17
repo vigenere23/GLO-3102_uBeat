@@ -52,8 +52,7 @@
           song.restartSongOrPrevious();
         },
         nextSong() {
-          const song = new SongPlayer();
-          song.playNextSong();
+          SongPlayer.playNextSong();
         },
         continuSong() {
           const song = new SongPlayer();

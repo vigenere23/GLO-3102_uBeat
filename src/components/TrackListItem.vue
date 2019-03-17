@@ -22,7 +22,7 @@
           </v-btn>
         </v-list-tile-action>
         <v-list-tile-action>
-          <v-btn icon ripple v-on:click="add">
+          <v-btn icon ripple @click="add">
             <v-icon color="white">playlist_add</v-icon>
           </v-btn>
         </v-list-tile-action>
@@ -31,7 +31,7 @@
             <v-menu offset-x left>
               <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon color="white">add</v-icon></v-btn>
               <v-list dense>
-                <v-list-tile v-on:click="addToPlaylist(i)" v-for="i in playlistsname" :key="i.playlistID" @click="">
+                <v-list-tile @click="addToPlaylist(i)" v-for="i in playlistsname" :key="i.playlistID">
                   <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
                 </v-list-tile>
               </v-list>
@@ -46,7 +46,7 @@
 <script>
 import helper from '@/js/helper';
 import api from '@/js/api';
-import SongPlayer from '../js/MusicControl';
+import SongPlayer from '@/js/MusicControl';
 
 export default {
   name: 'album-tracks-list-item',
@@ -64,7 +64,15 @@ export default {
   computed: {
     durationText() {
       return helper.getPrettyDuration(this.duration);
-    }
+    },
+    thisSong() {
+      return {
+        title: this.title,
+        duration: this.duration,
+        number: this.number,
+        preview: this.preview
+      };
+    },
   },
   data() {
     return {
@@ -75,26 +83,16 @@ export default {
     };
   },
   methods: {
-    thisSong() {
-      return {
-        title: this.title,
-        duration: this.duration,
-        number: this.number,
-        preview: this.preview
-      };
-    },
     play() {
       const song = new SongPlayer();
       song.pauseSong();
       song.deleteElementsInArray();
-      song.addSong(this.thisSong());
+      song.addSong(this.thisSong);
       song.playSong();
     },
     add() {
       const song = new SongPlayer();
-      song.addSong(this.thisSong());
-      song.stop(this.thisSong());
-      song.playSong(this.preview);
+      song.addSong(this.thisSong);
     },
     async addToPlaylist(trackToAdd) {
       this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
