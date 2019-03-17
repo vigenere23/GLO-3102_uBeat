@@ -24,5 +24,5 @@
 </script>
 
 <style>
-  @import './css/style.css';
+  @import './assets/style.css';
 </style>
