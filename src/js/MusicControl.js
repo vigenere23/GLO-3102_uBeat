@@ -50,7 +50,7 @@ export default class SongPlayer {
   }
 
   static playNextSong() {
-    if (SongPlayer.instance.listOfSongs.length > '1') {
+    if (SongPlayer.instance.listOfSongs.length > 1) {
       SongPlayer.instance.pauseSong();
       SongPlayer.instance.listOfPastSongs.push(SongPlayer.instance.listOfSongs[0]);
       SongPlayer.instance.deleteSong(0);
