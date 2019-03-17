@@ -28,10 +28,6 @@ export default new Router({
       component: Album
     },
     {
-      path: '/playlists',
-      redirect: '/users/5c81361ad6f63a0004c26542/playlists'
-    },
-    {
       path: '/users/:userId/playlists',
       name: 'Playlists',
       component: Playlists
