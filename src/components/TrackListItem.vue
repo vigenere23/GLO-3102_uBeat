@@ -54,7 +54,7 @@ export default {
     duration: Number,
     number: Number,
     preview: String,
-    playlistsname: []
+    playlistsname: Array
   },
   computed: {
     durationText() {
