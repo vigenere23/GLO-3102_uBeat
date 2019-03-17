@@ -22,6 +22,11 @@
           </v-btn>
         </v-list-tile-action>
         <v-list-tile-action>
+          <v-btn icon ripple v-on:click="add">
+            <v-icon color="white">playlist_add</v-icon>
+          </v-btn>
+        </v-list-tile-action>
+        <v-list-tile-action>
           <v-container>
             <v-menu offset-x left>
               <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon color="white">add</v-icon></v-btn>
@@ -88,6 +93,7 @@ export default {
     add() {
       const song = new SongPlayer();
       song.addSong(this.thisSong());
+      song.stop(this.thisSong());
       song.playSong(this.preview);
     },
     async addToPlaylist(trackToAdd) {
