@@ -40,7 +40,6 @@
 
 <script>
 import helper from '@/js/helper';
-import MusicControl from '@/js/MusicControl';
 import api from '@/js/api';
 import SongPlayer from '../js/MusicControl';
 
@@ -89,8 +88,7 @@ export default {
     add() {
       const song = new SongPlayer();
       song.addSong(this.thisSong());
-      MusicControl.stopSong();
-      MusicControl.playSong(this.preview);
+      song.playSong(this.preview);
     },
     async addToPlaylist(trackToAdd) {
       this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
