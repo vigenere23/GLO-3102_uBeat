@@ -21,7 +21,7 @@
       :key="track.trackId"
       :trackId="track.trackId"
       :title="track.trackName"
-      :number="track.trackNumber"
+      :number="i + 1"
       :duration="track.trackTimeMillis"
       :preview="track.previewUrl"
       :playlistsname="playlistsname"
