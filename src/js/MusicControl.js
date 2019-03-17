@@ -1,3 +1,5 @@
+import { bus } from '@/main';
+
 export default class SongPlayer {
   constructor() {
     if (!SongPlayer.instance) {
@@ -9,6 +11,7 @@ export default class SongPlayer {
   }
   addSong(song) {
     this.listOfSongs.push(song);
+    this.setBottomBarVisibleOrNot();
   }
   deleteSong(songNumberInList) {
     this.listOfSongs.splice(songNumberInList, 1);
@@ -18,13 +21,15 @@ export default class SongPlayer {
     this.listOfPastSongs = [];
   }
   playSong() {
-    // if (global.audio) global.audio.removeEventListener('ended');
     global.audio = new Audio(this.listOfSongs[0].preview);
     global.audio.play();
     global.audio.addEventListener('ended', SongPlayer.instance.playNextSong);
+    this.setBottomBarVisibleOrNot();
+    bus.$emit('musicStarted');
+    bus.$emit('changeTitleOfSongPlaying', this.listOfSongs[0].title);
   }
   playPastSong() {
-    if (this.listOfPastSongs > 0) {
+    if (this.listOfPastSongs.length > 0) {
       const pastSong = this.listOfPastSongs.pop();
       this.listOfSongs.splice(0, 0, pastSong);
       this.playSong();
@@ -33,6 +38,7 @@ export default class SongPlayer {
   pauseSong() {
     if (this.listOfSongs.length > 0) {
       global.audio.pause();
+      bus.$emit('musicStopped');
     }
   }
   /* eslint-disable */
@@ -44,6 +50,9 @@ export default class SongPlayer {
       SongPlayer.instance.playSong();
     } else {
       SongPlayer.instance.pauseSong();
+      SongPlayer.instance.listOfPastSongs.push(SongPlayer.instance.listOfSongs[0]);
+      SongPlayer.instance.deleteSong(0);
+      SongPlayer.instance.setBottomBarVisibleOrNot();
     }
   }
   /* eslint-enable */
@@ -57,5 +66,12 @@ export default class SongPlayer {
   }
   getNumberOfItemsInListOfSongs() {
     return this.listOfSongs.length;
+  }
+  setBottomBarVisibleOrNot() {
+    if (this.listOfSongs.length > 0) {
+      bus.$emit('showBottomBar');
+    } else {
+      bus.$emit('hideBottomBar');
+    }
   }
 }

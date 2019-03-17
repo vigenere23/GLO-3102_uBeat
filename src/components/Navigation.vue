@@ -92,11 +92,12 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <MusicPlayer></MusicPlayer>
+    <MusicPlayer v-show="this.showBottomBar" ></MusicPlayer>
   </div>
 </template>
 
 <script>
+  import { bus } from '@/main';
   import Toolbar from './Toolbar';
   import MusicPlayer from './MusicPlayer';
 
@@ -133,7 +134,16 @@
           { name: 'Settings', icon: 'settings', path: '/settings' },
           { name: 'Logout', icon: 'logout', path: '/logout' }
         ],
+        showBottomBar: false,
       };
+    },
+    created() {
+      bus.$on('showBottomBar', () => {
+        this.showBottomBar = true;
+      });
+      bus.$on('hideBottomBar', () => {
+        this.showBottomBar = false;
+      });
     },
     mounted() {
       this.windowWidth = window.innerWidth;

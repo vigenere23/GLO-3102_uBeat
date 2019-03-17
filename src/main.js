@@ -17,7 +17,9 @@ Vue.use(Vuetify, {
   }
 });
 
-/* eslint-disable no-new */
+/* eslint-disable */
+export const bus = new Vue();
+
 new Vue({
   el: '#app',
   router,

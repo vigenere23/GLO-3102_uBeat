@@ -3,14 +3,7 @@
     <v-img
       id="album-cover"
       :src="imageUrl"
-      v-on:mouseover="isVisible = true"
-      v-on:mouseout="isVisible = false"
     >
-      <v-content v-show="isVisible">
-        <v-btn icon ripple bottom style="size: 80px" v-on:click="playAllAlbum">
-          <v-icon style="font-size: 80px">play_arrow</v-icon>
-        </v-btn>
-      </v-content>
     </v-img>
     <v-card-title primary-title>
       <div id="info-album">
@@ -26,30 +19,26 @@
 </template>
 
 <script>
-export default {
-  name: 'album-infos',
-  data() {
-    return {
-      isVisible: false,
-    };
-  },
-  props: {
-    title: String,
-    subtitle: String,
-    releaseDate: String,
-    genre: String,
-    numberOfTracks: Number,
-    advisory: String,
-    itunesLink: String,
-    imageUrl: String
-  },
-  computed: {
-    numberOfTracksText() {
-      const songText = this.numberOfTracks > 1 ? 'songs' : 'song';
-      return `${this.numberOfTracks} ${songText}`;
+
+  export default {
+    name: 'album-infos',
+    props: {
+      title: String,
+      subtitle: String,
+      releaseDate: String,
+      genre: String,
+      numberOfTracks: Number,
+      advisory: String,
+      itunesLink: String,
+      imageUrl: String
+    },
+    computed: {
+      numberOfTracksText() {
+        const songText = this.numberOfTracks > 1 ? 'songs' : 'song';
+        return `${this.numberOfTracks} ${songText}`;
+      }
     }
-  },
-};
+  };
 </script>
 
 <style scoped>
