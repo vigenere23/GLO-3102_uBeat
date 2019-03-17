@@ -2,12 +2,15 @@
   <div id="home-page">
     <div class="centered-page">
 
-      <h1>Home</h1>
+      <div class="centered-title">
+        <h1 class="large-thin-title">Home</h1>
+      </div>
+
       <cover-list
         v-for="(coverList, i) in coverLists"
         :key="i"
         :title="coverList.title"
-        :type="coverList.type"
+        type="album"
         :covers="coverList.covers"
       />
 
@@ -17,7 +20,8 @@
 
 <script>
 import CoverList from '@/components/CoverList';
-import HomeAlbumList from '@/js/HomeAlbumList';
+import homeAlbumLists from '@/js/homeAlbumLists';
+import api from '@/js/api';
 
 export default {
   name: 'home',
@@ -26,8 +30,21 @@ export default {
   },
   data() {
     return {
-      coverLists: HomeAlbumList
+      coverLists: []
     };
+  },
+  mounted() {
+    if (!this.coverLists.length) {
+      homeAlbumLists.forEach((albumList) => {
+        const coverList = {};
+        coverList.title = albumList.title;
+        coverList.covers = [];
+        albumList.ids.forEach(async (id) => {
+          coverList.covers.push(await api.getAlbumInfos(id));
+        });
+        this.coverLists.push(coverList);
+      });
+    }
   }
 };
 </script>

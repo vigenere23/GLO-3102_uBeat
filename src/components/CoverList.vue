@@ -5,12 +5,12 @@
 
     <ul class="better-scrollbar" :class="{ wrap }" v-if="type === 'year-album'">
       <li v-for="(cover, i) in covers" :key="i">
-        <cover-list-album-year
+        <cover-list-item
           :name="cover.collectionName"
-          :year="new Date(cover.releaseDate).getFullYear()"
           :advisory="cover.contentAdvisoryRating"
-          :albumId="cover.collectionId"
-          :image="cover.artworkUrl100"
+          :desc="new Date(cover.releaseDate).getFullYear()"
+          :link="`/album/${cover.collectionId}`"
+          :image="imageHd(cover.artworkUrl100)"
         />
       </li>
     </ul>
@@ -25,13 +25,14 @@
       </li>
     </ul>
 
-    <ul class="better-scrollbar" :class="{ wrap }" v-else>
+    <ul class="better-scrollbar" :class="{ wrap }" v-else-if="type === 'album'">
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-item
-          :name="cover.name"
-          :desc="cover.desc"
-          :link="cover.link"
-          :image="cover.image"
+          :name="cover.collectionName"
+          :advisory="cover.contentAdvisoryRating"
+          :desc="cover.artistName"
+          :link="`/album/${cover.collectionId}`"
+          :image="imageHd(cover.artworkUrl100)"
         />
       </li>
     </ul>
@@ -41,13 +42,12 @@
 
 <script>
 import CoverListItem from '@/components/CoverListItem';
-import CoverListAlbumYear from '@/components/CoverListAlbumYear';
+import helper from '@/js/helper';
 
 export default {
   name: 'CoverList',
   components: {
-    CoverListItem,
-    CoverListAlbumYear
+    CoverListItem
   },
   props: {
     title: String,
@@ -57,6 +57,11 @@ export default {
       required: true
     },
     wrap: Boolean
+  },
+  methods: {
+    imageHd(image) {
+      return helper.getImageUrlOfSize(image, 200);
+    }
   }
 };
 </script>
