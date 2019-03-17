@@ -3,7 +3,7 @@
     <v-subheader inset class="track-list-title">Songs
       <v-spacer></v-spacer>
       <v-list-tile-action>
-        <v-menu offset-y v-if="listType !== 'playlist'">
+        <v-menu offset-overflow v-if="listType !== 'playlist'">
           <v-btn ripple slot="activator" v-on:click="getPlaylistsNames">Add All</v-btn>
           <v-list dense>
             <v-list-tile v-on:click="addAllToPlaylist(i)" v-for="i in playlistsname" @click="">
@@ -50,6 +50,7 @@
           const test = [playlists[i].name, playlists[i].id];
           this.playlistsname.push(test);
         }
+        this.playlistsname.sort();
       },
       async addAllToPlaylist(trackToAdd) {
         this.tracks = await api.getAlbumTracks(this.$route.params.albumId);

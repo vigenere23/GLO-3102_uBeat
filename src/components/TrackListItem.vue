@@ -23,7 +23,7 @@
         </v-list-tile-action>
         <v-list-tile-action>
           <v-container>
-            <v-menu offset-y>
+            <v-menu offset-overflow left>
               <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
               <v-list dense>
                 <v-list-tile v-on:click="addToPlaylist(i)" v-for="i in playlistsname" @click="">
@@ -81,6 +81,7 @@ export default {
         const test = [playlists[i].name, playlists[i].id];
         this.playlistsname.push(test);
       }
+      this.playlistsname.sort();
     },
     async addToPlaylist(trackToAdd) {
       this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
