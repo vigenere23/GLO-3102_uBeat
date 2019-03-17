@@ -1,7 +1,7 @@
 <template>
   <router-link class="cover" :to="link || ''" tag="a">
-    <v-img class="cover-image" :src="image"></v-img>
-    <p class="name">{{ name }}</p>
+    <v-img :src="image || '/static/blank-album-200.png'"></v-img>
+    <p class="name">{{ name || "untitled" }}</p>
     <p class="desc" v-if="desc">{{ desc }}</p>
   </router-link>
 </template>
@@ -15,10 +15,7 @@ export default {
       required: true
     },
     desc: [String, Number],
-    image: {
-      type: String,
-      required: true
-    },
+    image: String,
     link: String
   }
 };
@@ -69,6 +66,7 @@ export default {
 
 @media screen and (max-width: 1263px) {
   .cover {
+    padding: 8px 0;
 
     p.name {
       font-size: 15px;

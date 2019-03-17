@@ -3,6 +3,7 @@
   min-height: 100%;
   box-sizing: border-box;
   padding-bottom: 64px;
+  color: white;
 }
 
 .centered-page {
@@ -11,6 +12,10 @@
   box-sizing: border-box;
   padding: 16px;
   margin: auto;
+}
+
+.page {
+  padding-top: 56px;
 }
 
 .better-scrollbar::-webkit-scrollbar {
@@ -25,8 +30,50 @@
   border-radius: 5px;
 }
 
+.large-thin-title {
+  margin-bottom: 0.1em;
+  font-size: 96px;
+  font-weight: 300;
+  line-height: 1em;
+  letter-spacing: -.04em;
+}
+
+.large-thin-subtitle {
+  font-size: 36px;
+  line-height: 1.5em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.centered-title {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
 a {
   text-decoration: inherit;
+}
+
+.inputStyle {
+  background-color: white;
+  color: black;
+}
+
+.simple-input-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+
+.simple-input-field button {
+  flex-shrink: 0;
+}
+
+.simple-input-field .v-input {
+  max-width: 300px;
+  min-width: 100px
 }
 
 .itunes-link {
@@ -65,60 +112,34 @@ a {
 
 /* Artist.vue */
 
-#artist-page {
-  width: 100%;
-  padding-top: 56px;
-  color: white;
-}
-
-#artist-page #title {
-  text-align: center;
-  margin-bottom: 56px;
-}
-
-#artist-page #title h1 {
-  margin-bottom: 0.1em;
-  font-size: 96px;
-  font-weight: 300;
-  line-height: 1em;
-  letter-spacing: -.04em;
-}
-
-#artist-page #title h2 {
-  font-size: 36px;
-  line-height: 1.5em;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.68);
-}
-
-#artist-page #title a {
+#artist-page #itunes-link {
   margin-top: 16px;
 }
 
 @media screen and (max-width: 1263px) {
-  #artist-page #title h1 {
+  .large-thin-title {
     font-size: 54px;
   }
 
-  #artist-page #title h2 {
+  .large-thin-subtitle {
     font-size: 24px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  #artist-page {
+  .page {
     padding-top: 24px;
   }
 
-  #artist-page #title {
+  .centered-title {
     margin-bottom: 32px;
   }
 
-  #artist-page #title h1 {
+  .large-thin-title {
     font-size: 42px;
   }
 
-  #artist-page #title h2 {
+  .large-thin-subtitle {
     font-size: 20px;
   }
 }

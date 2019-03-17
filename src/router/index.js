@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import Album from '@/components/Album';
 import Artist from '@/components/Artist';
+import Playlists from '@/components/Playlists';
+import PlaylistAlbum from '@/components/PlaylistAlbum';
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
@@ -16,22 +18,24 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/artist',
-      redirect: '/artist/290242959'
-    },
-    {
       path: '/artist/:artistId',
       name: 'Artist',
       component: Artist
     },
     {
-      path: '/album',
-      redirect: '/album/1450330588'
-    },
-    {
       path: '/album/:albumId',
       name: 'Album',
       component: Album
+    },
+    {
+      path: '/users/:userId/playlists',
+      name: 'Playlists',
+      component: Playlists
+    },
+    {
+      path: '/playlists/:playlistId',
+      name: 'PlaylistAlbum',
+      component: PlaylistAlbum
     }
   ],
 });

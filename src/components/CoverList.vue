@@ -1,7 +1,9 @@
 <template>
   <div class="cover-list">
-    <h3>{{ title }}</h3>
-    <ul class="better-scrollbar" v-if="type === 'year-album'">
+
+    <h3 v-if="title">{{ title }}</h3>
+
+    <ul class="better-scrollbar" :class="{ wrap }" v-if="type === 'year-album'">
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-album-year
           :name="cover.collectionName"
@@ -12,7 +14,18 @@
         />
       </li>
     </ul>
-    <ul class="better-scrollbar" v-else>
+
+    <ul class="better-scrollbar" :class="{ wrap }" v-else-if="type === 'playlist'">
+      <li v-for="(cover, i) in covers" :key="i">
+        <cover-list-item
+          :name="cover.name"
+          :link="`/playlists/${cover.id}`"
+          image="/static/blank-album-200.png"
+        />
+      </li>
+    </ul>
+
+    <ul class="better-scrollbar" :class="{ wrap }" v-else>
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-item
           :name="cover.name"
@@ -22,6 +35,7 @@
         />
       </li>
     </ul>
+
   </div>
 </template>
 
@@ -36,15 +50,13 @@ export default {
     CoverListAlbumYear
   },
   props: {
-    title: {
-      type: String,
-      required: true
-    },
+    title: String,
     type: String,
     covers: {
       type: Array,
       required: true
-    }
+    },
+    wrap: Boolean
   }
 };
 </script>
@@ -67,6 +79,10 @@ export default {
     overflow-x: auto;
     padding: 8px 0;
     list-style: none;
+  }
+
+  ul.wrap {
+    flex-wrap: wrap;
   }
 
   li {

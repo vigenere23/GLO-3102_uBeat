@@ -13,7 +13,6 @@ Vue.use(Vuetify, {
     primary: '#0D2029',
     secondary: '#182A33',
     accent: '#FFFAEC',
-    selected: 'colors.blue-grey.darken-4',
   }
 });
 

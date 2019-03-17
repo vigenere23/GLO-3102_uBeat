@@ -45,6 +45,7 @@ export default {
   methods: {
     resetPage() {
       this.tracks = [];
+      this.imageUrl = '';
     },
     loadPage(albumId) {
       this.resetPage();

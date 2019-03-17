@@ -1,10 +1,10 @@
 <template>
-  <div id='artist-page' class='blue-grey darken-4'>
+  <div id="artist-page" class="page blue-grey darken-4">
     <div class="centered-page">
 
-      <div id="title">
-        <h1>{{ artistName }}</h1>
-        <h2>{{ artistGenre }}</h2>
+      <div class="centered-title">
+        <h1 class="large-thin-title">{{ artistName }}</h1>
+        <h2 class="large-thin-subtitle">{{ artistGenre }}</h2>
         <a class="itunes-link" target="_blank" :href="itunesLink"></a>
       </div>
 

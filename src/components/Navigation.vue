@@ -123,11 +123,11 @@
         },
         navigationDrawerItems: [
           { name: 'Home', icon: 'dashboard', path: '/' },
-          { name: 'Playlists', icon: 'queue_music', path: '/playlists' }
+          { name: 'Playlists', icon: 'queue_music', path: '/users/5c81361ad6f63a0004c26542/playlists' }
         ],
         correctionHelper: [
-          { name: 'Artist', icon: 'dashboard', path: '/artist' },
-          { name: 'Album', icon: 'queue_music', path: '/album' }
+          { name: 'Artist', icon: 'dashboard', path: '/artist/290242959' },
+          { name: 'Album', icon: 'queue_music', path: '/album/1450330588' }
         ],
         userMenuItem: [
           { name: 'Profile', icon: 'person', path: '/profile' },
