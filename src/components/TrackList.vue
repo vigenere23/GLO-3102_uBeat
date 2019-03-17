@@ -24,6 +24,7 @@
       :number="track.trackNumber"
       :duration="track.trackTimeMillis"
       :preview="track.previewUrl"
+      :playlistsname="playlistsname"
     ></track-list-item>
   </v-list>
 </template>

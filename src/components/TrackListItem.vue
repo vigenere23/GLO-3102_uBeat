@@ -24,7 +24,7 @@
         <v-list-tile-action>
           <v-container>
             <v-menu offset-x left>
-              <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon v-on:click="getPlaylistsNames" color="white">add</v-icon></v-btn>
+              <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon color="white">add</v-icon></v-btn>
               <v-list dense>
                 <v-list-tile v-on:click="addToPlaylist(i)" v-for="i in playlistsname" @click="">
                   <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
@@ -53,20 +53,17 @@ export default {
     playlistID: String,
     duration: Number,
     number: Number,
-    preview: String
+    preview: String,
+    playlistsname: []
   },
   computed: {
     durationText() {
       return helper.getPrettyDuration(this.duration);
     }
   },
-  mounted() {
-    this.getPlaylistsNames();
-  },
   data() {
     return {
       deleted: false,
-      playlistsname: [],
       tracks: [],
       name: String,
       trackName: String
@@ -76,15 +73,6 @@ export default {
     play() {
       MusicControl.stopSong();
       MusicControl.playSong(this.preview);
-    },
-    async getPlaylistsNames() {
-      this.playlistsname.length = 0;
-      const playlists = await api.getUserPlaylists('5c81361ad6f63a0004c26542');
-      for (let i = 0; i < playlists.length; i += 1) {
-        const test = [playlists[i].name, playlists[i].id];
-        this.playlistsname.push(test);
-      }
-      this.playlistsname.sort();
     },
     async addToPlaylist(trackToAdd) {
       this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
