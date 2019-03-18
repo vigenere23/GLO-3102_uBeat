@@ -46,7 +46,7 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 
 * Gabriel St-Pierre (GASTP33) (111 178 727)
 * Eleftherios Balampanis (ELBAL13) (111 152 532)
-* Olivier Gingras (olgin2) (111 181 997)
+* Olivier Gingras (OLGIN2) (111 181 997)
 * Nicolas Fillion (nic-fillion) (111 183 659)
 * Philippe Jones (PHJON5) (111 181 051)
 * Maxime St-Pierre (MASTP18) (111 112 959)
