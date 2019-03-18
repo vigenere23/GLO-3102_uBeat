@@ -68,6 +68,7 @@
       },
       playAllAlbum() {
         const song = new SongPlayer();
+        song.pauseSong();
         song.deleteElementsInArray();
         this.tracks.forEach((track) => {
           song.addSong({ title: track.trackName,
