@@ -1,6 +1,10 @@
 <template>
   <v-list two-line subheader class="blue-grey darken-3 track-list">
-    <v-subheader inset class="track-list-title">Songs
+    <v-subheader inset class="track-list-title">
+      <v-btn icon ripple v-on:click="playAllAlbum">
+        <v-icon color="white">play_arrow</v-icon>
+      </v-btn>
+      Songs
       <v-spacer></v-spacer>
       <v-list-tile-action>
         <v-menu offset-x left v-if="listType !== 'playlist'">
@@ -30,6 +34,7 @@
   import TrackListItem from '@/components/TrackListItem';
   import api from '@/js/api';
   import { bus } from '@/main';
+  import SongPlayer from '../js/MusicControl';
 
   export default {
     name: 'track-list',
@@ -61,6 +66,16 @@
           }
         });
       },
+      playAllAlbum() {
+        const song = new SongPlayer();
+        song.deleteElementsInArray();
+        this.tracks.forEach((track) => {
+          song.addSong({ title: track.trackName,
+            duration: track.trackTimeMillis,
+            number: track.number,
+            preview: track.previewUrl });
+        });
+      }
     },
     props: {
       tracks: Array,
@@ -78,6 +93,7 @@
     .track-list-title {
       font-size: 20px;
       color: white;
+      margin-left: 0px;
     }
   }
 </style>
