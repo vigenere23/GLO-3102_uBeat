@@ -35,11 +35,9 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 1. Routes existantes:
    1. `/` : affiche quelques albums selon les genres.
    2. `/artist/:id` : affiche les informations de l'artiste à cet `id`.
-   3. `/artist` : redirige vers la page `/artist/290242959` (Tame Impala) afin d'éviter d'avoir à connaître un id.
    4. `/album/:id` : affiche les informations de l'album à cet `id`.
-   5. `/album` : redirige vers la page `/album/` (Thank U, Next) afin d'éviter d'avoir à connaître un id.
    6. `/users/:id/playlists` : 
    7. `/playlists/:id` : 
 2. Boutons d'accès rapide (HELPER) dans la navigation :
-   1. `Artist` : Accède à la page `/artist` (avec redirection)
-   2. `Album` : Accède à la page `/album` (avec redirection)
+   1. `Artist` : redirige vers la page `/artist/290242959` (Tame Impala) afin d'éviter d'avoir à connaître un id.
+   2. `Album` : redirige vers la page `/album/` (Thank U, Next) afin d'éviter d'avoir à connaître un id.
