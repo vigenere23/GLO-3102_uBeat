@@ -7,7 +7,7 @@
         <h2 class="large-thin-subtitle">for {{ user.name }}</h2>
       </div>
 
-      <div class="simple-input-field">
+      <div class="simple-input-field" v-if="!loading">
         <v-text-field
           label="playlist-name"
           placeholder="Name..."

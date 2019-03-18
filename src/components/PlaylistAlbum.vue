@@ -20,7 +20,11 @@
       <v-btn v-on:click="changeName">Rename playlist</v-btn>
     </div>
 
-    <track-list :tracks="tracks"></track-list>
+    <track-list
+      :listType=listType
+      :playlistID=playlistID
+      :tracks="tracks">
+    </track-list>
 
   </div>
 </template>
@@ -39,8 +43,10 @@ export default {
   data() {
     return {
       infos: {},
+      listType: 'playlist',
       tracks: [],
       imageUrl: '',
+      playlistID: '',
       newPlayListName: ''
     };
   },
@@ -63,6 +69,7 @@ export default {
     async loadPlaylistInfosAndTracks(playlistId) {
       this.infos = await api.getPlaylistInfosAndTracks(playlistId);
       this.tracks = this.infos.tracks;
+      this.playlistID = playlistId;
     },
     async deletePlaylist() {
       await api.deletePlaylists(this.$route.params.playlistId);

@@ -30,9 +30,9 @@ async function put(url, body) {
   }
 }
 
-async function deleteFromApi(url, body) {
+async function deleteFromApi(url) {
   try {
-    const response = await axios.delete(url, body);
+    const response = await axios.delete(url);
     return response.data;
   } catch (err) {
     return null;
@@ -120,5 +120,16 @@ export default {
       name: newName,
       owner: newOwner,
     });
+  },
+
+  async deleteSongTrackFromPlaylist(playlistId, songId) {
+    const url = `${API_URL}/playlists/${playlistId}/tracks/${songId}`;
+    return deleteFromApi(url);
+  },
+
+  async addSongToPlaylist(playlistId, track) {
+    const url = `${API_URL}/playlists/${playlistId}/tracks`;
+    return post(url, track);
   }
+
 };
