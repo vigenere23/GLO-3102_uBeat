@@ -4,7 +4,7 @@
       id="album-cover"
       :src="imageUrl || '/static/blank-album-400.png'"
     >
-    
+
     <v-card-title primary-title>
       <div id="info-album">
         <h1>{{ title || 'Untitled' }}</h1>
@@ -43,50 +43,52 @@ export default {
   }
 };
 </script>
-
 <style lang="scss">
-#album-card {
-  display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-
-  #album-cover {
-    width: 40%;
-    max-width: 400px;
-  }
-
-  #info-album {
-    display: flex;
-    flex-direction: column;
-    color: white;
-  }
-}
-
-@media (max-width: 600px) {
   #album-card {
-    height: 95vw;
-    max-height: 440px;
-    min-height: 300px;
-    padding: 0;
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 
     #album-cover {
-      width: 90vw;
+      width: 40vw;
       max-width: 400px;
-      position: absolute;
-      filter: blur(2px);
-      opacity: 0.5;
-      z-index: 1;
+      max-height: 400px;
+      height: 40vw;
     }
 
     #info-album {
-      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      color: white;
     }
   }
-}
+
+  @media (max-width: 600px) {
+    #album-card {
+      height: 95vw;
+      max-height: 440px;
+      min-height: 300px;
+      padding: 0;
+      margin-top: 20px;
+
+      #album-cover {
+        width: 90vw;
+        height: 90vw;
+        max-width: 400px;
+        position: absolute;
+        filter: blur(2px);
+        opacity: 0.5;
+        z-index: 1;
+      }
+
+      #info-album {
+        z-index: 2;
+      }
+    }
+  }
 </style>
 
 <style scoped>
