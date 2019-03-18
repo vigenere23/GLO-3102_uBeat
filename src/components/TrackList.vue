@@ -6,8 +6,8 @@
         <v-menu offset-x left v-if="listType !== 'playlist'">
           <v-btn ripple slot="activator">Add All</v-btn>
           <v-list dense>
-            <v-list-tile v-on:click="addAllToPlaylist(i)" v-for="i in playlistsname" :key="i.playlistID"  @click="">
-              <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
+            <v-list-tile @click="addAllTracksToPlaylist(playlist)" v-for="playlist in playlists" :key="playlist.id">
+              <v-list-tile-title>{{ playlist.name }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>
@@ -24,7 +24,7 @@
       :number="i + 1"
       :duration="track.trackTimeMillis"
       :preview="track.previewUrl"
-      :playlistsname="playlistsname"
+      :playlistsname="playlists"
     ></track-list-item>
   </v-list>
 </template>
@@ -38,29 +38,22 @@
     components: {
       TrackListItem
     },
-    mounted() {
-      this.getPlaylistsNames();
+    async mounted() {
+      this.playlists = await api.getUserPlaylists('5c81361ad6f63a0004c26542');
+      this.playlists.sort();
     },
     data() {
       return {
-        playlistsname: [],
+        playlists: [],
       };
     },
     methods: {
-      async getPlaylistsNames() {
-        this.playlistsname.length = 0;
-        const playlists = await api.getUserPlaylists('5c81361ad6f63a0004c26542');
-        for (let i = 0; i < playlists.length; i += 1) {
-          const test = [playlists[i].name, playlists[i].id];
-          this.playlistsname.push(test);
-        }
-        this.playlistsname.sort();
-      },
-      async addAllToPlaylist(trackToAdd) {
-        this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
-        for (let i = 0; i < this.tracks.length; i += 1) {
-          api.addSongToPlaylist(trackToAdd[1], this.tracks[i]);
-        }
+      addAllTracksToPlaylist(playlist) {
+        this.tracks.forEach((track) => {
+          if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === track.trackId)) {
+            api.addSongToPlaylist(playlist.id, track);
+          }
+        });
       },
     },
     props: {
