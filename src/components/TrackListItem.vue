@@ -16,27 +16,25 @@
           <v-list-tile-title class="song-title">{{ track.trackName }}</v-list-tile-title>
           <v-list-tile-sub-title class="song-duration">{{ durationText || '' }}</v-list-tile-sub-title>
         </v-list-tile-content>
-        <v-list-tile-action v-on:click="deleteSong" v-if="listType === 'playlist'">
-          <v-btn icon ripple v-if="listType === 'playlist'">
-            <v-icon color="white">remove</v-icon>
-          </v-btn>
-        </v-list-tile-action>
         <v-list-tile-action>
           <v-btn icon ripple @click="add">
             <v-icon color="white">playlist_add</v-icon>
           </v-btn>
         </v-list-tile-action>
-        <v-list-tile-action>
-          <v-container>
-            <v-menu offset-x left>
-              <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon color="white">add</v-icon></v-btn>
-              <v-list dense>
-                <v-list-tile @click="addToPlaylist(playlist)" v-for="playlist in playlists" :key="playlist.id">
-                  <v-list-tile-title>{{ playlist.name }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
-          </v-container>
+        <v-list-tile-action @click="deleteSong" v-if="listType === 'playlist'">
+          <v-btn icon ripple>
+            <v-icon color="white">remove</v-icon>
+          </v-btn>
+        </v-list-tile-action>
+        <v-list-tile-action v-else>
+          <v-menu offset-x left>
+            <v-btn icon ripple slot="activator"><v-icon color="white">add</v-icon></v-btn>
+            <v-list dense>
+              <v-list-tile @click="addToPlaylist(playlist)" v-for="playlist in playlists" :key="playlist.id">
+                <v-list-tile-title>{{ playlist.name }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
         </v-list-tile-action>
       </v-list-tile>
     </v-hover>
