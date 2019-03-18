@@ -48,5 +48,5 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 * Eleftherios Balampanis (Elef542) (111 152 532)
 * Olivier Gingras (olgin2) (111 181 997)
 * Nicolas Fillion
-* Philippe Jones
+* Philippe Jones (111 181 051)
 * Maxime St-Pierre
