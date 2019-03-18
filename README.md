@@ -45,7 +45,7 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 ### Membres de l'équipe
 
 * Gabriel St-Pierre (GASTP33) (111 178 727)
-* Eleftherios Balampanis (Elef542) (111 152 532)
+* Eleftherios Balampanis (ELBAL13) (111 152 532)
 * Olivier Gingras (olgin2) (111 181 997)
 * Nicolas Fillion (nic-fillion) (111 183 659)
 * Philippe Jones (ArcadeGamer) (111 181 051)
