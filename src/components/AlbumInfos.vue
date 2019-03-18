@@ -22,8 +22,6 @@
 </template>
 
 <script>
-  import { bus } from '@/main';
-
   export default {
     name: 'album-infos',
     props: {
@@ -31,22 +29,20 @@
       subtitle: String,
       releaseDate: String,
       genre: String,
-      numberOfTracks: Number,
+      tracks: Array,
       advisory: String,
       itunesLink: String,
       imageUrl: String,
       deleteButton: Boolean
     },
     computed: {
+      numberOfTracks() {
+        return this.tracks.length || 0;
+      },
       numberOfTracksText() {
         const songText = this.numberOfTracks > 1 ? 'songs' : 'song';
         return `${this.numberOfTracks} ${songText}`;
-      },
-    },
-    created() {
-      bus.$on('songDeletedOfPlaylist', () => {
-        this.numberOfTracks -= 1;
-      });
+      }
     }
   };
 </script>

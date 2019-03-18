@@ -5,7 +5,7 @@
       :subtitle="infos.artistName"
       :release-date="releaseDate"
       :genre="infos.primaryGenreName"
-      :number-of-tracks="infos.trackCount"
+      :tracks="tracks"
       :advisory="infos.contentAdvisoryRating"
       :itunes-link="itunesLink"
       :image-url="imageUrl"
