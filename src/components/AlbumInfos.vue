@@ -46,7 +46,6 @@
     }
   };
 </script>
-
 <style lang="scss">
   #album-card {
     display: flex;
@@ -57,8 +56,10 @@
     padding-right: 20px;
 
     #album-cover {
-      width: 40%;
+      width: 40vw;
       max-width: 400px;
+      max-height: 400px;
+      height: 40vw;
     }
 
     #info-album {
@@ -78,6 +79,7 @@
 
       #album-cover {
         width: 90vw;
+        height: 90vw;
         max-width: 400px;
         position: absolute;
         filter: blur(2px);
