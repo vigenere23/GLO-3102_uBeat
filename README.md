@@ -49,4 +49,4 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 * Olivier Gingras (olgin2) (111 181 997)
 * Nicolas Fillion
 * Philippe Jones (ArcadeGamer) (111 181 051)
-* Maxime St-Pierre
+* Maxime St-Pierre (MASTP18) (111 112 959)
