@@ -13,30 +13,28 @@
           </div>
         </v-list-tile-avatar>
         <v-list-tile-content>
-          <v-list-tile-title class="song-title">{{ title }}</v-list-tile-title>
+          <v-list-tile-title class="song-title">{{ track.trackName }}</v-list-tile-title>
           <v-list-tile-sub-title class="song-duration">{{ durationText || '' }}</v-list-tile-sub-title>
         </v-list-tile-content>
-        <v-list-tile-action v-on:click="deleteSong" v-if="listType === 'playlist'">
-          <v-btn icon ripple v-if="listType === 'playlist'">
-            <v-icon color="white">remove</v-icon>
-          </v-btn>
-        </v-list-tile-action>
         <v-list-tile-action>
           <v-btn icon ripple @click="add">
             <v-icon color="white">playlist_add</v-icon>
           </v-btn>
         </v-list-tile-action>
-        <v-list-tile-action>
-          <v-container>
-            <v-menu offset-x left>
-              <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon color="white">add</v-icon></v-btn>
-              <v-list dense>
-                <v-list-tile @click="addToPlaylist(i)" v-for="i in playlistsname" :key="i.playlistID">
-                  <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
-          </v-container>
+        <v-list-tile-action @click="deleteSong" v-if="listType === 'playlist'">
+          <v-btn icon ripple>
+            <v-icon color="white">remove</v-icon>
+          </v-btn>
+        </v-list-tile-action>
+        <v-list-tile-action v-else>
+          <v-menu offset-x left>
+            <v-btn icon ripple slot="activator"><v-icon color="white">add</v-icon></v-btn>
+            <v-list dense>
+              <v-list-tile @click="addToPlaylist(playlist)" v-for="playlist in playlists" :key="playlist.id">
+                <v-list-tile-title>{{ playlist.name }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
         </v-list-tile-action>
       </v-list-tile>
     </v-hover>
@@ -52,33 +50,29 @@ import { bus } from '@/main';
 export default {
   name: 'album-tracks-list-item',
   props: {
-    title: String,
     listType: String,
-    trackId: [String, Number],
     userId: String,
-    playlistID: String,
-    duration: Number,
+    playlistId: String,
+    track: Object,
     number: Number,
-    preview: String,
-    playlistsname: Array
+    playlists: Array
   },
   computed: {
     durationText() {
-      return helper.getPrettyDuration(this.duration);
+      return helper.getPrettyDuration(this.track.trackTimeMillis);
     },
     thisSong() {
       return {
-        title: this.title,
-        duration: this.duration,
+        title: this.track.trackName,
+        duration: this.track.trackTimeMillis,
         number: this.number,
-        preview: this.preview
+        preview: this.track.previewUrl
       };
     },
   },
   data() {
     return {
       deleted: false,
-      tracks: [],
       name: String,
       trackName: String
     };
@@ -98,16 +92,13 @@ export default {
         bus.$emit('firstElementInArray', song.listOfSongs[0].title);
       }
     },
-    async addToPlaylist(trackToAdd) {
-      this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
-      for (let i = 0; i < this.tracks.length; i += 1) {
-        if (this.tracks[i].trackName === this.title) {
-          api.addSongToPlaylist(trackToAdd[1], this.tracks[i]);
-        }
+    addToPlaylist(playlist) {
+      if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === this.track.trackId)) {
+        api.addSongToPlaylist(playlist.id, this.track);
       }
     },
     async deleteSong() {
-      await api.deleteSongTrackFromPlaylist(this.playlistID, this.trackId);
+      await api.deleteSongTrackFromPlaylist(this.playlistId, this.track.trackId);
       this.deleted = true;
     }
   }

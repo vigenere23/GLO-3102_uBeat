@@ -21,8 +21,8 @@
     </div>
 
     <track-list
-      :listType=listType
-      :playlistID=playlistID
+      :listType="listType"
+      :playlistId="playlistId"
       :tracks="tracks">
     </track-list>
 
@@ -46,7 +46,7 @@ export default {
       listType: 'playlist',
       tracks: [],
       imageUrl: '',
-      playlistID: '',
+      playlistId: '',
       newPlayListName: ''
     };
   },
@@ -69,7 +69,7 @@ export default {
     async loadPlaylistInfosAndTracks(playlistId) {
       this.infos = await api.getPlaylistInfosAndTracks(playlistId);
       this.tracks = this.infos.tracks;
-      this.playlistID = playlistId;
+      this.playlistId = playlistId;
     },
     async deletePlaylist() {
       await api.deletePlaylists(this.$route.params.playlistId);
