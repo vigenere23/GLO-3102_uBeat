@@ -82,8 +82,7 @@ export default {
       const song = new SongPlayer();
       song.pauseSong();
       song.deleteElementsInArray();
-      song.addSong(this.thisSong);
-      song.playSong();
+      this.add();
     },
     add() {
       const song = new SongPlayer();
