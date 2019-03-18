@@ -38,6 +38,7 @@
   </v-toolbar>
 </template>
 <script>
+
   export default {
     name: 'toolbar',
     data() {

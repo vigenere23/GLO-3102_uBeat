@@ -22,11 +22,16 @@
           </v-btn>
         </v-list-tile-action>
         <v-list-tile-action>
+          <v-btn icon ripple @click="add">
+            <v-icon color="white">playlist_add</v-icon>
+          </v-btn>
+        </v-list-tile-action>
+        <v-list-tile-action>
           <v-container>
             <v-menu offset-x left>
               <v-btn icon ripple slot="activator" v-if="listType !== 'playlist'"><v-icon color="white">add</v-icon></v-btn>
               <v-list dense>
-                <v-list-tile v-on:click="addToPlaylist(i)" v-for="i in playlistsname" :key="i.playlistID" @click="">
+                <v-list-tile @click="addToPlaylist(i)" v-for="i in playlistsname" :key="i.playlistID">
                   <v-list-tile-title>{{ i[0] }}</v-list-tile-title>
                 </v-list-tile>
               </v-list>
@@ -40,8 +45,9 @@
 
 <script>
 import helper from '@/js/helper';
-import MusicControl from '@/js/MusicControl';
 import api from '@/js/api';
+import SongPlayer from '@/js/MusicControl';
+import { bus } from '@/main';
 
 export default {
   name: 'album-tracks-list-item',
@@ -59,7 +65,15 @@ export default {
   computed: {
     durationText() {
       return helper.getPrettyDuration(this.duration);
-    }
+    },
+    thisSong() {
+      return {
+        title: this.title,
+        duration: this.duration,
+        number: this.number,
+        preview: this.preview
+      };
+    },
   },
   data() {
     return {
@@ -71,8 +85,18 @@ export default {
   },
   methods: {
     play() {
-      MusicControl.stopSong();
-      MusicControl.playSong(this.preview);
+      const song = new SongPlayer();
+      song.pauseSong();
+      song.deleteElementsInArray();
+      song.addSong(this.thisSong);
+      song.playSong();
+    },
+    add() {
+      const song = new SongPlayer();
+      song.addSong(this.thisSong);
+      if (song.listOfSongs.length === 1) {
+        bus.$emit('firstElementInArray', song.listOfSongs[0].title);
+      }
     },
     async addToPlaylist(trackToAdd) {
       this.tracks = await api.getAlbumTracks(this.$route.params.albumId);
@@ -87,7 +111,6 @@ export default {
       this.deleted = true;
     }
   }
-
 };
 </script>
 
