@@ -3,7 +3,7 @@
 
     <album-infos
       :title="infos.name"
-      :number-of-tracks="tracks.length"
+      :tracks="tracks"
       image-url="/static/blank-album-400.png"
       :deleteButton="true"
       @delete="deletePlaylist"
@@ -73,10 +73,7 @@ export default {
     },
     async deletePlaylist() {
       await api.deletePlaylists(this.$route.params.playlistId);
-      setTimeout(this.goToPlaylists, 100);
-    },
-    async goToPlaylists() {
-      await this.$router.push('/playlists');
+      this.$router.go(-1);
     },
     async changeName() {
       if (this.newPlayListName) {

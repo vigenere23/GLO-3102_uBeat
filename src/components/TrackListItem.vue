@@ -99,6 +99,7 @@ export default {
     async deleteSong() {
       await api.deleteSongTrackFromPlaylist(this.playlistId, this.track.trackId);
       this.deleted = true;
+      bus.$emit('songDeletedOfPlaylist', this.number);
     }
   }
 };

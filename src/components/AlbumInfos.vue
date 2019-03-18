@@ -22,26 +22,29 @@
 </template>
 
 <script>
-export default {
-  name: 'album-infos',
-  props: {
-    title: String,
-    subtitle: String,
-    releaseDate: String,
-    genre: String,
-    numberOfTracks: Number,
-    advisory: String,
-    itunesLink: String,
-    imageUrl: String,
-    deleteButton: Boolean
-  },
-  computed: {
-    numberOfTracksText() {
-      const songText = this.numberOfTracks > 1 ? 'songs' : 'song';
-      return `${this.numberOfTracks} ${songText}`;
+  export default {
+    name: 'album-infos',
+    props: {
+      title: String,
+      subtitle: String,
+      releaseDate: String,
+      genre: String,
+      tracks: Array,
+      advisory: String,
+      itunesLink: String,
+      imageUrl: String,
+      deleteButton: Boolean
+    },
+    computed: {
+      numberOfTracks() {
+        return this.tracks.length || 0;
+      },
+      numberOfTracksText() {
+        const songText = this.numberOfTracks > 1 ? 'songs' : 'song';
+        return `${this.numberOfTracks} ${songText}`;
+      }
     }
-  }
-};
+  };
 </script>
 <style lang="scss">
   #album-card {

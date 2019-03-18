@@ -29,11 +29,20 @@
 <script>
   import TrackListItem from '@/components/TrackListItem';
   import api from '@/js/api';
+  import { bus } from '@/main';
 
   export default {
     name: 'track-list',
     components: {
       TrackListItem
+    },
+    created() {
+      bus.$on('songDeletedOfPlaylist', (data) => {
+        this.tracks.splice(data - 1, 1);
+        for (let i = data - 1; i < this.tracks.length; i += 1) {
+          this.tracks[i].number -= 1;
+        }
+      });
     },
     async mounted() {
       this.playlists = await api.getUserPlaylists('5c81361ad6f63a0004c26542');
