@@ -14,6 +14,9 @@ export default class SongPlayer {
   addSong(song) {
     this.listOfSongs.push(song);
     this.setBottomBarVisibleOrNot();
+    if (this.listOfSongs.length === 1) {
+      this.playSong();
+    }
   }
 
   deleteSong(songNumberInList) {
@@ -53,7 +56,7 @@ export default class SongPlayer {
     SongPlayer.instance.pauseSong();
     SongPlayer.instance.listOfPastSongs.push(SongPlayer.instance.listOfSongs[0]);
     SongPlayer.instance.deleteSong(0);
-    if (SongPlayer.instance.listOfSongs.length > 1) {
+    if (SongPlayer.instance.listOfSongs.length >= 1) {
       SongPlayer.instance.playSong();
     } else {
       global.audio.currentTime = 0;
