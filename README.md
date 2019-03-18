@@ -41,3 +41,7 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 2. Boutons d'accès rapide (HELPER) dans la navigation :
    1. `Artist` : redirige vers la page `/artist/290242959` (Tame Impala) afin d'éviter d'avoir à connaître un id.
    2. `Album` : redirige vers la page `/album/` (Thank U, Next) afin d'éviter d'avoir à connaître un id.
+   
+### Membres de l'équipe
+
+* Gabriel St-Peirre (GASTP33)
