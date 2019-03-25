@@ -1,12 +1,13 @@
 <template>
-  <div id="artist-page" class="page blue-grey darken-4">
-    <div class="centered-page">
+  <div id="artist-page">
 
-      <div class="centered-title">
-        <h1 class="large-thin-title">{{ artistName }}</h1>
-        <h2 class="large-thin-subtitle">{{ artistGenre }}</h2>
-        <a class="itunes-link" target="_blank" :href="itunesLink"></a>
-      </div>
+    <artist-infos
+      v-if="Object.keys(infos).length"
+      :infos="infos"
+      :image="image"
+    />
+
+    <div class="centered-page">
 
       <cover-list
         v-if="albums.length"
@@ -35,12 +36,13 @@
 
 <script>
 import api from '@/js/api';
-import helper from '@/js/helper';
+import ArtistInfos from '@/components/ArtistInfos';
 import CoverList from '@/components/CoverList';
 
 export default {
   name: 'artist',
   components: {
+    ArtistInfos,
     CoverList
   },
   data() {
@@ -48,9 +50,8 @@ export default {
       albums: [],
       eps: [],
       singles: [],
-      artistName: '',
-      artistGenre: '',
-      itunesLink: ''
+      infos: {},
+      image: 'https://i.scdn.co/image/a5c28221d9d309fc94268bd216cdf1ca05a6b0c2'
     };
   },
   async mounted() {
@@ -70,15 +71,9 @@ export default {
       this.albums = [];
       this.eps = [];
       this.singles = [];
-      this.artistName = '';
-      this.artistGenre = '';
-      this.itunesLink = '';
     },
     async loadArtistInfos(artistId) {
-      const infos = await api.getArtistInfos(artistId);
-      this.artistName = infos.artistName;
-      this.artistGenre = infos.primaryGenreName;
-      this.itunesLink = helper.getItunesLink(infos.artistLinkUrl);
+      this.infos = await api.getArtistInfos(artistId);
     },
     async loadAlbums(artistId) {
       const albums = await api.getAlbumsOfArtist(artistId);

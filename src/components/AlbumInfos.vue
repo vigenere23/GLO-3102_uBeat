@@ -93,8 +93,3 @@
     }
   }
 </style>
-
-<style scoped>
-  #album-cover:hover {
-  }
-</style>

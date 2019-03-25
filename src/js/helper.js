@@ -42,5 +42,9 @@ export default {
     if (hours && hours < 10) hours = `0${hours}`;
 
     return hours ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
+  },
+
+  fadingBackgroundImageStyle(image) {
+    return `background-image: linear-gradient(transparent -25%, #263238 100%), url("${image}");`;
   }
 };

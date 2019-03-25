@@ -1,5 +1,5 @@
 <template>
-  <div id="home-page">
+  <div id="home-page" class="page">
     <div class="centered-page">
 
       <div class="centered-title">

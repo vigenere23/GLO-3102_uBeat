@@ -69,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 .cover-list {
   width: 100%;
-  margin-top: 64px;
+  margin-bottom: 64px;
 
   h3 {
     margin-bottom: 16px;
