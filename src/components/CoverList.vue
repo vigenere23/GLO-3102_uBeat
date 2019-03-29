@@ -42,7 +42,7 @@
 
 <script>
 import CoverListItem from '@/components/CoverListItem';
-import helper from '@/js/helper';
+import formatter from '@/js/helpers/formatter';
 
 export default {
   name: 'CoverList',
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     imageHd(image) {
-      return helper.getImageUrlOfSize(image, 200);
+      return formatter.imageUrlOfSize(image, 200);
     }
   }
 };

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import api from '@/js/api';
+import ubeat from '@/js/apis/ubeat';
 import ArtistInfos from '@/components/ArtistInfos';
 import CoverList from '@/components/CoverList';
 
@@ -73,10 +73,10 @@ export default {
       this.singles = [];
     },
     async loadArtistInfos(artistId) {
-      this.infos = await api.getArtistInfos(artistId);
+      this.infos = await ubeat.getArtistInfos(artistId);
     },
     async loadAlbums(artistId) {
-      const albums = await api.getAlbumsOfArtist(artistId);
+      const albums = await ubeat.getAlbumsOfArtist(artistId);
 
       albums.forEach((result) => {
         if (/EP$/.test(result.collectionName)) {

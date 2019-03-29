@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import api from '@/js/api';
+import ubeat from '@/js/apis/ubeat';
 import TrackList from '@/components/TrackList';
 import AlbumInfos from '@/components/AlbumInfos';
 
@@ -67,17 +67,17 @@ export default {
       this.loadPlaylistInfosAndTracks(playlistId);
     },
     async loadPlaylistInfosAndTracks(playlistId) {
-      this.infos = await api.getPlaylistInfosAndTracks(playlistId);
+      this.infos = await ubeat.getPlaylistInfosAndTracks(playlistId);
       this.tracks = this.infos.tracks;
       this.playlistId = playlistId;
     },
     async deletePlaylist() {
-      await api.deletePlaylists(this.$route.params.playlistId);
+      await ubeat.deletePlaylists(this.$route.params.playlistId);
       this.$router.go(-1);
     },
     async changeName() {
       if (this.newPlayListName) {
-        const newInfos = await api.changeNamePlaylist(
+        const newInfos = await ubeat.changeNamePlaylist(
           this.$route.params.playlistId,
           this.newPlayListName,
           this.infos.owner.email

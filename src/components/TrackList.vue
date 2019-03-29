@@ -32,7 +32,7 @@
 
 <script>
   import TrackListItem from '@/components/TrackListItem';
-  import api from '@/js/api';
+  import ubeat from '@/js/apis/ubeat';
   import { bus } from '@/main';
   import SongPlayer from '../js/MusicControl';
 
@@ -50,7 +50,7 @@
       });
     },
     async mounted() {
-      this.playlists = await api.getUserPlaylists('5c81361ad6f63a0004c26542');
+      this.playlists = await ubeat.getUserPlaylists('5c81361ad6f63a0004c26542');
       this.playlists.sort();
     },
     data() {
@@ -62,7 +62,7 @@
       addAllTracksToPlaylist(playlist) {
         this.tracks.forEach((track) => {
           if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === track.trackId)) {
-            api.addSongToPlaylist(playlist.id, track);
+            ubeat.addSongToPlaylist(playlist.id, track);
           }
         });
       },

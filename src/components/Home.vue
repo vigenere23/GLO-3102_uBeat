@@ -21,7 +21,7 @@
 <script>
 import CoverList from '@/components/CoverList';
 import homeAlbumLists from '@/js/homeAlbumLists';
-import api from '@/js/api';
+import ubeat from '@/js/apis/ubeat';
 
 export default {
   name: 'home',
@@ -40,7 +40,7 @@ export default {
         coverList.title = albumList.title;
         coverList.covers = [];
         albumList.ids.forEach(async (id) => {
-          coverList.covers.push(await api.getAlbumInfos(id));
+          coverList.covers.push(await ubeat.getAlbumInfos(id));
         });
         this.coverLists.push(coverList);
       });

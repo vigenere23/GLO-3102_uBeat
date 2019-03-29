@@ -1,7 +1,8 @@
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export default {
-  getImageUrlOfSize(url, size) {
+
+  imageUrlOfSize(url, size) {
     if (url && size) {
       const baseUrl = url.substring(0, url.indexOf('/source/') + '/source/'.length);
       return `${baseUrl}${size}x${size}bb.jpg`;
@@ -9,11 +10,12 @@ export default {
     return url;
   },
 
-  getItunesLink(baseLink) {
+  itunesLink(baseLink) {
+    if (!baseLink) return baseLink;
     return `${baseLink.replace(/\/us\//, '/ca/')}&app=music`;
   },
 
-  getPrettyDate(dateString) {
+  prettyDate(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
     const month = MONTHS[date.getMonth()];
@@ -28,7 +30,7 @@ export default {
     return `${month} ${dayNumber}${suffix}, ${year}`;
   },
 
-  getPrettyDuration(timeInMillis) {
+  prettyDuration(timeInMillis) {
     const time = new Date(0);
     time.setHours(0);
     time.setMilliseconds(timeInMillis);
@@ -42,9 +44,6 @@ export default {
     if (hours && hours < 10) hours = `0${hours}`;
 
     return hours ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
-  },
-
-  fadingBackgroundImageStyle(image) {
-    return `background-image: linear-gradient(transparent -25%, #263238 100%), url("${image}");`;
   }
+
 };
