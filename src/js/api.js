@@ -130,6 +130,11 @@ export default {
   async addSongToPlaylist(playlistId, track) {
     const url = `${API_URL}/playlists/${playlistId}/tracks`;
     return post(url, track);
+  },
+
+  async globalSearch(query) {
+    const url = `${API_URL}/search?q=${query}`;
+    return get(url);
   }
 
 };
