@@ -36,6 +36,7 @@
 
 <script>
 import ubeat from '@/js/apis/ubeat';
+import spotify from '@/js/apis/spotify';
 import ArtistInfos from '@/components/ArtistInfos';
 import CoverList from '@/components/CoverList';
 
@@ -51,8 +52,15 @@ export default {
       eps: [],
       singles: [],
       infos: {},
-      image: 'https://i.scdn.co/image/a5c28221d9d309fc94268bd216cdf1ca05a6b0c2'
+      spotify_infos: {},
     };
+  },
+  computed: {
+    image() {
+      return this.spotify_infos.images
+        ? this.spotify_infos.images[0].url
+        : '';
+    }
   },
   async mounted() {
     this.loadPage(this.$route.params.artistId);
@@ -71,9 +79,11 @@ export default {
       this.albums = [];
       this.eps = [];
       this.singles = [];
+      this.spotify_infos = {};
     },
     async loadArtistInfos(artistId) {
       this.infos = await ubeat.getArtistInfos(artistId);
+      this.spotify_infos = await spotify.getArtistInfos(this.infos.artistName);
     },
     async loadAlbums(artistId) {
       const albums = await ubeat.getAlbumsOfArtist(artistId);

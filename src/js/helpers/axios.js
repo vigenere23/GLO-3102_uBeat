@@ -1,10 +1,11 @@
 import axios from 'axios';
+import qs from 'qs';
 
 export default {
 
-  async axiosGet(url) {
+  async axiosGet(url, options) {
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(url, options);
       return response.data;
     } catch (err) {
       return null;
@@ -13,7 +14,7 @@ export default {
 
   async axiosPost(url, body, options) {
     try {
-      const response = await axios.post(url, body, options);
+      const response = await axios.post(url, qs.stringify(body), options);
       return response.data;
     } catch (err) {
       return null;

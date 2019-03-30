@@ -1,29 +1,19 @@
-import Cookies from 'js-cookie'
-import axiosHelper from "@/js/helpers/axios"
+import axiosHelper from '@/js/helpers/axios';
 
-const AUTH = "Basic ZGM3Njg0OTRkYzU2NDVlMGEyMGYyMTUxN2FhNjBjY2I6OGI0YTk5NWEyMGZiNGY5ZGE2YmFiYTIzMzgyNzIwOTE=";
-const AUTH_URL = "https://accounts.spotify.com/api/token"
+const BASE_URL = 'https://guarded-falls-12203.herokuapp.com';
 
-async function getToken() {
-  if (!Cookies.get('spotify_token')) {
-    const body = { "grant_type" : "client_credentials" }
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Authorization": AUTH
-    }
-    const authResponse = axiosHelper.axiosPost(AUTH_URL, body, options);
-    const token = authResponse.token_type + " " + authResponse.access_token;
-    Cookies.set('spotify_token', token, { expires: (authResponse.expires_in - 10) / 3600.0 / 24.0 })
+export default {
+
+  async getArtistInfos(artistName) {
+    const url = `${BASE_URL}/search`;
+    const params = {
+      q: artistName,
+      type: 'artist',
+      limit: 1
+    };
+
+    const response = await axiosHelper.axiosGet(url, { params });
+    return response.artists.items[0] || {};
   }
 
-  return Cookies.get('spotify_token')
-}
-
-async function parseOptions(token) {
-  const token = await getToken();
-  return {
-    headers: {
-      "Authorization": token
-    }
-  };
-}
+};
