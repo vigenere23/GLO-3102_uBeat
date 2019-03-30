@@ -11,9 +11,9 @@ export default {
     }
   },
 
-  async axiosPost(url, body) {
+  async axiosPost(url, body, options) {
     try {
-      const response = await axios.post(url, body);
+      const response = await axios.post(url, body, options);
       return response.data;
     } catch (err) {
       return null;
