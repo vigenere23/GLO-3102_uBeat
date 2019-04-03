@@ -8,7 +8,7 @@
     <v-card-title primary-title>
       <div id="info-album">
         <h1>{{ title || 'Untitled' }}</h1>
-        <h2>{{ subtitle }}</h2>
+        <router-link tag="a" :to="subtitleLink" class="h2">{{ subtitle }}</router-link>
         <h3 v-if="releaseDate">Release on {{ releaseDate }}</h3>
         <h4><span v-if="genre">{{ genre }} &bull; </span>{{ numberOfTracksText }}</h4>
         <h4>{{ advisory }}</h4>
@@ -27,6 +27,10 @@
     props: {
       title: String,
       subtitle: String,
+      subtitleLink: {
+        type: String,
+        default: ''
+      },
       releaseDate: String,
       genre: String,
       tracks: Array,
@@ -47,6 +51,26 @@
   };
 </script>
 <style lang="scss">
+  h1 {
+    line-height: 1.1em;
+    margin-bottom: 0.3em;
+    font-weight: 500;
+  }
+
+  .h2 {
+    font-size: 22px;
+    color: white;
+    font-weight: 400;
+    margin-bottom: 0.2em;
+  }
+
+  h3, h4 {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    line-height: 1.1em;
+    margin-bottom: 0.3em;
+  }
+
   #album-card {
     display: flex;
     justify-content: center;
