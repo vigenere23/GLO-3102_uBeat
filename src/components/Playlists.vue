@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import api from '@/js/api';
+import ubeat from '@/js/apis/ubeat';
 import CoverList from '@/components/CoverList';
 import LoadingCenter from '@/components/LoadingCenter';
 
@@ -68,18 +68,18 @@ export default {
       this.username = '';
     },
     async loadUserInfos(userId) {
-      const user = await api.getUserInfos(userId);
+      const user = await ubeat.getUserInfos(userId);
       this.user = user;
     },
     async loadPlaylists(userId) {
-      const playlists = await api.getUserPlaylists(userId);
+      const playlists = await ubeat.getUserPlaylists(userId);
       this.loading = false;
       this.playlists = playlists;
     },
     async addPlaylist() {
       if (this.newPlayListName !== '') {
-        const infos = await api.getUserInfos(this.$route.params.userId);
-        const newPlaylist = await api.addPlaylist(this.newPlayListName, infos.email);
+        const infos = await ubeat.getUserInfos(this.$route.params.userId);
+        const newPlaylist = await ubeat.addPlaylist(this.newPlayListName, infos.email);
         if (newPlaylist) {
           this.playlists.push(newPlaylist);
           this.newPlayListName = '';

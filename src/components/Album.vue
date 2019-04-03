@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import api from '@/js/api';
-import helper from '@/js/helper';
+import ubeat from '@/js/apis/ubeat';
+import formatter from '@/js/helpers/formatter';
 import TrackList from '@/components/TrackList';
 import AlbumInfos from '@/components/AlbumInfos';
 
@@ -54,13 +54,13 @@ export default {
       this.loadTracks(albumId);
     },
     async loadAlbumInfos(albumId) {
-      this.infos = await api.getAlbumInfos(albumId);
-      this.itunesLink = helper.getItunesLink(this.infos.collectionViewUrl);
-      this.releaseDate = helper.getPrettyDate(this.infos.releaseDate);
-      this.imageUrl = helper.getImageUrlOfSize(this.infos.artworkUrl100, 400);
+      this.infos = await ubeat.getAlbumInfos(albumId);
+      this.itunesLink = formatter.itunesLink(this.infos.collectionViewUrl);
+      this.releaseDate = formatter.prettyDate(this.infos.releaseDate);
+      this.imageUrl = formatter.imageUrlOfSize(this.infos.artworkUrl100, 400);
     },
     async loadTracks(albumId) {
-      this.tracks = await api.getAlbumTracks(albumId);
+      this.tracks = await ubeat.getAlbumTracks(albumId);
     }
   }
 };
