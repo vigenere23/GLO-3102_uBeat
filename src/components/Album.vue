@@ -3,6 +3,7 @@
     <album-infos
       :title="infos.collectionName"
       :subtitle="infos.artistName"
+      :subtitleLink="`/artist/${infos.artistId}`"
       :release-date="releaseDate"
       :genre="infos.primaryGenreName"
       :tracks="tracks"
