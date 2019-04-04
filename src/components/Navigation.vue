@@ -133,6 +133,7 @@
           { name: 'Login/Signup', icon: 'person', path: '/login' },
           { name: 'Settings', icon: 'settings', path: '/settings' },
           { name: 'Logout', icon: 'logout', path: '/logout' },
+          { name: 'Profile', icon: 'person', path: '/profile' }
         ],
         showBottomBar: false,
       };

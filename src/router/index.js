@@ -11,6 +11,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import LogIn from '../components/LogIn';
 import SignUp from '../components/SignUp';
 import LogOut from '../components/LogOut';
+import Profile from '../components/Profile';
 
 Vue.use(Router);
 
@@ -65,6 +66,11 @@ export default new Router({
       path: '/logout',
       name: 'LogOut',
       component: LogOut
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     }
   ],
 });
