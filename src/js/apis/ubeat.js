@@ -1,6 +1,7 @@
 import axiosHelper from '@/js/helpers/axios';
 
 const BASE_URL = 'https://ubeat.herokuapp.com/unsecure';
+const LOGIN = 'https://ubeat.herokuapp.com';
 
 function sortAlbumsDesc(albums) {
   return albums.sort((album1, album2) => {
@@ -86,7 +87,6 @@ export default {
     const url = `${BASE_URL}/playlists/${playlistId}/tracks`;
     return axiosHelper.axiosPost(url, track);
   },
-
   async searchSingleArtistByName(name) {
     const url = `${BASE_URL}/search/artists`;
     const params = { q: name, limit: 1 };
@@ -105,6 +105,25 @@ export default {
       return axiosHelper.extractMultipleResults(results);
     }
     return results;
+  },
+
+  async signup(userName, userEmail, userPassword) {
+    const url = `${LOGIN}/signup`;
+    const body = {
+      name: userName,
+      email: userEmail,
+      password: userPassword
+    };
+    return axiosHelper.axiosPost(url, body);
+  },
+
+  async login(userEmail, userPassword) {
+    const url = `${LOGIN}/login`;
+    const body = {
+      email: userEmail,
+      password: userPassword
+    };
+    return axiosHelper.axiosPost(url, body);
   }
 
 };

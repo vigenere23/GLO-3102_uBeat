@@ -8,6 +8,8 @@ import PlaylistAlbum from '@/components/PlaylistAlbum';
 import Search from '@/components/Search';
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import LogIn from '../components/LogIn';
+import SignUp from '../components/SignUp';
 
 Vue.use(Router);
 
@@ -42,6 +44,16 @@ export default new Router({
       path: '/search/:type/:query',
       name: 'Search',
       component: Search
+    },
+    {
+      path: '/login',
+      name: 'LogIn',
+      component: LogIn
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
     }
   ],
 });
