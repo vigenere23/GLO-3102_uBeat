@@ -19,9 +19,10 @@
 </template>
 
 <script>
-import CoverList from '@/components/CoverList';
+import Cookies from 'js-cookie';
 import homeAlbumLists from '@/js/homeAlbumLists';
 import ubeat from '@/js/apis/ubeat';
+import CoverList from '@/components/CoverList';
 
 export default {
   name: 'home',
@@ -44,6 +45,12 @@ export default {
         });
         this.coverLists.push(coverList);
       });
+    }
+  },
+  beforeMount() {
+    const cookie = Cookies.get('uBeatCookie');
+    if (cookie === null || cookie === undefined || cookie === '') {
+      this.$router.push({ path: '/login' });
     }
   }
 };

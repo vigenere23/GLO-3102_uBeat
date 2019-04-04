@@ -59,10 +59,12 @@ export default {
   },
   async beforeMount() {
     const cookie = Cookies.get('uBeatCookie');
-    if (cookie !== null || cookie !== undefined || cookie !== '') {
+    if (!(cookie === null || cookie === undefined || cookie === '')) {
       const json = await ubeat.tokenInfo(cookie);
       const userId = json.id;
       this.$router.push({ path: `/users/${userId}/playlists` });
+    } else {
+      this.$router.push({ path: '/login' });
     }
   },
   methods: {
@@ -95,6 +97,6 @@ export default {
         }
       }
     }
-  }
+  },
 };
 </script>

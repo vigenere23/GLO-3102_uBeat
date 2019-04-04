@@ -31,7 +31,9 @@
     <div>
       <v-snackbar
         v-model="snackbar"
-        :timeout="4000">
+        :timeout="4000"
+        :top=true
+        :color="color">
         {{this.snackbarMessage}}
       </v-snackbar>
     </div>
@@ -50,7 +52,8 @@
           userEmail: '',
           userPassword: '',
           snackbar: false,
-          snackbarMessage: ''
+          snackbarMessage: '',
+          color: 'red'
 
         };
       },
@@ -77,7 +80,7 @@
       },
       async beforeMount() {
         const cookie = Cookies.get('uBeatCookie');
-        if (cookie !== null || cookie !== undefined || cookie !== '') {
+        if (!(cookie === null || cookie === undefined || cookie === '')) {
           const json = await ubeat.tokenInfo(cookie);
           const userId = json.id;
           this.$router.push({ path: `/users/${userId}/playlists` });

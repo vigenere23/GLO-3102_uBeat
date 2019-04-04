@@ -53,7 +53,9 @@
     <div>
       <v-snackbar
         v-model="snackbar"
-        :timeout="4000">
+        :timeout="4000"
+        :top=true
+        :color="color">
         {{this.snackbarMessage}}
       </v-snackbar>
     </div>
@@ -74,7 +76,8 @@
           userPassword: '',
           userConfirmPassword: '',
           userEmail: '',
-          snackbarMessage: ''
+          snackbarMessage: '',
+          color: 'red'
         };
       },
       methods: {

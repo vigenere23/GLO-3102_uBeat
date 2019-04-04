@@ -37,6 +37,11 @@ export default new Router({
       component: Playlists
     },
     {
+      path: '/playlists',
+      name: 'playlistRedirection',
+      component: Playlists
+    },
+    {
       path: '/playlists/:playlistId',
       name: 'PlaylistAlbum',
       component: PlaylistAlbum
