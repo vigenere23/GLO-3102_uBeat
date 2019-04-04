@@ -58,10 +58,11 @@
   }
 
   .h2 {
-    font-size: 22px;
     color: white;
+    font-size: 22px;
     font-weight: 400;
-    margin-bottom: 0.2em;
+    line-height: 1.1em;
+    margin-bottom: 0.5em;
   }
 
   h3, h4 {
