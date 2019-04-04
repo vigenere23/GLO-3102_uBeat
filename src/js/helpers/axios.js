@@ -2,10 +2,9 @@ import axios from 'axios';
 import qs from 'qs';
 
 export default {
-
-  async axiosGet(url, options) {
+  async axiosGet(url, header = {}) {
     try {
-      const response = await axios.get(url, options);
+      const response = await axios.get(url, header);
       return response.data;
     } catch (err) {
       return null;

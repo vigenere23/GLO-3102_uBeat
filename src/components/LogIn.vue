@@ -25,6 +25,7 @@
 
     <div id="logIn">
       <v-btn v-on:click="login">Log In</v-btn>
+      <v-btn v-on:click="redirect">Sign Up</v-btn>
     </div>
 
     <div>
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+    import Cookies from 'js-cookie';
     import ubeat from '../js/apis/ubeat';
 
     export default {
@@ -54,14 +56,31 @@
       },
       methods: {
         async login() {
-          if (this.userName.length === 0 || this.userPassword.length === 0) {
+          if (this.userEmail.length === 0 || this.userPassword.length === 0) {
             this.snackbarMessage = 'you have an empty field';
             this.snackbar = true;
           } else {
-            ubeat.login(this.userEmail, this.userPassword);
-            // TODO erreur si usager n'existe pas
-            // TODO log email et password variable globale
+            const json = await ubeat.login(this.userEmail, this.userPassword);
+            if (json === null) {
+              this.snackbarMessage = 'Email or password is invalid';
+              this.snackbar = true;
+            } else {
+              const userId = json.id;
+              await Cookies.set('uBeatCookie', json.token);
+              this.$router.push({ path: `/users/${userId}/playlists` });
+            }
           }
+        },
+        async redirect() {
+          this.$router.push({ path: '/signup' });
+        }
+      },
+      async beforeMount() {
+        const cookie = Cookies.get('uBeatCookie');
+        if (cookie !== null || cookie !== undefined || cookie !== '') {
+          const json = await ubeat.tokenInfo(cookie);
+          const userId = json.id;
+          this.$router.push({ path: `/users/${userId}/playlists` });
         }
       }
     };

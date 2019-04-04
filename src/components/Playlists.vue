@@ -31,9 +31,10 @@
 </template>
 
 <script>
-import ubeat from '@/js/apis/ubeat';
+import Cookies from 'js-cookie';
 import CoverList from '@/components/CoverList';
 import LoadingCenter from '@/components/LoadingCenter';
+import ubeat from '@/js/apis/ubeat';
 
 export default {
   name: 'playlists',
@@ -55,6 +56,14 @@ export default {
   async beforeRouteUpdate(to, from, next) {
     await this.loadPage(to.params.userId);
     next();
+  },
+  async beforeMount() {
+    const cookie = Cookies.get('uBeatCookie');
+    if (cookie !== null || cookie !== undefined || cookie !== '') {
+      const json = await ubeat.tokenInfo(cookie);
+      const userId = json.id;
+      this.$router.push({ path: `/users/${userId}/playlists` });
+    }
   },
   methods: {
     async loadPage(userId) {

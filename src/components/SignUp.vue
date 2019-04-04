@@ -84,7 +84,9 @@
             this.snackbarMessage = 'you have an empty field';
             this.snackbar = true;
           } else if (this.userPassword === this.userConfirmPassword) {
-            ubeat.signup(this.userName, this.userEmail, this.userPassword);
+            const json = await ubeat.signup(this.userName, this.userEmail, this.userPassword);
+            const userId = await json.id;
+            this.$router.push({ path: `/users/${userId}/playlists` });
           } else {
             this.snackbarMessage = 'password and confirm password should be the same';
             this.snackbar = true;

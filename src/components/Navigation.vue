@@ -130,10 +130,9 @@
           { name: 'Album', icon: 'queue_music', path: '/album/1450330588' }
         ],
         userMenuItem: [
-          { name: 'Login', icon: 'person', path: '/login' },
+          { name: 'Login/Signup', icon: 'person', path: '/login' },
           { name: 'Settings', icon: 'settings', path: '/settings' },
           { name: 'Logout', icon: 'logout', path: '/logout' },
-          { name: 'Signup', icon: 'login', path: '/signup' }
         ],
         showBottomBar: false,
       };

@@ -124,6 +124,14 @@ export default {
       password: userPassword
     };
     return axiosHelper.axiosPost(url, body);
+  },
+
+  async tokenInfo(cookie) {
+    const url = `${LOGIN}/tokenInfo`;
+    const header = {
+      headers: { Authorization: cookie }
+    };
+    return axiosHelper.axiosGet(url, header);
   }
 
 };
