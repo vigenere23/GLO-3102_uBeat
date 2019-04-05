@@ -83,7 +83,7 @@ export default {
     },
     async loadArtistInfos(artistId) {
       this.infos = await ubeat.getArtistInfos(artistId);
-      this.spotify_infos = await spotify.getArtistInfos(this.infos.artistName);
+      this.spotify_infos = await spotify.getArtistInfosByName(this.infos.artistName);
     },
     async loadAlbums(artistId) {
       const albums = await ubeat.getAlbumsOfArtist(artistId);

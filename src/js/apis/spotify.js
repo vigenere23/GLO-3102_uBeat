@@ -4,7 +4,7 @@ const BASE_URL = 'https://guarded-falls-12203.herokuapp.com';
 
 export default {
 
-  async getArtistInfos(artistName) {
+  async getArtistInfosByName(artistName) {
     const url = `${BASE_URL}/search`;
     const params = {
       q: artistName,
