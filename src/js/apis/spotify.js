@@ -12,7 +12,7 @@ export default {
       limit: 1
     };
 
-    const response = await axiosHelper.axiosGet(url, { params });
+    const response = await axiosHelper.axiosGet(url, { params, withCredentials: true });
     return response.artists.items[0] || {};
   }
 
