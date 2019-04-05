@@ -5,7 +5,7 @@ const BASE_URL = 'https://guarded-falls-12203.herokuapp.com';
 export default class SpotifyApi {
 
   static async getArtistInfosByName(artistName) {
-    const url = `${BASE_URL}/search/artist`;
+    const url = `${BASE_URL}/search`;
     const params = {
       q: artistName,
       type: 'artist',
