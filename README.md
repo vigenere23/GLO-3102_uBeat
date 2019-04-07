@@ -41,7 +41,13 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 2. Boutons d'accès rapide (HELPER) dans la navigation :
    1. `Artist` : redirige vers la page `/artist/290242959` (Tame Impala) afin d'éviter d'avoir à connaître un id.
    2. `Album` : redirige vers la page `/album/` (Thank U, Next) afin d'éviter d'avoir à connaître un id.
-   
+
+### Livrable 3
+
+Voici quelques informations importante concernant le livrable 3 (final) du projet :
+
+1. Afin de bénéficier de certaines fonctionnalités, assurez-vous de démarrer localement le serveur d'acheminement de l'API Spotify en suivant [ces instructions](https://github.com/GLO3102-H19/spotifyAPI-team-18).
+
 ### Membres de l'équipe
 
 * Gabriel St-Pierre (GASTP33) (111 178 727)
