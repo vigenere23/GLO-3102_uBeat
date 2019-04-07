@@ -1,6 +1,6 @@
 import axiosHelper from '@/js/helpers/axios';
 
-const BASE_URL = 'https://guarded-falls-12203.herokuapp.com';
+const BASE_URL = 'http://localhost:9090';
 
 export default class SpotifyApi {
 
