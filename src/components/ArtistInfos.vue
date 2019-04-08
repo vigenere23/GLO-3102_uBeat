@@ -33,6 +33,6 @@ export default {
 .artist-infos {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center 25%;
 }
 </style>
