@@ -20,6 +20,16 @@
         <span id="bottom-bar-song-title">
           {{titleOfTheSong}}
         </span>
+        <v-menu offset-x id="nextSongs">
+          <v-btn icon ripple slot="activator" v-on:click="chargeQueue"><v-icon color="white">queue_music</v-icon></v-btn>
+          <v-list dense class="listInQueue">
+            <v-list-tile-title class="queueList" id="TitleOfListQueue">Next songs</v-list-tile-title>
+            <v-divider dark></v-divider>
+            <v-list-tile class="listTileInQueue" v-for="(songs, index) in listOfSongsInQueue">
+              <v-list-tile-title class="queueList" v-on:click="changeSongInQueue(index)">{{index + 1}}) {{ songs.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </v-toolbar>
     </div>
   </div>
@@ -34,6 +44,7 @@
       return {
         displayPlayButton: true,
         titleOfTheSong: '',
+        listOfSongsInQueue: []
       };
     },
     created() {
@@ -77,6 +88,16 @@
       pauseSong() {
         const song = new SongPlayer();
         song.pauseSong();
+      },
+      chargeQueue() {
+        const song = new SongPlayer();
+        this.listOfSongsInQueue = song.listOfSongs;
+        this.listOfSongsInQueue.shift();
+      },
+      changeSongInQueue(index) {
+        const song = new SongPlayer();
+        song.listOfSongs.splice(0, index - 1);
+        this.nextSong();
       }
     },
     name: 'MusicPlayer'
@@ -90,7 +111,7 @@
     height: 55px;
     width: 100%;
     position: fixed;
-    z-index: 100;
+    z-index: 5;
   }
 
   #bottom-bar-song-title {
@@ -102,5 +123,35 @@
   #bottom-bar-3-buttons {
     margin-left: 10px;
     white-space: nowrap;
+  }
+  #nextSongs {
+    display: block;
+    margin-left: auto;
+    z-index: 100;
+  }
+  .queueList {
+    font-size: 14px;
+    color: white;
+  }
+  .listInQueue{
+    background: rgb(27, 41, 50);
+    max-height: 200px;
+  }
+  .listTileInQueue {
+    background: rgb(27, 41, 50);
+  }
+  .listTileInQueue:hover {
+    background: #3a474e;
+  }
+  #TitleOfListQueue {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+  }
+  /* !!! Classe en dessous importante !!! */
+  .v-menu__content {
+    position: fixed;
+    right: 50px;
+    max-width: 250px;
   }
 </style>
