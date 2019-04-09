@@ -1,6 +1,6 @@
 <template>
   <router-link class="cover" :to="link || ''" tag="a">
-    <img class="cover-image" :src="image || '/static/blank-album-200.png'">
+    <div class="cover-image" :style="backgroundImage"></div>
     <p class="name">{{ nameWithAdvisory || "untitled" }}</p>
     <p class="desc" v-if="desc">{{ desc }}</p>
   </router-link>
@@ -22,6 +22,12 @@ export default {
   computed: {
     nameWithAdvisory() {
       return this.advisory ? `${this.name} [${this.advisory}]` : this.name;
+    },
+    imageOrDefault() {
+      return this.image || '/static/blank-album-200.png';
+    },
+    backgroundImage() {
+      return `background-image: url('${this.imageOrDefault}');`;
     }
   }
 };
@@ -67,6 +73,10 @@ export default {
   .cover-image {
     display: block;
     width: 100%;
+    padding-bottom: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 }
 

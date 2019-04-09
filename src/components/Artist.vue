@@ -31,7 +31,7 @@
       />
 
       <cover-list
-        v-if="similarArtists"
+        v-if="similarArtists.length"
         title="Similar artists"
         type="artist"
         :covers="similarArtists"
@@ -60,7 +60,7 @@ export default {
       singles: [],
       infos: null,
       spotifyInfos: null,
-      similarArtists: null
+      similarArtists: []
     };
   },
   computed: {
@@ -89,13 +89,14 @@ export default {
       this.singles = [];
       this.infos = null;
       this.spotifyInfos = null;
-      this.similarArtists = null;
+      this.similarArtists = [];
     },
     async loadArtistInfos(artistId) {
       this.infos = await ubeat.getArtistInfos(artistId);
       this.spotifyInfos = await spotify.getArtistInfosByName(this.infos.artistName);
       if (this.spotifyInfos) {
-        this.similarArtists = await spotify.getSimilarArtists(this.spotifyInfos.id);
+        const similarArtists = await spotify.getSimilarArtists(this.spotifyInfos.id);
+        this.similarArtists = similarArtists.filter(x => x);
       }
     },
     async loadAlbums(artistId) {

@@ -41,7 +41,7 @@
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-item
           :name="cover.name"
-          :link="`/artist/`"
+          :link="`/artist/${cover.artistId}`"
           :image="cover.images[0].url"
         />
       </li>

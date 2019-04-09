@@ -1,4 +1,5 @@
 import axiosHelper from '@/js/helpers/axios';
+import ubeat from '@/js/apis/ubeat';
 
 const BASE_URL = 'http://localhost:9090';
 
@@ -28,12 +29,17 @@ export default class SpotifyApi {
     const response = await axiosHelper.axiosGet(url, { withCredentials: true });
 
     const artists = [];
-    response.artists.forEach(async (artist) => {
+    const promises = response.artists.map(async (artist) => {
       const artistInfo = await this.getArtistInfosById(artist.id);
       if (!artistInfo.error) {
-        artists.push(artistInfo);
+        const ubeatArtistInfo = await ubeat.searchSingleArtistByName(artistInfo.name);
+        if (ubeatArtistInfo && !ubeatArtistInfo.error) {
+          artists.push({ ...artistInfo, ...ubeatArtistInfo.results[0] });
+        }
       }
     });
+    await Promise.all(promises);
+
     return artists;
   }
 

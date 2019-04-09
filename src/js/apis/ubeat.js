@@ -85,6 +85,12 @@ export default {
   async addSongToPlaylist(playlistId, track) {
     const url = `${BASE_URL}/playlists/${playlistId}/tracks`;
     return axiosHelper.axiosPost(url, track);
+  },
+
+  async searchSingleArtistByName(name) {
+    const url = `${BASE_URL}/search/artists`;
+    const params = { q: name, limit: 1 };
+    return axiosHelper.axiosGet(url, { params });
   }
 
 };
