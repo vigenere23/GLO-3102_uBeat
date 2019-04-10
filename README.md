@@ -26,6 +26,13 @@ Pour activer le "hot-reloading" :
 npm run dev
 ```
 
+## Spotify API
+
+Afin de bénéficier de certaines fonctionnalités, assurez-vous d'initialiser le projet de Spotify API, défini en temps que submodule git. 
+1. Dans le dossier du projet, exécuter `git submodule init` suivi de `git submodule update` **OU** cloner le projet à part. 
+2. Pour démarrer localement le serveur d'acheminement de l'API Spotify, veuillez suivre [ces instructions](https://github.com/GLO3102-H19/spotifyAPI-team-18).
+
+
 ## Informations importantes
 
 ### Livrable 2
@@ -43,10 +50,6 @@ Voici quelques informations importante concernant le livrable 2 du projet :
    2. `Album` : redirige vers la page `/album/` (Thank U, Next) afin d'éviter d'avoir à connaître un id.
 
 ### Livrable 3
-
-Voici quelques informations importante concernant le livrable 3 (final) du projet :
-
-1. Afin de bénéficier de certaines fonctionnalités, assurez-vous de démarrer localement le serveur d'acheminement de l'API Spotify en suivant [ces instructions](https://github.com/GLO3102-H19/spotifyAPI-team-18).
 
 ### Membres de l'équipe
 
