@@ -2,7 +2,7 @@
   <div id="playlist-page" class="page blue-grey darken-4">
     <div class="centered-page">
 
-      <div class="centered-title">
+      <div class="centered-title" v-if="loading !== true">
         <h1 class="large-thin-title">Playlists</h1>
         <h2 class="large-thin-subtitle">for {{ user.name }}</h2>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h2> {{name}}</h2>
+      <h1> {{name}}</h1>
     </div>
 
     <div>
@@ -9,26 +9,37 @@
     </div>
 
     <div>
-      playlists
+      <h3>Playlists</h3>
+      <cover-list
+        type="playlist"
+        :covers="playlists"
+        :wrap="true"
+      ></cover-list>
     </div>
 
     <div>
-      follower
+      <h3>Following</h3>
+
     </div>
 
-    <div>
-      friends
+    <div v-if="userSearchResult">
+
     </div>
+
   </div>
 </template>
 
 <script>
   import Cookies from 'js-cookie';
   import ubeat from '@/js/apis/ubeat';
+  import CoverList from '@/components/CoverList';
 
   // TODO profile
   export default {
-    name: 'profile.vue',
+    name: 'Profile',
+    components: {
+      CoverList
+    },
     data() {
       return {
         userId: '',
@@ -37,19 +48,40 @@
         name: '',
         email: '',
         following: [],
-        friend: []
+        userSearchResult: false
       };
     },
     async beforeMount() {
-      const cookie = Cookies.get('uBeatCookie');
-      if (!(cookie === null || cookie === undefined || cookie === '')) {
-        const json = await ubeat.tokenInfo(cookie);
-        this.userId = json.id;
-        this.name = json.name;
-        this.email = json.email;
-        this.following = json.following;
+      if (this.$route.params.userTargetId) {
+        this.userSearchResult = true;
+        const infosUser = await ubeat.getUserInfos(this.$route.params.userTargetId);
+        this.userId = infosUser.id;
+        this.name = infosUser.name;
+        this.email = infosUser.email;
+        this.userSearchResult = true;
       } else {
-        this.$router.push({ path: '/login' });
+        const cookie = Cookies.get('uBeatCookie');
+        if (!(cookie === null || cookie === undefined || cookie === '')) {
+          const json = await ubeat.tokenInfo(cookie);
+          this.userId = json.id;
+          this.name = json.name;
+          this.email = json.email;
+        } else {
+          this.$router.push({ path: '/login' });
+        }
+      }
+    },
+    async mounted() {
+      this.loadPlaylists(this.userId);
+      this.loadFollowing(this.userId);
+    },
+    methods: {
+      async loadPlaylists(userId) {
+        this.playlists = await ubeat.getUserPlaylists(userId);
+      },
+      async loadFollowing(userId) {
+        const infosUser = await ubeat.getUserInfos(userId);
+        this.following = infosUser.following;
       }
     }
   };

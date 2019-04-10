@@ -71,6 +71,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/profile/:userTargetId',
+      name: 'userProfile',
+      component: Profile
     }
   ],
 });
