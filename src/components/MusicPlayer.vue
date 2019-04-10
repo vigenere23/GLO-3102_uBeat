@@ -20,16 +20,31 @@
         <span id="bottom-bar-song-title">
           {{titleOfTheSong}}
         </span>
-        <v-menu offset-x id="nextSongs">
-          <v-btn icon ripple slot="activator" v-on:click="chargeQueue"><v-icon color="white">queue_music</v-icon></v-btn>
-          <v-list dense class="listInQueue">
-            <v-list-tile-title class="queueList" id="TitleOfListQueue">Next songs</v-list-tile-title>
-            <v-divider dark></v-divider>
-            <v-list-tile class="listTileInQueue" v-for="(songs, index) in listOfSongsInQueue">
-              <v-list-tile-title class="queueList" v-on:click="changeSongInQueue(index)">{{index + 1}}) {{ songs.title }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
+        <div id="rightOptions">
+          <v-btn icon ripple v-on:click="shuffle">
+            <v-icon color="white">shuffle</v-icon>
+          </v-btn>
+          <v-btn icon ripple v-show="this.repeatBtn === false" v-on:click="repeatBtn = true">
+            <v-icon color="white">repeat</v-icon>
+          </v-btn>
+          <v-btn icon ripple class="blue-grey darken-4" v-show="this.repeatBtn" v-on:click="repeatBtn = false">
+            <v-icon color="white">repeat</v-icon>
+          </v-btn>
+          <v-menu offset-x>
+            <v-btn icon ripple slot="activator" v-on:click="chargeQueue"><v-icon color="white">queue_music</v-icon></v-btn>
+            <v-list dense class="listInQueue">
+              <v-list-tile-title class="queueList" id="TitleOfListQueue">Next songs</v-list-tile-title>
+              <v-divider dark></v-divider>
+              <v-list-tile class="listTileInQueue" v-for="(songs, index) in listOfSongsInQueue.slice(1)">
+                <v-list-tile-title class="queueList" v-on:click="changeSongInQueue(index)">{{index + 1}}) {{ songs.title }}</v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile class="queueList" v-if="listOfSongsInQueue.length <= 1">
+                <v-list-tile-title class="queueList">No next song :(</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </div>
+
       </v-toolbar>
     </div>
   </div>
@@ -44,7 +59,8 @@
       return {
         displayPlayButton: true,
         titleOfTheSong: '',
-        listOfSongsInQueue: []
+        listOfSongsInQueue: [],
+        repeatBtn: false
       };
     },
     created() {
@@ -59,6 +75,14 @@
       });
       bus.$on('firstElementInArray', (data) => {
         this.titleOfTheSong = data;
+      });
+      bus.$on('checkForRepeat', () => {
+        const song = new SongPlayer();
+        if (this.repeatBtn === true) {
+          song.listOfSongs = song.listOfPastSongs;
+          song.playSong();
+          song.listOfPastSongs = [];
+        }
       });
     },
     methods: {
@@ -92,12 +116,16 @@
       chargeQueue() {
         const song = new SongPlayer();
         this.listOfSongsInQueue = song.listOfSongs;
-        this.listOfSongsInQueue.shift();
+        // this.listOfSongsInQueue.shift();
       },
       changeSongInQueue(index) {
         const song = new SongPlayer();
         song.listOfSongs.splice(0, index - 1);
         this.nextSong();
+      },
+      shuffle() {
+        const song = new SongPlayer();
+        song.shuffle();
       }
     },
     name: 'MusicPlayer'
@@ -124,7 +152,7 @@
     margin-left: 10px;
     white-space: nowrap;
   }
-  #nextSongs {
+  #rightOptions {
     display: block;
     margin-left: auto;
     z-index: 100;
@@ -136,22 +164,27 @@
   .listInQueue{
     background: rgb(27, 41, 50);
     max-height: 200px;
+    width: 250px;
+    right: 200px;
   }
   .listTileInQueue {
     background: rgb(27, 41, 50);
   }
   .listTileInQueue:hover {
     background: #3a474e;
+    cursor: pointer;
   }
   #TitleOfListQueue {
     margin-left: auto;
     margin-right: auto;
     width: 80px;
   }
-  /* !!! Classe en dessous importante !!! */
+  /* !!! Classe en dessous importante !!!
   .v-menu__content {
     position: fixed;
     right: 50px;
-    max-width: 250px;
+    width: 250px;
   }
+  */
+
 </style>
