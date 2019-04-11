@@ -19,7 +19,12 @@
 
     <div>
       <h3>Following</h3>
-
+      <ul id="following">
+        <li v-for="(value) in following" v-on:click="goToOtherProfile(value.id)">
+          Name: {{ value.name }}
+          Email: {{ value.email }}
+        </li>
+      </ul>
     </div>
 
     <div v-if="userSearchResult">
@@ -51,7 +56,7 @@
         userSearchResult: false
       };
     },
-    async beforeMount() {
+    async mounted() {
       if (this.$route.params.userTargetId) {
         this.userSearchResult = true;
         const infosUser = await ubeat.getUserInfos(this.$route.params.userTargetId);
@@ -70,8 +75,6 @@
           this.$router.push({ path: '/login' });
         }
       }
-    },
-    async mounted() {
       this.loadPlaylists(this.userId);
       this.loadFollowing(this.userId);
     },
@@ -82,6 +85,10 @@
       async loadFollowing(userId) {
         const infosUser = await ubeat.getUserInfos(userId);
         this.following = infosUser.following;
+      },
+      goToOtherProfile(otherUserId) {
+        const path = `/profile/${otherUserId}`;
+        this.$router.push({ path });
       }
     }
   };
