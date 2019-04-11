@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="music-player">
-      <v-toolbar class="blue-grey darken-2">
+      <v-toolbar class="blue-grey darken-2" id="toolbar">
         <div id="bottom-bar-3-buttons">
           <v-btn icon ripple right class="blue-grey darken-4" v-on:click="previousSong">
             <v-icon color="white">fast_rewind</v-icon>
@@ -30,7 +30,7 @@
           <v-btn icon ripple class="blue-grey darken-4" v-show="this.repeatBtn" v-on:click="repeatBtn = false">
             <v-icon color="white">repeat</v-icon>
           </v-btn>
-          <v-menu offset-x>
+          <v-menu nudge-left="200px" nudge-top="200px">
             <v-btn icon ripple slot="activator" v-on:click="chargeQueue"><v-icon color="white">queue_music</v-icon></v-btn>
             <v-list dense class="listInQueue">
               <v-list-tile-title class="queueList" id="TitleOfListQueue">Next songs</v-list-tile-title>
@@ -120,7 +120,7 @@
       },
       changeSongInQueue(index) {
         const song = new SongPlayer();
-        song.listOfSongs.splice(0, index - 1);
+        song.listOfSongs.splice(0, index);
         this.nextSong();
       },
       shuffle() {
@@ -134,26 +134,28 @@
 
 <style scoped>
   #music-player {
+    display: flex;
     bottom: 0px;
     margin-top: 0px;
-    height: 55px;
+    align-content: center;
+    height: 50px;
     width: 100%;
     position: fixed;
     z-index: 5;
   }
-
   #bottom-bar-song-title {
     font-size: 16px;
     color: white;
     white-space: nowrap;
+    overflow: hidden;
+    width: auto;
   }
-
   #bottom-bar-3-buttons {
     margin-left: 10px;
     white-space: nowrap;
   }
   #rightOptions {
-    display: block;
+    display: flex;
     margin-left: auto;
     z-index: 100;
   }
@@ -165,7 +167,6 @@
     background: rgb(27, 41, 50);
     max-height: 200px;
     width: 250px;
-    right: 200px;
   }
   .listTileInQueue {
     background: rgb(27, 41, 50);
@@ -179,12 +180,26 @@
     margin-right: auto;
     width: 80px;
   }
-  /* !!! Classe en dessous importante !!!
-  .v-menu__content {
-    position: fixed;
-    right: 50px;
-    width: 250px;
+
+  @media (max-width: 450px) {
+    #music-player {
+      height: 100px;
+      padding-top: 6px;
+    }
+    #toolbar{
+      display: flex;
+      height: 100px;
+      flex-wrap: wrap-reverse;
+    }
+    #rightOptions {
+      display: flex;
+      position: fixed;
+      bottom: 50px;
+      width: 100%;
+      justify-content: space-around;
+      border-bottom: white 1px solid;
+      left: 0px;
+    }
   }
-  */
 
 </style>
