@@ -55,7 +55,8 @@
         email: '',
         following: [],
         userSearchResult: false,
-        alreadyFollow: false
+        alreadyFollow: false,
+        cookie: ''
       };
     },
     async mounted() {
@@ -68,9 +69,9 @@
         this.userSearchResult = true;
         this.alreadyFollow = await this.determineIfFollowed(this.userId);
       } else { // we are on our own profile page
-        const cookie = Cookies.get('uBeatCookie');
-        if (!(cookie === null || cookie === undefined || cookie === '')) {
-          const json = await ubeat.tokenInfo(cookie);
+        this.cookie = Cookies.get('uBeatCookie');
+        if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
+          const json = await ubeat.tokenInfo(this.cookie);
           this.userId = json.id;
           this.name = json.name;
           this.email = json.email;
@@ -91,9 +92,9 @@
         this.following = infosUser.following;
       },
       async setMyId() {
-        const cookie = Cookies.get('uBeatCookie');
-        if (!(cookie === null || cookie === undefined || cookie === '')) {
-          const json = await ubeat.tokenInfo(cookie);
+        this.cookie = Cookies.get('uBeatCookie');
+        if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
+          const json = await ubeat.tokenInfo(this.cookie);
           this.myId = json.id;
         }
       },
@@ -106,6 +107,7 @@
           if (!(this.userId === '' || this.userId === this.myId)) {
             await ubeat.follow(this.userId);
           }
+          this.alreadyFollow = true;
         } else {
           this.$router.push({ path: '/login' });
         }
@@ -115,6 +117,7 @@
           if (!(this.userId === '' || this.userId === this.myId)) {
             await ubeat.unfollow(this.userId);
           }
+          this.alreadyFollow = false;
         } else {
           this.$router.push({ path: '/login' });
         }
