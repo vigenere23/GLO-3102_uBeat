@@ -65,7 +65,9 @@
 </template>
 
 <script>
+    import * as Cookies from 'js-cookie';
     import ubeat from '../js/apis/ubeat';
+
 
     export default {
       name: 'SignUp',
@@ -87,9 +89,16 @@
             this.snackbarMessage = 'you have an empty field';
             this.snackbar = true;
           } else if (this.userPassword === this.userConfirmPassword) {
-            const json = await ubeat.signup(this.userName, this.userEmail, this.userPassword);
-            const userId = await json.id;
-            this.$router.push({ path: `/users/${userId}/playlists` });
+            await ubeat.signup(this.userName, this.userEmail, this.userPassword);
+            const json = await ubeat.login(this.userEmail, this.userPassword);
+            if (json === null) {
+              this.snackbarMessage = 'Email or password is invalid';
+              this.snackbar = true;
+            } else {
+              const userId = json.id;
+              await Cookies.set('uBeatCookie', json.token);
+              this.$router.push({ path: `/users/${userId}/playlists` });
+            }
           } else {
             this.snackbarMessage = 'password and confirm password should be the same';
             this.snackbar = true;

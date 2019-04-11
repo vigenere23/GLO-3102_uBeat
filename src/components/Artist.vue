@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import * as Cookies from 'js-cookie';
 import ubeat from '@/js/apis/ubeat';
 import spotify from '@/js/apis/spotify';
 import ArtistInfos from '@/components/ArtistInfos';
@@ -77,6 +78,13 @@ export default {
     await this.loadPage(to.params.artistId);
     next();
   },
+  beforeMount() {
+    const cookie = Cookies.get('uBeatCookie');
+    if (cookie === null || cookie === undefined || cookie === '') {
+      this.$router.push({ path: '/login' });
+    }
+  },
+
   methods: {
     async loadPage(artistId) {
       this.resetPage();

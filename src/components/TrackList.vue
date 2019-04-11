@@ -31,6 +31,7 @@
 </template>
 
 <script>
+  import * as Cookies from 'js-cookie';
   import TrackListItem from '@/components/TrackListItem';
   import ubeat from '@/js/apis/ubeat';
   import { bus } from '@/main';
@@ -50,8 +51,19 @@
       });
     },
     async mounted() {
-      this.playlists = await ubeat.getUserPlaylists('5c81361ad6f63a0004c26542');
-      this.playlists.sort();
+      const cookie = Cookies.get('uBeatCookie');
+      if (!(cookie === null || cookie === undefined || cookie === '')) {
+        const json = await ubeat.tokenInfo(cookie);
+        const userId = json.id;
+        this.playlists = await ubeat.getUserPlaylists(userId);
+        this.playlists.sort();
+      }
+    },
+    beforeMount() {
+      const cookie = Cookies.get('uBeatCookie');
+      if (cookie === null || cookie === undefined || cookie === '') {
+        this.$router.push({ path: '/login' });
+      }
     },
     data() {
       return {
