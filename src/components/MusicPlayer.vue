@@ -136,8 +136,7 @@
   #music-player {
     display: flex;
     bottom: 0px;
-    margin-top: 0px;
-    align-content: center;
+    align-items: center;
     height: 50px;
     width: 100%;
     position: fixed;
