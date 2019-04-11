@@ -117,6 +117,19 @@ export default {
     return axiosHelper.axiosPost(url, body);
   },
 
+  async unfollow(targetUserId) {
+    const url = `${LOGIN}/follow/${targetUserId}`;
+    return axiosHelper.axiosDelete(url);
+  },
+
+  async follow(targetUserId) {
+    const url = `${LOGIN}/follow`;
+    const body = {
+      id: targetUserId,
+    };
+    return axiosHelper.axiosPost(url, body);
+  },
+
   async login(userEmail, userPassword) {
     const url = `${LOGIN}/login`;
     const body = {
