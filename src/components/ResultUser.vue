@@ -1,8 +1,7 @@
 <template>
-  <div id="track-result">
-    <router-link
-      :to="'/users/' + user.id">{{user.John Smith}}</router-link>
-  </div>
+  <router-link
+    :to="'/users/' + user.id">{{user.name}}
+  </router-link>
 </template>
 
 <script>

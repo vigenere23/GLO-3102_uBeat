@@ -133,7 +133,7 @@ export default {
   },
 
   async search(type, query) {
-    const url = encodeURI(`${API_URL}/search${type}?q=${query}`);
+    const url = encodeURI(`${API_URL}/search/${type}?q=${query}`);
     const results = await get(url);
     if (type !== 'users') {
       return extractMultipleResults(results);
