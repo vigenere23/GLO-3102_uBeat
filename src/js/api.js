@@ -132,9 +132,10 @@ export default {
     return post(url, track);
   },
 
-  async globalSearch(query) {
-    const url = `${API_URL}/search?q=${query}`;
-    return get(url);
+  async search(type, query) {
+    const urlParam = (type !== undefined) ? `/${type}` : '';
+    const url = encodeURI(`${API_URL}/search${urlParam}?q=${query}`);
+    const results = await get(url);
+    return extractMultipleResults(results);
   }
-
 };

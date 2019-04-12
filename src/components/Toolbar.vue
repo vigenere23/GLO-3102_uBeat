@@ -24,38 +24,50 @@
       </v-btn>
     </v-toolbar-title>
     <v-spacer v-if="windowWidth >= 1264"></v-spacer>
-    <v-autocomplete
-      v-model="select"
-      :loading="loading"
-      :items="items"
-      :search-input.sync="search"
-      cache-items
+    <v-text-field
       id="searchField"
       flat
       solo
       hide-details
-      hide-no-data
       style="max-width: 750px;"
       clearable
       append-icon='search'
+      @click:append="search"
       placeholder="Search">
-    </v-autocomplete>
+    </v-text-field>
+    <v-select
+      v-model="selected"
+      id="searchType"
+      flat
+      solo
+      hide-details
+      style="max-width: 100px;"
+      :items="items"
+    ></v-select>
     <v-spacer v-if="windowWidth >= 1264"></v-spacer>
   </v-toolbar>
 </template>
 <script>
-
   export default {
     name: 'toolbar',
     data() {
       return {
-        home: { name: 'Home', icon: 'dashboard', path: '/' }
+        selected: 'Artists',
+        home: { name: 'Home', icon: 'dashboard', path: '/' },
+        items: ['Artists', 'Albums', 'Tracks', 'Users']
       };
     },
     props: {
       drawer: {},
       toolbar: {},
       windowWidth: {}
+    },
+    methods: {
+      search() {
+        const type = this.selected.toLowerCase();
+        const query = document.getElementById('searchField').value.toLowerCase();
+        this.$router.replace(`/search/${type}/${query}`);
+      }
     }
   };
 </script>

@@ -5,6 +5,7 @@ import Album from '@/components/Album';
 import Artist from '@/components/Artist';
 import Playlists from '@/components/Playlists';
 import PlaylistAlbum from '@/components/PlaylistAlbum';
+import Search from '@/components/Search';
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/playlists/:playlistId',
       name: 'PlaylistAlbum',
       component: PlaylistAlbum
+    },
+    {
+      path: '/search/:type/:query',
+      name: 'Search',
+      component: Search
     }
   ],
 });
