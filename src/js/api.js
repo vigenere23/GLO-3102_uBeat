@@ -133,9 +133,14 @@ export default {
   },
 
   async search(type, query) {
-    const url = encodeURI(`${API_URL}/search/${type}?q=${query}`);
+    const properType = (type === 'global') ? '' : type;
+    const url = encodeURI(`${API_URL}/search/${properType}?q=${query}`);
     const results = await get(url);
-    if (type !== 'users') {
+    if (type === 'global') {
+      const urlUsers = encodeURI(`${API_URL}/search/users?q=${query}`);
+      const usersResult = await get(urlUsers);
+      return extractMultipleResults(results).concat(usersResult);
+    } else if (type !== 'users') {
       return extractMultipleResults(results);
     }
     return results;

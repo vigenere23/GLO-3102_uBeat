@@ -52,9 +52,9 @@
     name: 'toolbar',
     data() {
       return {
-        selected: 'Artists',
+        selected: 'Global',
         home: { name: 'Home', icon: 'dashboard', path: '/' },
-        items: ['Artists', 'Albums', 'Tracks', 'Users']
+        items: ['Global', 'Artists', 'Albums', 'Tracks', 'Users']
       };
     },
     props: {

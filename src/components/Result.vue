@@ -3,13 +3,13 @@
     <div v-if="result.wrapperType === 'artist'" id="artist-result">
       <ResultArtist :v-if="result.wrapperType === 'artist'" :artist="result"></ResultArtist>
     </div>
-    <div v-else-if="result.wrapperType === 'album'" id="album-result">
+    <div v-if="result.wrapperType === 'collection'" id="album-result">
       <ResultAlbum :album="result"></ResultAlbum>
     </div>
-    <div v-else-if="result.wrapperType === 'track'" id="track-result">
+    <div v-if="result.wrapperType === 'track'" id="track-result">
       <ResultTrack :track="result"></ResultTrack>
     </div>
-    <div v-else-if="result.wrapperType === undefined" id="user-result">
+    <div v-if="result.wrapperType === undefined" id="user-result">
       <ResultUser :user="result"></ResultUser>
     </div>
   </div>
