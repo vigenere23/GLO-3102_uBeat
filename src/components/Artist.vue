@@ -2,7 +2,7 @@
   <div id="artist-page">
 
     <artist-infos
-      v-if="Object.keys(infos).length"
+      v-if="infos"
       :infos="infos"
       :image="image"
     />
@@ -30,6 +30,13 @@
         :covers="eps"
       />
 
+      <cover-list
+        v-if="similarArtists.length"
+        title="Similar artists"
+        type="artist"
+        :covers="similarArtists"
+      />
+
     </div>
   </div>
 </template>
@@ -51,14 +58,15 @@ export default {
       albums: [],
       eps: [],
       singles: [],
-      infos: {},
-      spotify_infos: {},
+      infos: null,
+      spotifyInfos: null,
+      similarArtists: []
     };
   },
   computed: {
     image() {
-      return this.spotify_infos.images
-        ? this.spotify_infos.images[0].url
+      return this.spotifyInfos && this.spotifyInfos.images
+        ? this.spotifyInfos.images[0].url
         : '';
     }
   },
@@ -79,11 +87,17 @@ export default {
       this.albums = [];
       this.eps = [];
       this.singles = [];
-      this.spotify_infos = {};
+      this.infos = null;
+      this.spotifyInfos = null;
+      this.similarArtists = [];
     },
     async loadArtistInfos(artistId) {
       this.infos = await ubeat.getArtistInfos(artistId);
-      this.spotify_infos = await spotify.getArtistInfosByName(this.infos.artistName);
+      this.spotifyInfos = await spotify.getArtistInfosByName(this.infos.artistName);
+      if (this.spotifyInfos) {
+        const similarArtists = await spotify.getSimilarArtists(this.spotifyInfos.id);
+        this.similarArtists = similarArtists.filter(x => x);
+      }
     },
     async loadAlbums(artistId) {
       const albums = await ubeat.getAlbumsOfArtist(artistId);
