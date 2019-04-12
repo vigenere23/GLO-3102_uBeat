@@ -133,9 +133,11 @@ export default {
   },
 
   async search(type, query) {
-    const urlParam = (type !== undefined) ? `/${type}` : '';
-    const url = encodeURI(`${API_URL}/search${urlParam}?q=${query}`);
+    const url = encodeURI(`${API_URL}/search${type}?q=${query}`);
     const results = await get(url);
-    return extractMultipleResults(results);
+    if (type !== 'users') {
+      return extractMultipleResults(results);
+    }
+    return results;
   }
 };
