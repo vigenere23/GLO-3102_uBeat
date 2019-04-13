@@ -91,6 +91,20 @@ export default {
     const url = `${BASE_URL}/search/artists`;
     const params = { q: name, limit: 1 };
     return axiosHelper.axiosGet(url, { params });
+  },
+
+  async search(type, query) {
+    const properType = (type === 'global') ? '' : type;
+    const url = encodeURI(`${BASE_URL}/search/${properType}?q=${query}`);
+    const results = await axiosHelper.axiosGet(url);
+    if (type === 'global') {
+      const urlUsers = encodeURI(`${BASE_URL}/search/users?q=${query}`);
+      const usersResult = await axiosHelper.axiosGet(urlUsers);
+      return axiosHelper.extractMultipleResults(results).concat(usersResult);
+    } else if (type !== 'users') {
+      return axiosHelper.extractMultipleResults(results);
+    }
+    return results;
   }
 
 };

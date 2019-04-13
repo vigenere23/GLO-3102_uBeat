@@ -55,7 +55,7 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-      <!-- TODO: Remove this div for release 2, these are helper for correction -->
+      <!-- TODO: Remove this div for release 3, these are helper for correction -->
       <v-list id="correctionHelper">
         <v-divider></v-divider>
         <v-list-tile>
