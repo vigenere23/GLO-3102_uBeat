@@ -2,7 +2,7 @@
   <div id="artist-page">
 
     <artist-infos
-      v-if="Object.keys(infos).length"
+      v-if="infos"
       :infos="infos"
       :image="image"
     />
@@ -30,12 +30,20 @@
         :covers="eps"
       />
 
+      <cover-list
+        v-if="similarArtists.length"
+        title="Similar artists"
+        type="artist"
+        :covers="similarArtists"
+      />
+
     </div>
   </div>
 </template>
 
 <script>
-import api from '@/js/api';
+import ubeat from '@/js/apis/ubeat';
+import spotify from '@/js/apis/spotify';
 import ArtistInfos from '@/components/ArtistInfos';
 import CoverList from '@/components/CoverList';
 
@@ -50,9 +58,17 @@ export default {
       albums: [],
       eps: [],
       singles: [],
-      infos: {},
-      image: 'https://i.scdn.co/image/a5c28221d9d309fc94268bd216cdf1ca05a6b0c2'
+      infos: null,
+      spotifyInfos: null,
+      similarArtists: []
     };
+  },
+  computed: {
+    image() {
+      return this.spotifyInfos && this.spotifyInfos.images
+        ? this.spotifyInfos.images[0].url
+        : '';
+    }
   },
   async mounted() {
     this.loadPage(this.$route.params.artistId);
@@ -71,12 +87,20 @@ export default {
       this.albums = [];
       this.eps = [];
       this.singles = [];
+      this.infos = null;
+      this.spotifyInfos = null;
+      this.similarArtists = [];
     },
     async loadArtistInfos(artistId) {
-      this.infos = await api.getArtistInfos(artistId);
+      this.infos = await ubeat.getArtistInfos(artistId);
+      this.spotifyInfos = await spotify.getArtistInfosByName(this.infos.artistName);
+      if (this.spotifyInfos) {
+        const similarArtists = await spotify.getSimilarArtists(this.spotifyInfos.id);
+        this.similarArtists = similarArtists.filter(x => x);
+      }
     },
     async loadAlbums(artistId) {
-      const albums = await api.getAlbumsOfArtist(artistId);
+      const albums = await ubeat.getAlbumsOfArtist(artistId);
 
       albums.forEach((result) => {
         if (/EP$/.test(result.collectionName)) {

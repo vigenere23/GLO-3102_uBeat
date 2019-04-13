@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import api from '@/js/api';
+  import api from '@/js/apis/ubeat';
   import Result from './Result';
 
   export default {

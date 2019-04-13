@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import helper from '@/js/helper';
+import formatter from '@/js/helpers/formatter';
+import styles from '@/js/helpers/styles';
 
 export default {
   name: 'artist-infos',
@@ -19,10 +20,10 @@ export default {
   },
   computed: {
     itunesLink() {
-      return helper.getItunesLink(this.infos.artistLinkUrl);
+      return formatter.itunesLink(this.infos.artistLinkUrl);
     },
     artistImageStyle() {
-      return helper.fadingBackgroundImageStyle(this.image);
+      return styles.fadingBackgroundImageStyle(this.image);
     }
   }
 };
@@ -30,8 +31,8 @@ export default {
 
 <style lang="scss">
 .artist-infos {
-  background-size: 100% auto;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center 25%;
 }
 </style>

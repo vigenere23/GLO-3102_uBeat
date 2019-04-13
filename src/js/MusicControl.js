@@ -59,6 +59,7 @@ export default class SongPlayer {
     if (SongPlayer.instance.listOfSongs.length >= 1) {
       SongPlayer.instance.playSong();
     } else {
+      bus.$emit('checkForRepeat');
       global.audio.currentTime = 0;
       SongPlayer.instance.setBottomBarVisibleOrNot();
     }
@@ -82,6 +83,14 @@ export default class SongPlayer {
       bus.$emit('showBottomBar');
     } else {
       bus.$emit('hideBottomBar');
+    }
+  }
+  shuffle() {
+    for (let i = this.listOfSongs.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const k = this.listOfSongs[i];
+      this.listOfSongs[i] = this.listOfSongs[j];
+      this.listOfSongs[j] = k;
     }
   }
 

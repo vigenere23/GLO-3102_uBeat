@@ -3,7 +3,7 @@
 
     <h3 v-if="title">{{ title }}</h3>
 
-    <ul class="better-scrollbar" :class="{ wrap }" v-if="type === 'year-album'">
+    <ul v-if="type === 'year-album'" class="better-scrollbar" :class="{ wrap }">
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-item
           :name="cover.collectionName"
@@ -15,7 +15,7 @@
       </li>
     </ul>
 
-    <ul class="better-scrollbar" :class="{ wrap }" v-else-if="type === 'playlist'">
+    <ul v-else-if="type === 'playlist'" class="better-scrollbar" :class="{ wrap }">
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-item
           :name="cover.name"
@@ -25,7 +25,7 @@
       </li>
     </ul>
 
-    <ul class="better-scrollbar" :class="{ wrap }" v-else-if="type === 'album'">
+    <ul v-else-if="type === 'album'" class="better-scrollbar" :class="{ wrap }">
       <li v-for="(cover, i) in covers" :key="i">
         <cover-list-item
           :name="cover.collectionName"
@@ -37,12 +37,22 @@
       </li>
     </ul>
 
+    <ul v-else-if="type === 'artist'" class="better-scrollbar" :class="{ wrap }">
+      <li v-for="(cover, i) in covers" :key="i">
+        <cover-list-item
+          :name="cover.name"
+          :link="`/artist/${cover.artistId}`"
+          :image="cover.images[0].url"
+        />
+      </li>
+    </ul>
+
   </div>
 </template>
 
 <script>
 import CoverListItem from '@/components/CoverListItem';
-import helper from '@/js/helper';
+import formatter from '@/js/helpers/formatter';
 
 export default {
   name: 'CoverList',
@@ -60,7 +70,7 @@ export default {
   },
   methods: {
     imageHd(image) {
-      return helper.getImageUrlOfSize(image, 200);
+      return formatter.imageUrlOfSize(image, 200);
     }
   }
 };

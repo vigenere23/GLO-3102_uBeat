@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import helper from '@/js/helper';
-import api from '@/js/api';
+import formatter from '@/js/helpers/formatter';
+import ubeat from '@/js/apis/ubeat';
 import SongPlayer from '@/js/MusicControl';
 import { bus } from '@/main';
 
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     durationText() {
-      return helper.getPrettyDuration(this.track.trackTimeMillis);
+      return formatter.prettyDuration(this.track.trackTimeMillis);
     },
     thisSong() {
       return {
@@ -93,11 +93,11 @@ export default {
     },
     addToPlaylist(playlist) {
       if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === this.track.trackId)) {
-        api.addSongToPlaylist(playlist.id, this.track);
+        ubeat.addSongToPlaylist(playlist.id, this.track);
       }
     },
     async deleteSong() {
-      await api.deleteSongTrackFromPlaylist(this.playlistId, this.track.trackId);
+      await ubeat.deleteSongTrackFromPlaylist(this.playlistId, this.track.trackId);
       this.deleted = true;
       bus.$emit('songDeletedOfPlaylist', this.number);
     }
