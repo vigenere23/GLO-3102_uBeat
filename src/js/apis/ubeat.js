@@ -117,17 +117,23 @@ export default {
     return axiosHelper.axiosPost(url, body);
   },
 
-  async unfollow(targetUserId) {
+  async unfollow(targetUserId, cookie) {
     const url = `${LOGIN}/follow/${targetUserId}`;
-    return axiosHelper.axiosDelete(url);
+    const header = {
+      headers: { Authorization: cookie }
+    };
+    return axiosHelper.axiosDelete(url, header);
   },
 
-  async follow(targetUserId) {
+  async follow(targetUserId, cookie) {
     const url = `${LOGIN}/follow`;
+    const header = {
+      headers: { Authorization: cookie }
+    };
     const body = {
       id: targetUserId,
     };
-    return axiosHelper.axiosPost(url, body);
+    return axiosHelper.axiosPost(url, body, header);
   },
 
   async login(userEmail, userPassword) {

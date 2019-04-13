@@ -60,6 +60,7 @@
       };
     },
     async mounted() {
+      await this.setMyId();
       if (this.$route.params.userTargetId) { // we are on a different user's profile page
         this.userSearchResult = true;
         const infosUser = await ubeat.getUserInfos(this.$route.params.userTargetId);
@@ -81,7 +82,6 @@
       }
       this.loadPlaylists(this.userId);
       this.loadFollowing(this.userId);
-      this.setMyId();
     },
     methods: {
       async loadPlaylists(userId) {
@@ -99,13 +99,12 @@
         }
       },
       goToOtherProfile(otherUserId) {
-        const path = `/profile/${otherUserId}`;
-        this.$router.push({ path });
+        this.$router.push({ path: `/profile/${otherUserId}` });
       },
       async follow() {
         if (!(this.myId === '')) { // if passed therefore there's a cookie
           if (!(this.userId === '' || this.userId === this.myId)) {
-            await ubeat.follow(this.userId);
+            await ubeat.follow(this.userId, this.cookie);
           }
           this.alreadyFollow = true;
         } else {
@@ -115,7 +114,7 @@
       async unfollow() {
         if (!(this.myId === '')) { // if passed therefore there's a cookie
           if (!(this.userId === '' || this.userId === this.myId)) {
-            await ubeat.unfollow(this.userId);
+            await ubeat.unfollow(this.userId, this.cookie);
           }
           this.alreadyFollow = false;
         } else {
