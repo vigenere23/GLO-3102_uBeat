@@ -130,8 +130,7 @@ export default {
   async addSongToPlaylist(playlistId, track) {
     const url = `${API_URL}/playlists/${playlistId}/tracks`;
     return post(url, track);
-  }
-  ,
+  },
 
   async search(type, query) {
     const properType = (type === 'global') ? '' : type;
