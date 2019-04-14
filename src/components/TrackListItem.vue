@@ -29,9 +29,11 @@
         <v-list-tile-action v-else>
           <v-menu offset-x left>
             <v-btn icon ripple slot="activator"><v-icon color="white">add</v-icon></v-btn>
-            <v-list dense>
+            <v-list dense class="blue-grey darken-4" id="listOfPlaylist">
+              <v-list-tile-title id="PlaylistBtnTitle">Playlist</v-list-tile-title>
+              <v-divider dark></v-divider>
               <v-list-tile @click="addToPlaylist(playlist)" v-for="playlist in playlists" :key="playlist.id">
-                <v-list-tile-title>{{ playlist.name }}</v-list-tile-title>
+                <v-list-tile-title id="playlistTitle">{{ playlist.name }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
@@ -110,8 +112,21 @@ export default {
   border-top: solid white 1px;
 }
 
-.song-number, .song-title, .song-duration {
+.song-number, .song-title, .song-duration, #playlistTitle, #PlaylistBtnTitle {
   color: white !important;
+}
+
+#PlaylistBtnTitle {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 67px;
+  font-weight: bold;
+}
+
+#listOfPlaylist {
+  max-width: 215px;
 }
 
 .play-arrow {

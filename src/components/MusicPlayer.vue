@@ -178,6 +178,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 80px;
+    font-weight: bold;
   }
 
   @media (max-width: 450px) {
