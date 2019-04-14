@@ -53,9 +53,17 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 
 Voici les informations importantes pour le livrable 3 du projet :
 
-Page d'authentification et profil de l'utilisateur:
-  - METTRE URL ICIT
-  - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
+Page d'authentification et page d'inscription:
+  - `/login` : La page d'authentification, si un user n'a pas de cookie, il est redirigé sur cette page.
+  - `/signup` : Si un user n'a pas déjà un compte, il peut en créer un. Une fois le compte créé, il est authentifié automatiquement.
+  - `/logout` : Page pour que l'utilisateur courant puisse se déconnecter.
+  - Pour créer un utilisateur ou se connecter à un autre compte, il faut d'abord se déconnecter avec `Logout`. 
+    Ensuite, il suffit de cliquer sur `Login/Signup`.
+  
+Profil d'un utilisateur:
+  - `/profile/:userId` : Affiche le profil de l'utilisateur avec ce `userId`.
+  - `/profileID` : Affiche le user courant. On y retrouve son nom, son email, ses playlists et les personnes qu'il suit.
+  - Pour voir le profil de l'utilisateur courant, il suffit de cliquer sur le bouton `profile`.
   
 Barre de recherche:
   - METTRE URL ICIT
