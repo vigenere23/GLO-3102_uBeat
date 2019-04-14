@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import ubeat from '@/js/apis/ubeat';
+  import * as Cookies from 'js-cookie';
   import ResultArtist from './ResultArtist';
   import ResultAlbum from './ResultAlbum';
   import ResultTrack from './ResultTrack';
@@ -26,7 +28,16 @@
     name: 'Result',
     props: {
       result: {},
-      type: String
-    }
+      type: String,
+    },
+    async mounted() {
+      const cookie = Cookies.get('uBeatCookie');
+      if (!(cookie === null || cookie === undefined || cookie === '')) {
+        const json = await ubeat.tokenInfo(cookie);
+        const userId = json.id;
+        this.playlists = await ubeat.getUserPlaylists(userId);
+        this.playlists.sort();
+      }
+    },
   };
 </script>

@@ -2,7 +2,7 @@
   <div id="playlist-page" class="page blue-grey darken-4">
     <div class="centered-page">
 
-      <div class="centered-title">
+      <div class="centered-title" v-if="loading !== true">
         <h1 class="large-thin-title">Playlists</h1>
         <h2 class="large-thin-subtitle">for {{ user.name }}</h2>
       </div>
@@ -31,9 +31,10 @@
 </template>
 
 <script>
-import ubeat from '@/js/apis/ubeat';
+import Cookies from 'js-cookie';
 import CoverList from '@/components/CoverList';
 import LoadingCenter from '@/components/LoadingCenter';
+import ubeat from '@/js/apis/ubeat';
 
 export default {
   name: 'playlists',
@@ -55,6 +56,16 @@ export default {
   async beforeRouteUpdate(to, from, next) {
     await this.loadPage(to.params.userId);
     next();
+  },
+  async beforeMount() {
+    const cookie = Cookies.get('uBeatCookie');
+    if (!(cookie === null || cookie === undefined || cookie === '')) {
+      const json = await ubeat.tokenInfo(cookie);
+      const userId = json.id;
+      this.$router.push({ path: `/users/${userId}/playlists` });
+    } else {
+      this.$router.push({ path: '/login' });
+    }
   },
   methods: {
     async loadPage(userId) {
@@ -86,6 +97,6 @@ export default {
         }
       }
     }
-  }
+  },
 };
 </script>

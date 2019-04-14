@@ -51,6 +51,39 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 
 ### Livrable 3
 
+Voici les informations importantes pour le livrable 3 du projet :
+
+Page d'authentification et page d'inscription:
+  - `/login` : La page d'authentification, si un user n'a pas de cookie, il est redirigé sur cette page.
+  - `/signup` : Si un user n'a pas déjà un compte, il peut en créer un. Une fois le compte créé, il est authentifié automatiquement.
+  - `/logout` : Page pour que l'utilisateur courant puisse se déconnecter.
+  - Pour créer un utilisateur ou se connecter à un autre compte, il faut d'abord se déconnecter avec `Logout`. 
+    Ensuite, il suffit de cliquer sur `Login/Signup`.
+  
+Profil d'un utilisateur:
+  - `/profile/:userId` : Affiche le profil de l'utilisateur avec ce `userId`.
+  - `/profileID` : Affiche le user courant. On y retrouve son nom, son email, ses playlists et les personnes qu'il suit.
+  - Pour voir le profil de l'utilisateur courant, il suffit de cliquer sur le bouton `profile`.
+  
+Barre de recherche:
+  - METTRE URL ICIT
+  - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
+
+Première fonctionnalité avancée : 
+  - METTRE URL ICIT
+  - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
+
+Deuxième fonctionnalité avancée : Ajout d'une barre pour jouer la musique
+  - Lorsque le bouton pour jouer une chanson est actionné, une barre pour
+  faire jouer la chanson apparait. Cette barre contient une option pour
+  mettre la chanson qui joue actuellement en pause. Si une chanson est ajoutée
+  dans la liste de chanson à jouer (icône à côté du bouton jouer dans la liste
+  de chansons), il est possible de la jouer en appuyant sur le bouton "skip". Il
+  est aussi possible de revenir en arrière. Pour voir cette liste, il suffit de cliquer
+  sur le bouton à l'extrême droite de la barre. Finalement, s'il y a des chansons dans
+  la liste de lectures, il est possible d'activer les boutons "shuffle" et "replay".
+
+
 ### Membres de l'équipe
 
 * Gabriel St-Pierre (GASTP33) (111 178 727)

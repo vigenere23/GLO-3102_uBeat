@@ -35,8 +35,8 @@
             <v-list dense class="listInQueue">
               <v-list-tile-title class="queueList" id="TitleOfListQueue">Next songs</v-list-tile-title>
               <v-divider dark></v-divider>
-              <v-list-tile class="listTileInQueue" v-for="(songs, index) in listOfSongsInQueue.slice(1)">
-                <v-list-tile-title class="queueList" v-on:click="changeSongInQueue(index)">{{index + 1}}) {{ songs.title }}</v-list-tile-title>
+              <v-list-tile class="listTileInQueue" v-for="(song, i) in listOfSongsInQueue.slice(1)" :key="song.id || i">
+                <v-list-tile-title class="queueList" v-on:click="changeSongInQueue(i)">{{i + 1}}) {{ song.title }}</v-list-tile-title>
               </v-list-tile>
               <v-list-tile class="queueList" v-if="listOfSongsInQueue.length <= 1">
                 <v-list-tile-title class="queueList">No next song :(</v-list-tile-title>

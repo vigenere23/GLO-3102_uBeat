@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="'/users/' + user.id">{{user.name}}
+    :to="'/profile/' + user.id">{{user.name}}
   </router-link>
 </template>
 
