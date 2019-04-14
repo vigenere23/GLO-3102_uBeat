@@ -12,10 +12,5 @@
       playlistId: String,
       playlists: Array
     },
-    data() {
-      return {
-        playlists: [],
-      };
-    },
   };
 </script>
