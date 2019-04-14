@@ -25,7 +25,7 @@
     <div id="friends">
       <h3>Following</h3>
       <ul id="following">
-        <li v-for="(value) in following" v-on:click="goToOtherProfile(value.id)">
+        <li v-for="(value, i) in following" :key="value.id || i" v-on:click="goToOtherProfile(value.id)">
           Name: {{ value.name }}
           Email: {{ value.email }}
         </li>
@@ -59,31 +59,38 @@
         cookie: ''
       };
     },
+    async beforeRouteUpdate(to, from, next) {
+      await this.fetchData();
+      next();
+    },
     async mounted() {
-      await this.setMyId();
-      if (this.$route.params.userTargetId) { // we are on a different user's profile page
-        this.userSearchResult = true;
-        const infosUser = await ubeat.getUserInfos(this.$route.params.userTargetId);
-        this.userId = infosUser.id;
-        this.name = infosUser.name;
-        this.email = infosUser.email;
-        this.userSearchResult = true;
-        this.alreadyFollow = await this.determineIfFollowed(this.userId);
-      } else { // we are on our own profile page
-        this.cookie = Cookies.get('uBeatCookie');
-        if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
-          const json = await ubeat.tokenInfo(this.cookie);
-          this.userId = json.id;
-          this.name = json.name;
-          this.email = json.email;
-        } else {
-          this.$router.push({ path: '/login' });
-        }
-      }
-      this.loadPlaylists(this.userId);
-      this.loadFollowing(this.userId);
+      await this.fetchData();
     },
     methods: {
+      async fetchData() {
+        await this.setMyId();
+        if (this.$route.params.userTargetId) { // we are on a different user's profile page
+          this.userSearchResult = true;
+          const infosUser = await ubeat.getUserInfos(this.$route.params.userTargetId);
+          this.userId = infosUser.id;
+          this.name = infosUser.name;
+          this.email = infosUser.email;
+          this.userSearchResult = true;
+          this.alreadyFollow = await this.determineIfFollowed(this.userId);
+        } else { // we are on our own profile page
+          this.cookie = Cookies.get('uBeatCookie');
+          if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
+            const json = await ubeat.tokenInfo(this.cookie);
+            this.userId = json.id;
+            this.name = json.name;
+            this.email = json.email;
+          } else {
+            this.$router.push({ path: '/login' });
+          }
+        }
+        this.loadPlaylists(this.userId);
+        this.loadFollowing(this.userId);
+      },
       async loadPlaylists(userId) {
         this.playlists = await ubeat.getUserPlaylists(userId);
       },
