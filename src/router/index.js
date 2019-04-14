@@ -12,6 +12,7 @@ import LogIn from '../components/LogIn';
 import SignUp from '../components/SignUp';
 import LogOut from '../components/LogOut';
 import Profile from '../components/Profile';
+import profileId from '../components/profileId';
 
 Vue.use(Router);
 
@@ -76,6 +77,11 @@ export default new Router({
       path: '/profile/:userTargetId',
       name: 'userProfile',
       component: Profile
+    },
+    {
+      path: '/profileId',
+      name: 'profileId',
+      component: profileId
     }
   ],
 });
