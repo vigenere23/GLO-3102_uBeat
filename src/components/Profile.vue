@@ -13,7 +13,7 @@
       <v-btn v-on:click="follow" v-else>FOLLOW</v-btn>
     </div>
 
-    <div id="playlists">
+    <div class="profileInfos" id="playlistsInfos">
       <h3>Playlists</h3>
       <cover-list
         type="playlist"
@@ -22,13 +22,13 @@
       ></cover-list>
     </div>
 
-    <div id="friends">
+    <div id="followingInfos">
       <h3>Following</h3>
       <ul id="following">
-        <li v-for="(value, i) in following" :key="value.id || i" v-on:click="goToOtherProfile(value.id)">
-          Name: {{ value.name }}
-          Email: {{ value.email }}
-        </li>
+        <div class="followingElements" v-for="(value, i) in following" :key="value.id || i" v-on:click="goToOtherProfile(value.id)">
+          <span>Name: {{ value.name }}</span>
+          <span>Email: {{ value.email }}</span>
+        </div>
       </ul>
     </div>
   </div>
@@ -106,7 +106,8 @@
         }
       },
       goToOtherProfile(otherUserId) {
-        this.$router.push({ path: `/profile/${otherUserId}` });
+        const path = `/profile/${otherUserId}`;
+        this.$router.push({ name: path });
       },
       async follow() {
         if (!(this.myId === '')) { // if passed therefore there's a cookie
@@ -146,5 +147,28 @@
 </script>
 
 <style scoped>
+
+  .profileInfos {
+    margin-left: 5vh;
+    margin-top: 1vh;
+  }
+
+  .profileInfos > h3 {
+    margin-top: 5vw;
+    margin-bottom: 2vw;
+  }
+
+  .followingElements {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1vw;
+    margin-left: 5vh;
+  }
+
+  #followingInfos  > h3{
+    margin-left: 5vh;
+    margin-bottom: 2vw;
+  }
 
 </style>
