@@ -29,9 +29,9 @@ export default {
     }
   },
 
-  async axiosDelete(url) {
+  async axiosDelete(url, header) {
     try {
-      const response = await axios.delete(url);
+      const response = await axios.delete(url, header);
       return response.data;
     } catch (err) {
       return null;

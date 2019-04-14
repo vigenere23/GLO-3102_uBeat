@@ -122,8 +122,8 @@
         if (!(this.myId === '')) { // if passed therefore there's a cookie
           if (!(this.userId === '' || this.userId === this.myId)) {
             await ubeat.unfollow(this.userId, this.cookie);
+            this.alreadyFollow = false;
           }
-          this.alreadyFollow = false;
         } else {
           this.$router.push({ path: '/login' });
         }
