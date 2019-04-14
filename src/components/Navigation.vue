@@ -123,7 +123,7 @@
         },
         navigationDrawerItems: [
           { name: 'Home', icon: 'dashboard', path: '/' },
-          { name: 'Playlists', icon: 'queue_music', path: '/users/5c81361ad6f63a0004c26542/playlists' }
+          { name: 'Playlists', icon: 'queue_music', path: '/dynamicPlaylists' }
         ],
         correctionHelper: [
           { name: 'Artist', icon: 'dashboard', path: '/artist/290242959' },

@@ -106,8 +106,7 @@
         }
       },
       goToOtherProfile(otherUserId) {
-        const path = `/profile/${otherUserId}`;
-        this.$router.push({ name: path });
+        this.$router.push({ path: `/profile/${otherUserId}` });
       },
       async follow() {
         if (!(this.myId === '')) { // if passed therefore there's a cookie

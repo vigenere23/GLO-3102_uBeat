@@ -13,6 +13,7 @@ import SignUp from '../components/SignUp';
 import LogOut from '../components/LogOut';
 import Profile from '../components/Profile';
 import profileId from '../components/profileId';
+import dynamicPlaylists from '../components/dynamicPlaylists';
 
 Vue.use(Router);
 
@@ -82,6 +83,11 @@ export default new Router({
       path: '/profileId',
       name: 'profileId',
       component: profileId
+    },
+    {
+      path: '/dynamicPlaylists',
+      name: 'rePlaylists',
+      component: dynamicPlaylists
     }
   ],
 });
