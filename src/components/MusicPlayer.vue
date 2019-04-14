@@ -30,7 +30,7 @@
           <v-btn icon ripple class="blue-grey darken-4" v-show="this.repeatBtn" v-on:click="repeatBtn = false">
             <v-icon color="white">repeat</v-icon>
           </v-btn>
-          <v-menu nudge-left="200px" nudge-top="200px">
+          <v-menu nudge-left="200px" nudge-top="200px" transition="slide-x-transition">
             <v-btn icon ripple slot="activator" v-on:click="chargeQueue"><v-icon color="white">queue_music</v-icon></v-btn>
             <v-list dense class="listInQueue">
               <v-list-tile-title class="queueList" id="TitleOfListQueue">Next songs</v-list-tile-title>

@@ -27,7 +27,7 @@
           </v-btn>
         </v-list-tile-action>
         <v-list-tile-action v-else>
-          <v-menu offset-x left>
+          <v-menu offset-x left transition="slide-x-transition">
             <v-btn icon ripple slot="activator"><v-icon color="white">add</v-icon></v-btn>
             <v-list dense class="blue-grey darken-4" id="listOfPlaylist">
               <v-list-tile-title id="PlaylistBtnTitle">Playlist</v-list-tile-title>
