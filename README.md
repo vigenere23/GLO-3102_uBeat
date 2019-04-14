@@ -51,6 +51,31 @@ Voici quelques informations importante concernant le livrable 2 du projet :
 
 ### Livrable 3
 
+Voici les informations importantes pour le livrable 3 du projet :
+
+Page d'authentification et profil de l'utilisateur:
+  - METTRE URL ICIT
+  - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
+  
+Barre de recherche:
+  - METTRE URL ICIT
+  - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
+
+Première fonctionnalité avancée : 
+  - METTRE URL ICIT
+  - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
+
+Deuxième fonctionnalité avancée : Ajout d'une barre pour jouer la musique
+  - Lorsque le bouton pour jouer une chanson est actionné, une barre pour
+  faire jouer la chanson apparait. Cette barre contient une option pour
+  mettre la chanson qui joue actuellement en pause. Si une chanson est ajoutée
+  dans la liste de chanson à jouer (icône à côté du bouton jouer dans la liste
+  de chansons), il est possible de la jouer en appuyant sur le bouton "skip". Il
+  est aussi possible de revenir en arrière. Pour voir cette liste, il suffit de cliquer
+  sur le bouton à l'extrême droite de la barre. Finalement, s'il y a des chansons dans
+  la liste de lectures, il est possible d'activer les boutons "shuffle" et "replay".
+
+
 ### Membres de l'équipe
 
 * Gabriel St-Pierre (GASTP33) (111 178 727)

@@ -8,7 +8,14 @@
   export default {
     name: 'ResultTrack',
     props: {
-      track: {}
-    }
+      track: {},
+      playlistId: String,
+      playlists: Array
+    },
+    data() {
+      return {
+        playlists: [],
+      };
+    },
   };
 </script>
