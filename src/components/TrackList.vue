@@ -7,11 +7,13 @@
       Songs
       <v-spacer></v-spacer>
       <v-list-tile-action>
-        <v-menu offset-x left v-if="listType !== 'playlist'">
+        <v-menu offset-x left transition="slide-x-transition" v-if="listType !== 'playlist'">
           <v-btn ripple slot="activator">Add All</v-btn>
-          <v-list dense>
+          <v-list dense class="blue-grey darken-4" id="listOfPlaylist">
+            <v-list-tile-title id="PlaylistBtnTitle">Playlist</v-list-tile-title>
+            <v-divider dark></v-divider>
             <v-list-tile @click="addAllTracksToPlaylist(playlist)" v-for="playlist in playlists" :key="playlist.id">
-              <v-list-tile-title>{{ playlist.name }}</v-list-tile-title>
+              <v-list-tile-title id="playlistTitle">{{ playlist.name }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>

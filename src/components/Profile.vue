@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="profil">
     <div class="profileInfos">
       <h1> {{name}}</h1>
     </div>
@@ -8,7 +8,7 @@
       <h2> {{email}}</h2>
     </div>
 
-    <div v-if="userSearchResult">
+    <div v-if="userSearchResult" id="followBtn">
       <v-btn v-on:click="unfollow" v-if="alreadyFollow">UNFOLLOW</v-btn>
       <v-btn v-on:click="follow" v-else>FOLLOW</v-btn>
     </div>
@@ -18,18 +18,21 @@
       <cover-list
         type="playlist"
         :covers="playlists"
-        :wrap="true"
+        :wrap="false"
       ></cover-list>
     </div>
 
     <div id="followingInfos">
       <h3>Following</h3>
-      <ul id="following">
+      <div id="following">
         <div class="followingElements" v-for="(value, i) in following" :key="value.id || i" v-on:click="goToOtherProfile(value.id)">
+          <v-avatar size="75px" id="avatar">
+            <img src="/static/generic-avatar.png">
+          </v-avatar>
           <span>Name: {{ value.name }}</span>
           <span>Email: {{ value.email }}</span>
         </div>
-      </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -148,8 +151,7 @@
 <style scoped>
 
   .profileInfos {
-    margin-left: 5vh;
-    margin-top: 1vh;
+    margin-top: 30px;
   }
 
   .profileInfos > h3 {
@@ -162,12 +164,32 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1vw;
-    margin-left: 5vh;
+    margin-right: 5vh;
+    width: 150px;
   }
 
   #followingInfos  > h3{
-    margin-left: 5vh;
     margin-bottom: 2vw;
+  }
+
+  #following {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  #avatar {
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 15px;
+  }
+
+  #followBtn {
+    margin-top: 1vh;
+  }
+
+  #profil {
+    margin: 30px;
   }
 
 </style>
