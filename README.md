@@ -73,13 +73,9 @@ Première fonctionnalité avancée :
   - METTRE URL ICIT
   - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
 
-Deuxième fonctionnalité avancée : Ajout d'une barre pour jouer la musique
-  - Lorsque le bouton pour jouer une chanson est actionné, une barre pour
-  faire jouer la chanson apparait. Cette barre contient une option pour
-  mettre la chanson qui joue actuellement en pause. Si une chanson est ajoutée
-  dans la liste de chanson à jouer (icône à côté du bouton jouer dans la liste
-  de chansons), il est possible de la jouer en appuyant sur le bouton "skip". Il
-  est aussi possible de revenir en arrière. Pour voir cette liste, il suffit de cliquer
+Deuxième fonctionnalité avancée (complexité acceptée par les professeurs) : Ajout d'une barre pour jouer la musique
+  - Lorsque le bouton pour jouer une chanson est actionné, une nouvelle barre de navigation apparait (elle persiste même si      l'utilisateur change de page). Cette barre contient une option pour mettre la chanson qui joue actuellement en pause. Une chanson peut être ajoutée dans la liste de chanson à jouer (icône à côté du bouton jouer dans la liste
+  de chansons). Ilest aussi possible de naviguer dans les chansons suivantes et précédentes avec les boutons. Pour voir cette liste, il suffit de cliquer
   sur le bouton à l'extrême droite de la barre. Finalement, s'il y a des chansons dans
   la liste de lectures, il est possible d'activer les boutons "shuffle" et "replay".
 
