@@ -123,10 +123,10 @@ export default {
       params: { q: query }
     };
     const properType = (type === 'global') ? '' : type;
-    const url = `${BASE_URL}/search/${properType}`;
+    const url = encodeURI(`${BASE_URL}/search/${properType}`);
     const results = await axiosHelper.axiosGet(url, options);
     if (type === 'global') {
-      const urlUsers = `${BASE_URL}/search/users`;
+      const urlUsers = encodeURI(`${BASE_URL}/search/users`);
       const usersResult = await axiosHelper.axiosGet(urlUsers, options);
       for (let i = 0; i < usersResult.length; i += 1) {
         usersResult[i].wrapperType = 'user';
