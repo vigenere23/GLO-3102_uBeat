@@ -1,33 +1,34 @@
 <template>
   <div>
     <v-list
+      :two-line="$route.params.type === 'albums'"
+      class="blue-grey darken-4"
       dark>
-      <v-subheader inset>Artists</v-subheader>
+      <v-subheader v-if="this.$route.params.type === 'global'">Artists</v-subheader>
       <v-list-tile
-        v-for="(result, i) in artistResults"
-        :key="result.id || i"
-      >
+        v-for="result in results.filter((item) => {return item.wrapperType.match('artist')})"
+        :key="result.id">
         <result :result="result" type="type"></result>
       </v-list-tile>
-      <v-subheader inset>Albums</v-subheader>
+      <v-subheader v-if="this.$route.params.type === 'global'">Albums</v-subheader>
       <v-list-tile
-        v-for="(result, i) in collectionResults"
-        :key="result.id || i"
-      >
+        v-for="result in results.filter((item) => {return item.wrapperType.match('collection')})"
+        :key="result.id">
+        <img
+          v-if="$route.params.type === 'albums'"
+          :src="result.artworkUrl60">
         <result :result="result" type="type"></result>
       </v-list-tile>
-      <v-subheader inset>Tracks</v-subheader>
+      <v-subheader v-if="this.$route.params.type === 'global'">Tracks</v-subheader>
       <v-list-tile
-        v-for="(result, i) in trackResults"
-        :key="result.id || i"
-      >
+        v-for="result in results.filter((item) => {return item.wrapperType.match('track')})"
+        :key="result.id">
         <result :result="result" type="type"></result>
       </v-list-tile>
-      <v-subheader inset>Users</v-subheader>
+      <v-subheader v-if="this.$route.params.type === 'global'">Users</v-subheader>
       <v-list-tile
-        v-for="(result, i) in otherResults"
-        :key="result.id || i"
-      >
+        v-for="result in results.filter((item) => {return item.wrapperType.match('user')})"
+        :key="result.id">
         <result :result="result" type="type"></result>
       </v-list-tile>
     </v-list>
@@ -35,26 +36,12 @@
 </template>
 
 <script>
-  import Cookies from 'js-cookie';
+  import * as Cookies from 'js-cookie';
   import ubeat from '@/js/apis/ubeat';
   import Result from './Result';
 
   export default {
     components: { Result },
-    computed: {
-      artistResults() {
-        return this.results.filter(item => item.wrapperType.match('artist'));
-      },
-      collectionResults() {
-        return this.results.filter(item => item.wrapperType.match('collection'));
-      },
-      trackResults() {
-        return this.results.filter(item => item.wrapperType.match('track'));
-      },
-      otherResults() {
-        return this.results.filter(item => !item.wrapperType);
-      }
-    },
     async mounted() {
       this.cookie = Cookies.get('uBeatCookie');
       if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
@@ -76,8 +63,19 @@
       if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
         this.type = this.$route.params.type;
         this.results = await ubeat.search(to.params.type, to.params.query, this.cookie);
+      } else {
+        this.$router.push({ path: '/login' });
       }
       next();
     }
   };
 </script>
+
+<style scoped>
+  #SignUp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+</style>

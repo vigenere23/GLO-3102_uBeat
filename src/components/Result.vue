@@ -1,7 +1,7 @@
 <template>
   <div id="results">
     <div v-if="result.wrapperType === 'artist'" id="artist-result">
-      <ResultArtist :v-if="result.wrapperType === 'artist'" :artist="result"></ResultArtist>
+      <ResultArtist :artist="result"></ResultArtist>
     </div>
     <div v-if="result.wrapperType === 'collection'" id="album-result">
       <ResultAlbum :album="result"></ResultAlbum>
@@ -9,7 +9,7 @@
     <div v-if="result.wrapperType === 'track'" id="track-result">
       <ResultTrack :track="result"></ResultTrack>
     </div>
-    <div v-if="result.wrapperType === undefined" id="user-result">
+    <div v-if="result.wrapperType === 'user'" id="user-result">
       <ResultUser :user="result"></ResultUser>
     </div>
   </div>

@@ -98,6 +98,16 @@ export default {
     const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
     return axiosHelper.axiosPost(url, track, options);
   },
+  async addAlbumToPlaylist(playlistId, albumId) {
+    const tracks = this.getAlbumTracks(albumId);
+    const url = `${BASE_URL}/playlists/${playlistId}/tracks`;
+    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    tracks.then((resolvedTracks) => {
+      resolvedTracks.forEach((resolvedTrack) => {
+        axiosHelper.axiosPost(url, resolvedTrack, params);
+      });
+    });
+  },
   async searchSingleArtistByName(name) {
     const url = `${BASE_URL}/search/artists`;
     const options = {
@@ -113,15 +123,21 @@ export default {
       params: { q: query }
     };
     const properType = (type === 'global') ? '' : type;
-    const url = `${BASE_URL}/search/${properType}`;
+    const url = encodeURI(`${BASE_URL}/search/${properType}`);
     const results = await axiosHelper.axiosGet(url, options);
     if (type === 'global') {
-      const urlUsers = `${BASE_URL}/search/users`;
+      const urlUsers = encodeURI(`${BASE_URL}/search/users`);
       const usersResult = await axiosHelper.axiosGet(urlUsers, options);
+      for (let i = 0; i < usersResult.length; i += 1) {
+        usersResult[i].wrapperType = 'user';
+      }
       return axiosHelper.extractMultipleResults(results)
         .concat(usersResult);
     } else if (type !== 'users') {
       return axiosHelper.extractMultipleResults(results);
+    }
+    for (let i = 0; i < results.length; i += 1) {
+      results[i].wrapperType = 'user';
     }
     return results;
   },

@@ -1,6 +1,6 @@
 <template>
-  <router-link
-    :to="'/artist/' + artist.artistId">{{artist.artistName}} - {{artist.primaryGenreName}}
+  <router-link class="white--text"
+    :to="'/artist/' + artist.artistId">{{artist.artistName}}
   </router-link>
 </template>
 
