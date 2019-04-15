@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="profil">
     <div class="profileInfos">
       <h1> {{name}}</h1>
     </div>
@@ -15,10 +15,11 @@
 
     <div class="profileInfos" id="playlistsInfos">
       <h3>Playlists</h3>
+
       <cover-list
         type="playlist"
         :covers="playlists"
-        :wrap="true"
+        :wrap="false"
       ></cover-list>
     </div>
 
@@ -150,8 +151,7 @@
 <style scoped>
 
   .profileInfos {
-    margin-left: 5vh;
-    margin-top: 1vh;
+    margin-top: 30px;
   }
 
   .profileInfos > h3 {
@@ -164,12 +164,11 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1vw;
-    margin-left: 5vh;
+    margin-right: 5vh;
     width: 150px;
   }
 
   #followingInfos  > h3{
-    margin-left: 5vh;
     margin-bottom: 2vw;
   }
 
@@ -177,13 +176,16 @@
     display: flex;
     flex-direction: row;
     overflow-x: auto;
-    margin-right: 30px;
   }
 
   #avatar {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 15px;
+  }
+
+  #profil {
+    margin: 30px;
   }
 
 </style>
