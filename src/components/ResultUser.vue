@@ -15,6 +15,7 @@
 
 <script>
   import ubeat from '@/js/apis/ubeat';
+  import Cookies from 'js-cookie';
 
   export default {
     name: 'ResultUser',
@@ -27,7 +28,7 @@
     },
     methods: {
       async follow() {
-        await ubeat.follow(this.user.id, this.cookie);
+        await ubeat.follow(this.user.id, Cookies.get('uBeatCookie'));
       },
     },
   };

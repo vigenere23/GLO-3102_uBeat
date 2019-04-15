@@ -27,7 +27,7 @@
       </v-list-tile>
       <v-subheader v-if="this.$route.params.type === 'global'">Users</v-subheader>
       <v-list-tile
-        v-for="result in results.filter((item) => {return item.wrapperType.match('user')})"
+        v-for="result in results.filter((item) => {return 'user'.match(item.wrapperType)})"
         :key="result.id">
         <result :result="result" type="type"></result>
       </v-list-tile>
