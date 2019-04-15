@@ -4,22 +4,30 @@
       dark>
       <v-subheader inset>Artists</v-subheader>
       <v-list-tile
-        v-for="result in results.filter(function(item) {return item.wrapperType.match('artist')})">
+        v-for="(result, i) in artistResults"
+        :key="result.id || i"
+      >
         <result :result="result" type="type"></result>
       </v-list-tile>
       <v-subheader inset>Albums</v-subheader>
       <v-list-tile
-        v-for="result in results.filter(function(item) {return item.wrapperType.match('collection')})">
+        v-for="(result, i) in collectionResults"
+        :key="result.id || i"
+      >
         <result :result="result" type="type"></result>
       </v-list-tile>
       <v-subheader inset>Tracks</v-subheader>
       <v-list-tile
-        v-for="result in results.filter(function(item) {return item.wrapperType.match('track')})">
+        v-for="(result, i) in trackResults"
+        :key="result.id || i"
+      >
         <result :result="result" type="type"></result>
       </v-list-tile>
       <v-subheader inset>Users</v-subheader>
       <v-list-tile
-        v-for="result in results.filter(function(item) {return item.wrapperType === undefined})">
+        v-for="(result, i) in otherResults"
+        :key="result.id || i"
+      >
         <result :result="result" type="type"></result>
       </v-list-tile>
     </v-list>
@@ -27,12 +35,26 @@
 </template>
 
 <script>
-  import * as Cookies from 'js-cookie';
+  import Cookies from 'js-cookie';
   import ubeat from '@/js/apis/ubeat';
   import Result from './Result';
 
   export default {
     components: { Result },
+    computed: {
+      artistResults() {
+        return this.results.filter(item => item.wrapperType.match('artist'));
+      },
+      collectionResults() {
+        return this.results.filter(item => item.wrapperType.match('collection'));
+      },
+      trackResults() {
+        return this.results.filter(item => item.wrapperType.match('track'));
+      },
+      otherResults() {
+        return this.results.filter(item => !item.wrapperType);
+      }
+    },
     async mounted() {
       this.cookie = Cookies.get('uBeatCookie');
       if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
