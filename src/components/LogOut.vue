@@ -25,7 +25,7 @@
       },
       methods: {
         async redirect() {
-          Cookies.set('uBeatCookie', '');
+          Cookies.remove('uBeatCookie');
           this.$router.push('/login');
         }
       },
