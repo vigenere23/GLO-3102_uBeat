@@ -43,8 +43,6 @@
     methods: {
       addToPlaylist(playlist) {
         if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === this.track.trackId)) {
-          console.log(playlist);
-          console.log(this.track.trackId);
           ubeat.addSongToPlaylist(playlist.id, this.track);
         }
       }

@@ -1,30 +1,44 @@
 import axios from 'axios';
-import qs from 'qs';
+import Cookies from 'js-cookie';
+import router from '@/router/index';
 
 export default {
-  async axiosGet(url, header = {}) {
+  async axiosGet(url, header) {
     try {
       const response = await axios.get(url, header);
       return response.data;
     } catch (err) {
+      if (err.response.status === 401) {
+        Cookies.remove('uBeatCookie');
+        router.push('/login');
+      }
       return null;
     }
   },
 
   async axiosPost(url, body, options) {
     try {
-      const response = await axios.post(url, qs.stringify(body), options);
+      const response = await axios.post(url, body, options);
       return response.data;
     } catch (err) {
+      if (err.response.status === 401) {
+        Cookies.remove('uBeatCookie');
+        router.push('/login');
+      }
       return null;
     }
   },
 
   async axiosPut(url, body) {
     try {
-      const response = await axios.put(url, body);
+      const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+      const response = await axios.put(url, body, options);
       return response.data;
     } catch (err) {
+      if (err.response.status === 401) {
+        Cookies.remove('uBeatCookie');
+        router.push('/login');
+      }
       return null;
     }
   },
@@ -34,6 +48,10 @@ export default {
       const response = await axios.delete(url, header);
       return response.data;
     } catch (err) {
+      if (err.response.status === 401) {
+        Cookies.remove('uBeatCookie');
+        router.push('/login');
+      }
       return null;
     }
   },
