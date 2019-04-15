@@ -7,13 +7,13 @@
       <v-subheader v-if="this.$route.params.type === 'global'">Artists</v-subheader>
       <v-list-tile
         v-for="result in results.filter(function(item) {return item.wrapperType.match('artist')})"
-        :key="result.id || i">
+        :key="result.id">
         <result :result="result" type="type"></result>
       </v-list-tile>
       <v-subheader v-if="this.$route.params.type === 'global'">Albums</v-subheader>
       <v-list-tile
         v-for="result in results.filter(function(item) {return item.wrapperType.match('collection')})"
-        :key="result.id || i">
+        :key="result.id">
         <img
           v-if="$route.params.type === 'albums'"
           :src="result.artworkUrl60">
@@ -22,13 +22,13 @@
       <v-subheader v-if="this.$route.params.type === 'global'">Tracks</v-subheader>
       <v-list-tile
         v-for="result in results.filter(function(item) {return item.wrapperType.match('track')})"
-        :key="result.id || i">
+        :key="result.id">
         <result :result="result" type="type"></result>
       </v-list-tile>
       <v-subheader v-if="this.$route.params.type === 'global'">Users</v-subheader>
       <v-list-tile
         v-for="result in results.filter(function(item) {return item.wrapperType.match('user')})"
-        :key="result.id || i">
+        :key="result.id">
         <result :result="result" type="type"></result>
       </v-list-tile>
     </v-list>
