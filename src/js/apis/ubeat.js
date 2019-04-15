@@ -19,59 +19,59 @@ function filterPlaylistsByUser(playlists, userId) {
 export default {
   async getAlbumsOfArtist(artistId) {
     const url = `${BASE_URL}/artists/${artistId}/albums`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    const data = await axiosHelper.axiosGet(url, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    const data = await axiosHelper.axiosGet(url, options);
     const albums = axiosHelper.extractMultipleResults(data);
     return sortAlbumsDesc(albums);
   },
 
   async getArtistInfos(artistId) {
     const url = `${BASE_URL}/artists/${artistId}`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    const data = await axiosHelper.axiosGet(url, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    const data = await axiosHelper.axiosGet(url, options);
     return axiosHelper.extractSingleResult(data);
   },
 
   async getUserInfos(userId) {
     const url = `${BASE_URL}/users/${userId}`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    return axiosHelper.axiosGet(url, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    return axiosHelper.axiosGet(url, options);
   },
 
   async getUserPlaylists(userId) {
     const url = `${BASE_URL}/playlists`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    const data = await axiosHelper.axiosGet(url, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    const data = await axiosHelper.axiosGet(url, options);
     return filterPlaylistsByUser(data, userId);
   },
 
   async getAlbumInfos(albumId) {
     const url = `${BASE_URL}/albums/${albumId}`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    const data = await axiosHelper.axiosGet(url, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    const data = await axiosHelper.axiosGet(url, options);
     return axiosHelper.extractSingleResult(data);
   },
 
   async getAlbumTracks(albumId) {
     const url = `${BASE_URL}/albums/${albumId}/tracks`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    const data = await axiosHelper.axiosGet(url, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    const data = await axiosHelper.axiosGet(url, options);
     return axiosHelper.extractMultipleResults(data);
   },
 
   async getPlaylistInfosAndTracks(playlistId) {
     const url = `${BASE_URL}/playlists/${playlistId}`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    return axiosHelper.axiosGet(url, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    return axiosHelper.axiosGet(url, options);
   },
 
   async addPlaylist(newName, newOwner) {
     const url = `${BASE_URL}/playlists`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
     return axiosHelper.axiosPost(url, {
       name: newName,
       owner: newOwner,
-    }, params);
+    }, options);
   },
 
   async deletePlaylists(playlistId) {
@@ -90,29 +90,35 @@ export default {
 
   async deleteSongTrackFromPlaylist(playlistId, songId) {
     const url = `${BASE_URL}/playlists/${playlistId}/tracks/${songId}`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    return axiosHelper.axiosDelete(url, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    return axiosHelper.axiosDelete(url, options);
   },
 
   async addSongToPlaylist(playlistId, track) {
     const url = `${BASE_URL}/playlists/${playlistId}/tracks`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    return axiosHelper.axiosPost(url, track, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    return axiosHelper.axiosPost(url, track, options);
   },
   async searchSingleArtistByName(name) {
     const url = `${BASE_URL}/search/artists`;
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie'), q: name, limit: 1 } };
-    return axiosHelper.axiosGet(url, { params });
+    const options = {
+      headers: { Authorization: Cookies.get('uBeatCookie') },
+      params: { q: name, limit: 1 }
+    };
+    return axiosHelper.axiosGet(url, options);
   },
 
   async search(type, query) {
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    const options = {
+      headers: { Authorization: Cookies.get('uBeatCookie') },
+      params: { q: query }
+    };
     const properType = (type === 'global') ? '' : type;
-    const url = encodeURI(`${BASE_URL}/search/${properType}?q=${query}`);
-    const results = await axiosHelper.axiosGet(url, params);
+    const url = `${BASE_URL}/search/${properType}`;
+    const results = await axiosHelper.axiosGet(url, options);
     if (type === 'global') {
-      const urlUsers = encodeURI(`${BASE_URL}/search/users?q=${query}`);
-      const usersResult = await axiosHelper.axiosGet(urlUsers, params);
+      const urlUsers = `${BASE_URL}/search/users`;
+      const usersResult = await axiosHelper.axiosGet(urlUsers, options);
       return axiosHelper.extractMultipleResults(results)
         .concat(usersResult);
     } else if (type !== 'users') {
@@ -128,8 +134,8 @@ export default {
       email: userEmail,
       password: userPassword
     };
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    return axiosHelper.axiosPost(url, body, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    return axiosHelper.axiosPost(url, body, options);
   },
 
   async unfollow(targetUserId, cookie) {
@@ -157,8 +163,8 @@ export default {
       email: userEmail,
       password: userPassword
     };
-    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-    return axiosHelper.axiosPost(url, body, params);
+    const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    return axiosHelper.axiosPost(url, body, options);
   },
 
   async tokenInfo(cookie) {

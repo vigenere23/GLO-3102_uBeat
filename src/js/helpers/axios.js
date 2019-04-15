@@ -1,5 +1,4 @@
 import axios from 'axios';
-import qs from 'qs';
 import Cookies from 'js-cookie';
 
 export default {
@@ -14,7 +13,7 @@ export default {
 
   async axiosPost(url, body, options) {
     try {
-      const response = await axios.post(url, qs.stringify(body), options);
+      const response = await axios.post(url, body, options);
       return response.data;
     } catch (err) {
       return null;
@@ -23,8 +22,8 @@ export default {
 
   async axiosPut(url, body) {
     try {
-      const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
-      const response = await axios.put(url, body, params);
+      const options = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+      const response = await axios.put(url, body, options);
       return response.data;
     } catch (err) {
       return null;
