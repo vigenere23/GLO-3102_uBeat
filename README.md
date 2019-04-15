@@ -66,18 +66,13 @@ Profil d'un utilisateur:
   - Pour voir le profil de l'utilisateur courant, il suffit de cliquer sur le bouton `profile`.
   
 Barre de recherche:
-  - METTRE URL ICIT
-  - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
+  - La barre de recherche est présente en permanence en haut de l'application web. Pour l'utiliser, l'utilisateur n'a qu'à écrire ce qu'il recherche dans la section réservée à cet effet. L'utilisateur peut alors choisir entre une recherche globale ou une recherche spécifique (artistes, albums, chansons, utilisateurs). La recherche globale mène à une page de résultats globale, où les résultats sont groupés par type. Au niveau de cette même page, un bouton est présent à côté des résultats d'albums et de chansons pour les ajouter à une liste de lecture et un bouton est présent à côté des résultats d'utilisateurs pour commencer à en suivre. En cliquant sur un résultat, l'utilisateur est alors redirigé à la page en question. Lorsqu'un utilisateur effectue une recherche spécifique, il arrive sur une page de résultats spécifiques, où une étiquette indique le type des résultats. Notamment, les couvertures des albums sont affichées lors d'une recherche spécifique au niveau des albums. 
 
-Première fonctionnalité avancée : 
-  - METTRE URL ICIT
-  - EXPLIQUER COMMENT S'Y RENDRE AVEC PITON
+Première fonctionnalité avancée : Afficher une image pour l’artiste/groupe et obtenir des suggestions d’artistes similaires à un artiste 
+  - Lorsque l'on accède à une page d'artiste, que ce soit avec le bouton d'accès rapide `Artist` présent au niveau du HELPER ou bien en passant par la barre de recherche de la façon présentée plus haut, il est possible d'accéder à une page d'un artiste quelconque. IMPORTANT! Pour que cette fonctionnalité soit fonctionnelle, il est nécessaire de suivre les étapes présentées plus haut au niveau du démarrage du serveur accédant à l'API de Spotify. À ce niveau, nous pouvons voir en arrière-plan une image pour l'artiste/groupe. Cette fonctionnalité ne constituant pas une fonctionnalité complète en elle-même, un un autre ajout a été implémenté. En effet, il est possible, toujours sur la même page, de voir des suggestions d'artistes similaires et d'y être redirigé à la guise de l'utilisateur.  
 
 Deuxième fonctionnalité avancée (complexité acceptée par les professeurs) : Ajout d'une barre pour jouer la musique
-  - Lorsque le bouton pour jouer une chanson est actionné, une nouvelle barre de navigation apparait (elle persiste même si      l'utilisateur change de page). Cette barre contient une option pour mettre la chanson qui joue actuellement en pause. Une chanson peut être ajoutée dans la liste de chanson à jouer (icône à côté du bouton jouer dans la liste
-  de chansons). Ilest aussi possible de naviguer dans les chansons suivantes et précédentes avec les boutons. Pour voir cette liste, il suffit de cliquer
-  sur le bouton à l'extrême droite de la barre. Finalement, s'il y a des chansons dans
-  la liste de lectures, il est possible d'activer les boutons "shuffle" et "replay".
+  - Lorsque le bouton pour jouer une chanson est actionné, une nouvelle barre de navigation apparait au bas de la page(elle persiste même si l'utilisateur change de page). Cette barre contient une option pour mettre la chanson qui joue actuellement en pause. Une chanson peut être ajoutée dans la liste de chanson à jouer (icône à côté du bouton jouer dans la liste de chansons). Il est aussi possible de naviguer dans les chansons suivantes et précédentes avec les boutons "next" et "previous". Pour voir cette liste, il suffit de cliquer sur le bouton à l'extrême droite de la barre; il est alors possible de jouer la chanson qui convient le mieux. Finalement, s'il y plusieurs chansons dans la liste, il est possible d'activer les boutons "shuffle" et "replay". 
 
 
 ### Membres de l'équipe
