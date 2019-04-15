@@ -1,7 +1,7 @@
 import axiosHelper from '@/js/helpers/axios';
 import Cookies from 'js-cookie';
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://ubeat.herokuapp.com';
 
 function sortAlbumsDesc(albums) {
   return albums.sort((album1, album2) => {
