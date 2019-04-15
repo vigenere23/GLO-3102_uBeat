@@ -1,8 +1,8 @@
 import axiosHelper from '@/js/helpers/axios';
 import Cookies from 'js-cookie';
 
-const BASE_URL = 'https://ubeat.herokuapp.com';
-const LOGIN = 'https://ubeat.herokuapp.com';
+const BASE_URL = 'http://localhost:3000';
+const LOGIN = 'http://localhost:3000';
 
 function sortAlbumsDesc(albums) {
   return albums.sort((album1, album2) => {
@@ -87,24 +87,31 @@ export default {
       owner: newOwner,
     });
   },
-
   async deleteSongTrackFromPlaylist(playlistId, songId) {
     const url = `${BASE_URL}/playlists/${playlistId}/tracks/${songId}`;
     const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
     return axiosHelper.axiosDelete(url, params);
   },
-
   async addSongToPlaylist(playlistId, track) {
     const url = `${BASE_URL}/playlists/${playlistId}/tracks`;
     const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
     return axiosHelper.axiosPost(url, track, params);
+  },
+  async addAlbumToPlaylist(playlistId, albumId) {
+    const tracks = this.getAlbumTracks(albumId);
+    const url = `${BASE_URL}/playlists/${playlistId}/tracks`;
+    const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
+    tracks.then((resolvedTracks) => {
+      resolvedTracks.forEach((resolvedTrack) => {
+        axiosHelper.axiosPost(url, resolvedTrack, params);
+      });
+    });
   },
   async searchSingleArtistByName(name) {
     const url = `${BASE_URL}/search/artists`;
     const params = { headers: { Authorization: Cookies.get('uBeatCookie'), q: name, limit: 1 } };
     return axiosHelper.axiosGet(url, { params });
   },
-
   async search(type, query) {
     const params = { headers: { Authorization: Cookies.get('uBeatCookie') } };
     const properType = (type === 'global') ? '' : type;
@@ -113,6 +120,9 @@ export default {
     if (type === 'global') {
       const urlUsers = encodeURI(`${BASE_URL}/search/users?q=${query}`);
       const usersResult = await axiosHelper.axiosGet(urlUsers, params);
+      for (let i = 0; i < usersResult.length; i += 1) {
+        usersResult[i].wrapperType = 'user';
+      }
       return axiosHelper.extractMultipleResults(results)
         .concat(usersResult);
     } else if (type !== 'users') {
@@ -120,7 +130,6 @@ export default {
     }
     return results;
   },
-
   async signup(userName, userEmail, userPassword) {
     const url = `${LOGIN}/signup`;
     const body = {

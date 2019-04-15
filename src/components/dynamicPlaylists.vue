@@ -1,5 +1,5 @@
 <template>
-    
+
 </template>
 
 <script>
@@ -11,7 +11,6 @@
       async beforeMount() {
         const cookie = Cookies.get('uBeatCookie');
         if (!(cookie === null || cookie === undefined || cookie === '')) {
-          console.log('jsuis call');
           const json = await ubeat.tokenInfo(cookie);
           const userId = json.id;
           this.$router.push({ path: `/users/${userId}/playlists` });

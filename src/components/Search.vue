@@ -1,25 +1,30 @@
 <template>
   <div>
     <v-list
+      :two-line="$route.params.type === 'albums'"
+      class="blue-grey darken-4"
       dark>
-      <v-subheader inset>Artists</v-subheader>
+      <v-subheader v-if="this.$route.params.type === 'global'">Artists</v-subheader>
       <v-list-tile
         v-for="result in results.filter(function(item) {return item.wrapperType.match('artist')})">
         <result :result="result" type="type"></result>
       </v-list-tile>
-      <v-subheader inset>Albums</v-subheader>
+      <v-subheader v-if="this.$route.params.type === 'global'">Albums</v-subheader>
       <v-list-tile
         v-for="result in results.filter(function(item) {return item.wrapperType.match('collection')})">
+        <img
+          v-if="$route.params.type === 'albums'"
+          :src="result.artworkUrl60">
         <result :result="result" type="type"></result>
       </v-list-tile>
-      <v-subheader inset>Tracks</v-subheader>
+      <v-subheader v-if="this.$route.params.type === 'global'">Tracks</v-subheader>
       <v-list-tile
         v-for="result in results.filter(function(item) {return item.wrapperType.match('track')})">
         <result :result="result" type="type"></result>
       </v-list-tile>
-      <v-subheader inset>Users</v-subheader>
+      <v-subheader v-if="this.$route.params.type === 'global'">Users</v-subheader>
       <v-list-tile
-        v-for="result in results.filter(function(item) {return item.wrapperType === undefined})">
+        v-for="result in results.filter(function(item) {return item.wrapperType.match('user')})">
         <result :result="result" type="type"></result>
       </v-list-tile>
     </v-list>
@@ -54,8 +59,19 @@
       if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
         this.type = this.$route.params.type;
         this.results = await ubeat.search(to.params.type, to.params.query, this.cookie);
+      } else {
+        this.$router.push({ path: '/login' });
       }
       next();
     }
   };
 </script>
+
+<style scoped>
+  #SignUp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+</style>

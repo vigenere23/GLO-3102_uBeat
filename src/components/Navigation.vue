@@ -20,7 +20,7 @@
               <img src="/static/generic-avatar.png">
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>User</v-list-tile-title>
+              <v-list-tile-title>{{username}}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action v-if="windowWidth > 600 && windowWidth < 1264">
               <v-btn
@@ -55,26 +55,6 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-      <!-- TODO: Remove this div for release 3, these are helper for correction -->
-      <v-list id="correctionHelper">
-        <v-divider></v-divider>
-        <v-list-tile>
-          HELPER
-        </v-list-tile>
-        <v-list-tile
-          active-class="blue-grey darken-4"
-          :class="item.path === $route.path ? 'blue-grey darken-4' : ''"
-          v-for="item in correctionHelper"
-          :key="item.title"
-          :to="item.path">
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
       <v-list dense>
         <v-divider></v-divider>
         <v-list-tile
@@ -92,19 +72,23 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <MusicPlayer v-show="this.showBottomBar" ></MusicPlayer>
+    <MusicPlayer v-show="this.showBottomBar"></MusicPlayer>
   </div>
 </template>
 
 <script>
+  import Cookies from 'js-cookie';
+  import ubeat from '@/js/apis/ubeat';
   import { bus } from '@/main';
   import Toolbar from './Toolbar';
   import MusicPlayer from './MusicPlayer';
+
 
   export default {
     components: { Toolbar, MusicPlayer },
     data() {
       return {
+        username: 'User',
         screenSize: '',
         windowWidth: null,
         drawer: {
@@ -138,6 +122,17 @@
         showBottomBar: false,
       };
     },
+    methods: {
+      async fetchName() {
+        this.cookie = Cookies.get('uBeatCookie');
+        if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
+          const json = await ubeat.tokenInfo(this.cookie);
+          this.username = json.name;
+        } else {
+          this.$router.push({ path: '/login' });
+        }
+      }
+    },
     created() {
       bus.$on('showBottomBar', () => {
         this.showBottomBar = true;
@@ -146,7 +141,12 @@
         this.showBottomBar = false;
       });
     },
-    mounted() {
+    async beforeRouteUpdate(to, from, next) {
+      this.fetchName();
+      next();
+    },
+    async mounted() {
+      this.fetchName();
       this.windowWidth = window.innerWidth;
       this.$nextTick(() => {
         window.onresize = () => {
@@ -163,7 +163,7 @@
             this.drawer.debounceTablet = false;
             this.drawer.debounceDesktop = false;
           } else if (this.windowWidth > 600 && this.windowWidth < 1264 &&
-                                        this.drawer.debounceTablet === false) {
+            this.drawer.debounceTablet === false) {
             this.drawer.clipped = false;
             this.drawer.fixed = true;
             this.drawer.permanent = true;

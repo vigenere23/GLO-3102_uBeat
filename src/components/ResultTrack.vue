@@ -1,18 +1,22 @@
 <template>
   <div>
-    <router-link
-      :to="'/album/' + track.collectionId">{{track.trackName}} - ({{track.collectionName}})
-    </router-link>
-    <v-list-tile-action>
-      <v-menu offset-x left>
-        <v-btn icon ripple slot="activator"><v-icon color="white">add</v-icon></v-btn>
-        <v-list dense>
-          <v-list-tile @click="addToPlaylist(playlist)" v-for="playlist in playlists" :key="playlist.id">
-            <v-list-tile-title>{{ playlist.name }}</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
-    </v-list-tile-action>
+    <v-layout row>
+      <router-link class="white--text"
+        :to="'/album/' + track.collectionId">{{track.trackName}} - ({{track.collectionName}})
+      </router-link>
+      <v-list-tile-action>
+        <v-menu offset-x left>
+          <v-btn icon ripple slot="activator">
+            <v-icon color="white">add</v-icon>
+          </v-btn>
+          <v-list dense>
+            <v-list-tile @click="addToPlaylist(playlist)" v-for="playlist in playlists" :key="playlist.id">
+              <v-list-tile-title>{{ playlist.name }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </v-list-tile-action>
+    </v-layout>
   </div>
 </template>
 
@@ -44,6 +48,8 @@
       addToPlaylist(playlist) {
         if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === this.track.trackId)) {
           ubeat.addSongToPlaylist(playlist.id, this.track);
+        } else {
+          this.$router.push({ path: '/login' });
         }
       }
     },
