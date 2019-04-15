@@ -126,12 +126,7 @@ export default {
       return axiosHelper.extractMultipleResults(results)
         .concat(usersResult);
     } else if (type !== 'users') {
-      const usersResult = axiosHelper.extractMultipleResults(results);
-      for (let i = 0; i < usersResult.length; i += 1) {
-        usersResult[i].wrapperType = 'user';
-        console.log(usersResult[i].wrapperType);
-      }
-      return usersResult;
+      return axiosHelper.extractMultipleResults(results);
     }
     return results;
   },
