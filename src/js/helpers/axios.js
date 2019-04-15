@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import router from '@/router/index';
 
 export default {
   async axiosGet(url, header) {
@@ -7,6 +8,10 @@ export default {
       const response = await axios.get(url, header);
       return response.data;
     } catch (err) {
+      if (err.response.status === 401) {
+        Cookies.remove('uBeatCookie');
+        router.push('/login');
+      }
       return null;
     }
   },
@@ -16,6 +21,10 @@ export default {
       const response = await axios.post(url, body, options);
       return response.data;
     } catch (err) {
+      if (err.response.status === 401) {
+        Cookies.remove('uBeatCookie');
+        router.push('/login');
+      }
       return null;
     }
   },
@@ -26,6 +35,10 @@ export default {
       const response = await axios.put(url, body, options);
       return response.data;
     } catch (err) {
+      if (err.response.status === 401) {
+        Cookies.remove('uBeatCookie');
+        router.push('/login');
+      }
       return null;
     }
   },
@@ -35,6 +48,10 @@ export default {
       const response = await axios.delete(url, header);
       return response.data;
     } catch (err) {
+      if (err.response.status === 401) {
+        Cookies.remove('uBeatCookie');
+        router.push('/login');
+      }
       return null;
     }
   },

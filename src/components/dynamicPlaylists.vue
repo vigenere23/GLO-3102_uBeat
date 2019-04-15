@@ -10,7 +10,7 @@
       name: 'dynamicPlaylists',
       async beforeMount() {
         const cookie = Cookies.get('uBeatCookie');
-        if (!cookie) {
+        if (cookie) {
           const json = await ubeat.tokenInfo(cookie);
           const userId = json.id;
           this.$router.push({ path: `/users/${userId}/playlists` });

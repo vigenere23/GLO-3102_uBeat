@@ -2,7 +2,6 @@ import axiosHelper from '@/js/helpers/axios';
 import Cookies from 'js-cookie';
 
 const BASE_URL = 'https://ubeat.herokuapp.com';
-const LOGIN = 'https://ubeat.herokuapp.com';
 
 function sortAlbumsDesc(albums) {
   return albums.sort((album1, album2) => {
@@ -128,7 +127,7 @@ export default {
   },
 
   async signup(userName, userEmail, userPassword) {
-    const url = `${LOGIN}/signup`;
+    const url = `${BASE_URL}/signup`;
     const body = {
       name: userName,
       email: userEmail,
@@ -139,7 +138,7 @@ export default {
   },
 
   async unfollow(targetUserId, cookie) {
-    const url = `${LOGIN}/follow/${targetUserId}`;
+    const url = `${BASE_URL}/follow/${targetUserId}`;
     const header = {
       headers: { Authorization: cookie }
     };
@@ -147,7 +146,7 @@ export default {
   },
 
   async follow(targetUserId, cookie) {
-    const url = `${LOGIN}/follow`;
+    const url = `${BASE_URL}/follow`;
     const header = {
       headers: { Authorization: cookie }
     };
@@ -158,7 +157,7 @@ export default {
   },
 
   async login(userEmail, userPassword) {
-    const url = `${LOGIN}/login`;
+    const url = `${BASE_URL}/login`;
     const body = {
       email: userEmail,
       password: userPassword
@@ -168,7 +167,7 @@ export default {
   },
 
   async tokenInfo(cookie) {
-    const url = `${LOGIN}/tokenInfo`;
+    const url = `${BASE_URL}/tokenInfo`;
     const header = {
       headers: { Authorization: cookie }
     };
