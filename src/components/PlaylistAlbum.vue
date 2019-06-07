@@ -4,7 +4,7 @@
     <album-infos
       :title="infos.name"
       :tracks="tracks"
-      image-url="/static/blank-album-400.png"
+      :image-url="require('@/assets/images/blank-album-400.png')"
       :deleteButton="true"
       @delete="deletePlaylist"
     ></album-infos>
@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import ubeat from '@/js/apis/ubeat';
-import TrackList from '@/components/TrackList';
-import AlbumInfos from '@/components/AlbumInfos';
+import ubeat from '@/js/apis/ubeat'
+import TrackList from '@/components/TrackList'
+import AlbumInfos from '@/components/AlbumInfos'
 
 export default {
   name: 'playlist-album',
@@ -40,7 +40,7 @@ export default {
     TrackList,
     AlbumInfos
   },
-  data() {
+  data () {
     return {
       infos: {},
       listType: 'playlist',
@@ -48,46 +48,46 @@ export default {
       imageUrl: '',
       playlistId: '',
       newPlayListName: ''
-    };
+    }
   },
-  async mounted() {
-    this.loadPage(this.$route.params.playlistId);
+  async mounted () {
+    this.loadPage(this.$route.params.playlistId)
   },
-  async beforeRouteUpdate(to, from, next) {
-    await this.loadPage(to.params.playlistId);
-    next();
+  async beforeRouteUpdate (to, from, next) {
+    await this.loadPage(to.params.playlistId)
+    next()
   },
   methods: {
-    resetPage() {
-      this.tracks = [];
-      this.imageUrl = '';
+    resetPage () {
+      this.tracks = []
+      this.imageUrl = ''
     },
-    loadPage(playlistId) {
-      this.resetPage();
-      this.loadPlaylistInfosAndTracks(playlistId);
+    loadPage (playlistId) {
+      this.resetPage()
+      this.loadPlaylistInfosAndTracks(playlistId)
     },
-    async loadPlaylistInfosAndTracks(playlistId) {
-      this.infos = await ubeat.getPlaylistInfosAndTracks(playlistId);
-      this.tracks = this.infos.tracks;
-      this.playlistId = playlistId;
+    async loadPlaylistInfosAndTracks (playlistId) {
+      this.infos = await ubeat.getPlaylistInfosAndTracks(playlistId)
+      this.tracks = this.infos.tracks
+      this.playlistId = playlistId
     },
-    async deletePlaylist() {
-      await ubeat.deletePlaylists(this.$route.params.playlistId);
-      this.$router.go(-1);
+    async deletePlaylist () {
+      await ubeat.deletePlaylists(this.$route.params.playlistId)
+      this.$router.go(-1)
     },
-    async changeName() {
+    async changeName () {
       if (this.newPlayListName) {
         const newInfos = await ubeat.changeNamePlaylist(
           this.$route.params.playlistId,
           this.newPlayListName,
           this.infos.owner.email
-        );
+        )
         if (newInfos) {
-          this.infos = newInfos;
-          this.newPlayListName = '';
+          this.infos = newInfos
+          this.newPlayListName = ''
         }
       }
     }
   }
-};
+}
 </script>

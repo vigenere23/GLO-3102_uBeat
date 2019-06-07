@@ -42,11 +42,11 @@
 </template>
 
 <script>
-import * as Cookies from 'js-cookie';
-import ubeat from '@/js/apis/ubeat';
-import spotify from '@/js/apis/spotify';
-import ArtistInfos from '@/components/ArtistInfos';
-import CoverList from '@/components/CoverList';
+import Cookies from 'js-cookie'
+import ubeat from '@/js/apis/ubeat'
+import spotify from '@/js/apis/spotify'
+import ArtistInfos from '@/components/ArtistInfos'
+import CoverList from '@/components/CoverList'
 
 export default {
   name: 'artist',
@@ -54,7 +54,7 @@ export default {
     ArtistInfos,
     CoverList
   },
-  data() {
+  data () {
     return {
       albums: [],
       eps: [],
@@ -62,64 +62,63 @@ export default {
       infos: null,
       spotifyInfos: null,
       similarArtists: []
-    };
+    }
   },
   computed: {
-    image() {
+    image () {
       return this.spotifyInfos && this.spotifyInfos.images
         ? this.spotifyInfos.images[0].url
-        : '';
+        : ''
     }
   },
-  async mounted() {
-    this.loadPage(this.$route.params.artistId);
+  async mounted () {
+    this.loadPage(this.$route.params.artistId)
   },
-  async beforeRouteUpdate(to, from, next) {
-    await this.loadPage(to.params.artistId);
-    next();
+  async beforeRouteUpdate (to, from, next) {
+    await this.loadPage(to.params.artistId)
+    next()
   },
-  beforeMount() {
-    const cookie = Cookies.get('uBeatCookie');
-    if (cookie === null || cookie === undefined || cookie === '') {
-      this.$router.push({ path: '/login' });
+  beforeMount () {
+    const cookie = Cookies.get('uBeatCookie')
+    if (!cookie) {
+      this.$router.push('/login')
     }
   },
-
   methods: {
-    async loadPage(artistId) {
-      this.resetPage();
-      this.loadArtistInfos(artistId);
-      this.loadAlbums(artistId);
+    async loadPage (artistId) {
+      this.resetPage()
+      this.loadArtistInfos(artistId)
+      this.loadAlbums(artistId)
     },
-    resetPage() {
-      this.albums = [];
-      this.eps = [];
-      this.singles = [];
-      this.infos = null;
-      this.spotifyInfos = null;
-      this.similarArtists = [];
+    resetPage () {
+      this.albums = []
+      this.eps = []
+      this.singles = []
+      this.infos = null
+      this.spotifyInfos = null
+      this.similarArtists = []
     },
-    async loadArtistInfos(artistId) {
-      this.infos = await ubeat.getArtistInfos(artistId);
-      this.spotifyInfos = await spotify.getArtistInfosByName(this.infos.artistName);
+    async loadArtistInfos (artistId) {
+      this.infos = await ubeat.getArtistInfos(artistId)
+      this.spotifyInfos = await spotify.getArtistInfosByName(this.infos.artistName)
       if (this.spotifyInfos) {
-        const similarArtists = await spotify.getSimilarArtists(this.spotifyInfos.id);
-        this.similarArtists = similarArtists.filter(x => x);
+        const similarArtists = await spotify.getSimilarArtists(this.spotifyInfos.id)
+        this.similarArtists = similarArtists.filter(x => x)
       }
     },
-    async loadAlbums(artistId) {
-      const albums = await ubeat.getAlbumsOfArtist(artistId);
+    async loadAlbums (artistId) {
+      const albums = await ubeat.getAlbumsOfArtist(artistId)
 
       albums.forEach((result) => {
         if (/EP$/.test(result.collectionName)) {
-          this.eps.push(result);
+          this.eps.push(result)
         } else if (/Single$/.test(result.collectionName)) {
-          this.singles.push(result);
+          this.singles.push(result)
         } else {
-          this.albums.push(result);
+          this.albums.push(result)
         }
-      });
+      })
     }
   }
-};
+}
 </script>

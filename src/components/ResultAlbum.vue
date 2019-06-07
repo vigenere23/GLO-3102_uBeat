@@ -1,7 +1,10 @@
 <template>
   <v-layout row>
-    <router-link class="white--text"
-                 :to="'/album/' + album.collectionId">{{album.collectionName}} - ({{album.artistName}})
+    <router-link
+      class="white--text"
+      :to="'/album/' + album.collectionId"
+    >
+      {{album.collectionName}} - ({{album.artistName}})
     </router-link>
     <v-list-tile-action>
       <v-menu offset-x left>
@@ -19,34 +22,34 @@
 </template>
 
 <script>
-  import ubeat from '@/js/apis/ubeat';
-  import * as Cookies from 'js-cookie';
+import ubeat from '@/js/apis/ubeat'
+import Cookies from 'js-cookie'
 
-  export default {
-    name: 'ResultAlbum',
-    props: {
-      album: {}
-    },
-    data() {
-      return {
-        playlists: [],
-      };
-    },
-    methods: {
-      addToPlaylist(playlist) {
-        ubeat.addAlbumToPlaylist(playlist.id, this.album.collectionId);
-      }
-    },
-    async mounted() {
-      const cookie = Cookies.get('uBeatCookie');
-      if (!(cookie === null || cookie === undefined || cookie === '')) {
-        const json = await ubeat.tokenInfo(cookie);
-        const userId = json.id;
-        this.playlists = await ubeat.getUserPlaylists(userId);
-        this.playlists.sort();
-      } else {
-        this.$router.push({ path: '/login' });
-      }
-    },
-  };
+export default {
+  name: 'ResultAlbum',
+  props: {
+    album: {}
+  },
+  data () {
+    return {
+      playlists: []
+    }
+  },
+  methods: {
+    addToPlaylist (playlist) {
+      ubeat.addAlbumToPlaylist(playlist.id, this.album.collectionId)
+    }
+  },
+  async mounted () {
+    const cookie = Cookies.get('uBeatCookie')
+    if (cookie) {
+      const user = await ubeat.tokenInfo(cookie)
+      this.playlists = await ubeat.getUserPlaylists(user.id)
+      this.playlists.sort()
+    }
+    else {
+      this.$router.push('/login')
+    }
+  }
+}
 </script>

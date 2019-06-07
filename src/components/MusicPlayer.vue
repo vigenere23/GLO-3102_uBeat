@@ -51,85 +51,84 @@
 </template>
 
 <script>
-  import { bus } from '@/main';
-  import SongPlayer from '../js/MusicControl';
+import { bus } from '@/main'
+import SongPlayer from '@/js/MusicControl'
 
-  export default {
-    data() {
-      return {
-        displayPlayButton: true,
-        titleOfTheSong: '',
-        listOfSongsInQueue: [],
-        repeatBtn: false
-      };
+export default {
+  data () {
+    return {
+      displayPlayButton: true,
+      titleOfTheSong: '',
+      listOfSongsInQueue: [],
+      repeatBtn: false
+    }
+  },
+  created () {
+    bus.$on('musicStopped', () => {
+      this.displayPlayButton = true
+    })
+    bus.$on('musicStarted', () => {
+      this.displayPlayButton = false
+    })
+    bus.$on('changeTitleOfSongPlaying', (data) => {
+      this.titleOfTheSong = data
+    })
+    bus.$on('firstElementInArray', (data) => {
+      this.titleOfTheSong = data
+    })
+    bus.$on('checkForRepeat', () => {
+      const song = new SongPlayer()
+      if (this.repeatBtn) {
+        song.listOfSongs = song.listOfPastSongs
+        song.playSong()
+        song.listOfPastSongs = []
+      }
+    })
+  },
+  methods: {
+    previousSong () {
+      const song = new SongPlayer()
+      song.restartSongOrPrevious()
     },
-    created() {
-      bus.$on('musicStopped', () => {
-        this.displayPlayButton = true;
-      });
-      bus.$on('musicStarted', () => {
-        this.displayPlayButton = false;
-      });
-      bus.$on('changeTitleOfSongPlaying', (data) => {
-        this.titleOfTheSong = data;
-      });
-      bus.$on('firstElementInArray', (data) => {
-        this.titleOfTheSong = data;
-      });
-      bus.$on('checkForRepeat', () => {
-        const song = new SongPlayer();
-        if (this.repeatBtn === true) {
-          song.listOfSongs = song.listOfPastSongs;
-          song.playSong();
-          song.listOfPastSongs = [];
-        }
-      });
+    nextSong () {
+      const song = new SongPlayer()
+      song.playNextSong()
     },
-    methods: {
-      previousSong() {
-        const song = new SongPlayer();
-        song.restartSongOrPrevious();
-      },
-      nextSong() {
-        const song = new SongPlayer();
-        song.playNextSong();
-      },
-      continuSong() {
-        const song = new SongPlayer();
-        if (song.listOfSongs.length > 0) {
-          if (global.audio !== undefined) {
-            if (global.audio.currentTime === 0) {
-              song.playSong();
-            } else {
-              global.audio.play();
-              this.displayPlayButton = false;
-            }
+    continuSong () {
+      const song = new SongPlayer()
+      if (song.listOfSongs.length > 0) {
+        if (global.audio !== undefined) {
+          if (global.audio.currentTime === 0) {
+            song.playSong()
           } else {
-            song.playSong();
+            global.audio.play()
+            this.displayPlayButton = false
           }
+        } else {
+          song.playSong()
         }
-      },
-      pauseSong() {
-        const song = new SongPlayer();
-        song.pauseSong();
-      },
-      chargeQueue() {
-        const song = new SongPlayer();
-        this.listOfSongsInQueue = song.listOfSongs;
-        // this.listOfSongsInQueue.shift();
-      },
-      changeSongInQueue(index) {
-        const song = new SongPlayer();
-        song.listOfSongs.splice(0, index);
-        this.nextSong();
-      },
-      shuffle() {
-        const song = new SongPlayer();
-        song.shuffle();
       }
     },
-    name: 'MusicPlayer'
-  };
+    pauseSong () {
+      const song = new SongPlayer()
+      song.pauseSong()
+    },
+    chargeQueue () {
+      const song = new SongPlayer()
+      this.listOfSongsInQueue = song.listOfSongs
+    },
+    changeSongInQueue (index) {
+      const song = new SongPlayer()
+      song.listOfSongs.splice(0, index)
+      this.nextSong()
+    },
+    shuffle () {
+      const song = new SongPlayer()
+      song.shuffle()
+    }
+  },
+  name: 'MusicPlayer'
+}
 </script>
 
 <style scoped>

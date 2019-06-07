@@ -19,39 +19,46 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
-import homeAlbumLists from '@/js/homeAlbumLists';
-import ubeat from '@/js/apis/ubeat';
-import CoverList from '@/components/CoverList';
+import Cookies from 'js-cookie'
+import homeAlbumLists from '@/js/homeAlbumLists'
+import ubeat from '@/js/apis/ubeat'
+import CoverList from '@/components/CoverList'
 
 export default {
   name: 'home',
   components: {
     CoverList
   },
-  data() {
+  data () {
     return {
       coverLists: []
-    };
-  },
-  mounted() {
-    if (!this.coverLists.length) {
-      homeAlbumLists.forEach((albumList) => {
-        const coverList = {};
-        coverList.title = albumList.title;
-        coverList.covers = [];
-        albumList.ids.forEach(async (id) => {
-          coverList.covers.push(await ubeat.getAlbumInfos(id));
-        });
-        this.coverLists.push(coverList);
-      });
     }
   },
-  beforeMount() {
-    const cookie = Cookies.get('uBeatCookie');
-    if (cookie === null || cookie === undefined || cookie === '') {
-      this.$router.push({ path: '/login' });
+  mounted () {
+    if (!this.coverLists.length && Cookies.get('uBeatCookie')) {
+      homeAlbumLists.forEach(async (albumList) => {
+        const coverList = await this.getAlbumInfosOfAlbumList(albumList)
+        this.coverLists.push(coverList)
+      })
+    }
+  },
+  beforeMount () {
+    if (!Cookies.get('uBeatCookie')) {
+      this.$router.push('/login')
+    }
+  },
+  methods: {
+    async getAlbumInfosOfAlbumList (albumList) {
+      const coverList = {
+        title: albumList.title,
+        covers: []
+      }
+      for await (const id of albumList.ids) {
+        const albumInfos = await ubeat.getAlbumInfos(id)
+        if (albumInfos) coverList.covers.push(albumInfos)
+      }
+      return coverList
     }
   }
-};
+}
 </script>

@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import ubeat from '@/js/apis/ubeat';
-import formatter from '@/js/helpers/formatter';
-import TrackList from '@/components/TrackList';
-import AlbumInfos from '@/components/AlbumInfos';
+import ubeat from '@/js/apis/ubeat'
+import formatter from '@/js/helpers/formatter'
+import TrackList from '@/components/TrackList'
+import AlbumInfos from '@/components/AlbumInfos'
 
 export default {
   name: 'album',
@@ -27,43 +27,43 @@ export default {
     TrackList,
     AlbumInfos
   },
-  data() {
+  data () {
     return {
       infos: {},
       tracks: [],
       itunesLink: '',
       releaseDate: '',
       imageUrl: ''
-    };
+    }
   },
-  async mounted() {
-    this.loadPage(this.$route.params.albumId);
+  async mounted () {
+    this.loadPage(this.$route.params.albumId)
   },
-  async beforeRouteUpdate(to, from, next) {
-    await this.loadPage(to.params.albumId);
-    next();
+  async beforeRouteUpdate (to, from, next) {
+    await this.loadPage(to.params.albumId)
+    next()
   },
   methods: {
-    resetPage() {
-      this.tracks = [];
-      this.imageUrl = '';
+    resetPage () {
+      this.tracks = []
+      this.imageUrl = ''
     },
-    loadPage(albumId) {
-      this.resetPage();
-      this.loadAlbumInfos(albumId);
-      this.loadTracks(albumId);
+    loadPage (albumId) {
+      this.resetPage()
+      this.loadAlbumInfos(albumId)
+      this.loadTracks(albumId)
     },
-    async loadAlbumInfos(albumId) {
-      this.infos = await ubeat.getAlbumInfos(albumId);
-      this.itunesLink = formatter.itunesLink(this.infos.collectionViewUrl);
-      this.releaseDate = formatter.prettyDate(this.infos.releaseDate);
-      this.imageUrl = formatter.imageUrlOfSize(this.infos.artworkUrl100, 400);
+    async loadAlbumInfos (albumId) {
+      this.infos = await ubeat.getAlbumInfos(albumId)
+      this.itunesLink = formatter.itunesLink(this.infos.collectionViewUrl)
+      this.releaseDate = formatter.prettyDate(this.infos.releaseDate)
+      this.imageUrl = formatter.imageUrlOfSize(this.infos.artworkUrl100, 400)
     },
-    async loadTracks(albumId) {
-      this.tracks = await ubeat.getAlbumTracks(albumId);
+    async loadTracks (albumId) {
+      this.tracks = await ubeat.getAlbumTracks(albumId)
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

@@ -20,17 +20,17 @@ export default {
     link: String
   },
   computed: {
-    nameWithAdvisory() {
-      return this.advisory ? `${this.name} [${this.advisory}]` : this.name;
+    nameWithAdvisory () {
+      return this.advisory ? `${this.name} [${this.advisory}]` : this.name
     },
-    imageOrDefault() {
-      return this.image || '/static/blank-album-200.png';
+    imageOrDefault () {
+      return this.image || require('@/assets/images/blank-album-200.png')
     },
-    backgroundImage() {
-      return `background-image: url('${this.imageOrDefault}');`;
+    backgroundImage () {
+      return `background-image: url('${this.imageOrDefault}');`
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

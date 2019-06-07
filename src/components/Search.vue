@@ -36,46 +36,45 @@
 </template>
 
 <script>
-  import * as Cookies from 'js-cookie';
-  import ubeat from '@/js/apis/ubeat';
-  import Result from './Result';
+import Cookies from 'js-cookie'
+import ubeat from '@/js/apis/ubeat'
+import Result from '@/components/Result'
 
-  export default {
-    components: { Result },
-    async mounted() {
-      this.cookie = Cookies.get('uBeatCookie');
-      if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
-        this.type = this.$route.params.type;
-        this.results = await ubeat.search(this.$route.params.type,
-          this.$route.params.query, this.cookie);
-      }
-    },
-    data() {
-      return {
-        type: String,
-        results: {},
-        cookie: Object
-      };
-    },
-    async beforeRouteUpdate(to, from, next) {
-      this.cookie = Cookies.get('uBeatCookie');
-      this.type = to.params.type;
-      if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
-        this.type = this.$route.params.type;
-        this.results = await ubeat.search(to.params.type, to.params.query, this.cookie);
-      } else {
-        this.$router.push({ path: '/login' });
-      }
-      next();
+export default {
+  components: {
+    Result
+  },
+  data () {
+    return {
+      type: String,
+      results: {}
     }
-  };
-</script>
-
-<style scoped>
-  #SignUp{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  },
+  async mounted () {
+    const cookie = Cookies.get('uBeatCookie')
+    if (cookie) {
+      this.type = this.$route.params.type
+      this.results = await ubeat.search(
+        this.$route.params.type,
+        this.$route.params.query,
+        cookie
+      )
+    }
+  },
+  async beforeRouteUpdate (to, from, next) {
+    const cookie = Cookies.get('uBeatCookie')
+    this.type = to.params.type
+    if (cookie) {
+      this.type = this.$route.params.type
+      this.results = await ubeat.search(
+        to.params.type,
+        to.params.query,
+        cookie
+      )
+    } else {
+      this.$router.push('/login')
+    }
+    next()
   }
-
-</style>
+}
+</script>

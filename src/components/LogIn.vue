@@ -6,9 +6,8 @@
       placeholder="Email..."
       solo
       hide-details
-      v-model="userEmail">
-
-    </v-text-field>
+      v-model="userEmail"
+    ></v-text-field>
     </div>
 
     <div class="simple-input-field">
@@ -18,9 +17,8 @@
         type="password"
         solo
         hide-details
-        v-model="userPassword">
-
-      </v-text-field>
+        v-model="userPassword"
+      ></v-text-field>
     </div>
 
     <div id="logIn">
@@ -42,51 +40,49 @@
 </template>
 
 <script>
-    import Cookies from 'js-cookie';
-    import ubeat from '../js/apis/ubeat';
+import Cookies from 'js-cookie'
+import ubeat from '@/js/apis/ubeat'
 
-    export default {
-      name: 'LogIn',
-      data() {
-        return {
-          userEmail: '',
-          userPassword: '',
-          snackbar: false,
-          snackbarMessage: '',
-          color: 'red'
+export default {
+  name: 'LogIn',
+  data () {
+    return {
+      userEmail: '',
+      userPassword: '',
+      snackbar: false,
+      snackbarMessage: '',
+      color: 'red'
 
-        };
-      },
-      methods: {
-        async login() {
-          if (this.userEmail.length === 0 || this.userPassword.length === 0) {
-            this.snackbarMessage = 'you have an empty field';
-            this.snackbar = true;
-          } else {
-            const json = await ubeat.login(this.userEmail, this.userPassword);
-            if (json === null) {
-              this.snackbarMessage = 'Email or password is invalid';
-              this.snackbar = true;
-            } else {
-              const userId = json.id;
-              await Cookies.set('uBeatCookie', json.token);
-              this.$router.push({ path: `/users/${userId}/playlists` });
-            }
-          }
-        },
-        async redirect() {
-          this.$router.push({ path: '/signup' });
-        }
-      },
-      async beforeMount() {
-        const cookie = Cookies.get('uBeatCookie');
-        if (cookie) {
-          const json = await ubeat.tokenInfo(cookie);
-          const userId = json.id;
-          this.$router.push({ path: `/users/${userId}/playlists` });
+    }
+  },
+  methods: {
+    async login () {
+      if (!this.userEmail || !this.userPassword) {
+        this.snackbarMessage = 'you have an empty field'
+        this.snackbar = true
+      } else {
+        const response = await ubeat.login(this.userEmail, this.userPassword)
+        if (!response) {
+          this.snackbarMessage = 'Email or password is invalid'
+          this.snackbar = true
+        } else {
+          Cookies.set('uBeatCookie', response.token)
+          this.$router.push(`/users/${response.id}/playlists`)
         }
       }
-    };
+    },
+    async redirect () {
+      this.$router.push({ path: '/signup' })
+    }
+  },
+  async beforeMount () {
+    const cookie = Cookies.get('uBeatCookie')
+    if (cookie) {
+      const user = await ubeat.tokenInfo(cookie)
+      this.$router.push(`/users/${user.id}/playlists`)
+    }
+  }
+}
 </script>
 
 <style scoped>

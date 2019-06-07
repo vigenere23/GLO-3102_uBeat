@@ -28,7 +28,7 @@
       <div id="following">
         <div class="followingElements" v-for="(value, i) in following" :key="value.id || i" v-on:click="goToOtherProfile(value.id)">
           <v-avatar size="75px" id="avatar">
-            <img src="/static/generic-avatar.png">
+            <img src="~@/assets/images/generic-avatar.png">
           </v-avatar>
           <span>Name: {{ value.name }}</span>
           <span>Email: {{ value.email }}</span>
@@ -39,117 +39,113 @@
 </template>
 
 <script>
-  import Cookies from 'js-cookie';
-  import ubeat from '@/js/apis/ubeat';
-  import CoverList from '@/components/CoverList';
+import Cookies from 'js-cookie'
+import ubeat from '@/js/apis/ubeat'
+import CoverList from '@/components/CoverList'
 
-  export default {
-    name: 'userProfile',
-    components: {
-      CoverList
-    },
-    data() {
-      return {
-        userId: '',
-        myId: '',
-        playlists: [],
-        newPlayListName: '',
-        name: '',
-        email: '',
-        following: [],
-        userSearchResult: false,
-        alreadyFollow: false,
-        cookie: ''
-      };
-    },
-    async beforeRouteUpdate(to, from, next) {
-      await this.fetchData();
-      next();
-    },
-    async mounted() {
-      await this.fetchData();
-    },
-    methods: {
-      async fetchData() {
-        await this.setMyId();
-        if (this.$route.params.userTargetId) { // we are on a different user's profile page
-          this.userSearchResult = true;
-          const infosUser = await ubeat.getUserInfos(this.$route.params.userTargetId);
-          this.userId = infosUser.id;
-          this.name = infosUser.name;
-          this.email = infosUser.email;
-          this.userSearchResult = true;
-          this.alreadyFollow = await this.determineIfFollowed(this.userId);
-        } else { // we are on our own profile page
-          this.cookie = Cookies.get('uBeatCookie');
-          if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
-            const json = await ubeat.tokenInfo(this.cookie);
-            this.userId = json.id;
-            this.name = json.name;
-            this.email = json.email;
-          } else {
-            this.$router.push({ path: '/login' });
-          }
-        }
-        this.loadPlaylists(this.userId);
-        this.loadFollowing(this.userId);
-      },
-      async loadPlaylists(userId) {
-        this.playlists = await ubeat.getUserPlaylists(userId);
-      },
-      async loadFollowing(userId) {
-        const infosUser = await ubeat.getUserInfos(userId);
-        this.following = infosUser.following;
-      },
-      async setMyId() {
-        this.cookie = Cookies.get('uBeatCookie');
-        if (!(this.cookie === null || this.cookie === undefined || this.cookie === '')) {
-          const json = await ubeat.tokenInfo(this.cookie);
-          this.myId = json.id;
-        }
-      },
-      goToOtherProfile(otherUserId) {
-        this.$router.push({ path: `/profile/${otherUserId}` });
-      },
-      async follow() {
-        if (!(this.myId === '')) { // if passed therefore there's a cookie
-          if (!(this.userId === '' || this.userId === this.myId)) {
-            await ubeat.follow(this.userId, this.cookie);
-          }
-          this.alreadyFollow = true;
-        } else {
-          this.$router.push({ path: '/login' });
-        }
-      },
-      async unfollow() {
-        if (!(this.myId === '')) { // if passed therefore there's a cookie
-          if (!(this.userId === '' || this.userId === this.myId)) {
-            await ubeat.unfollow(this.userId, this.cookie);
-            this.alreadyFollow = false;
-          }
-        } else {
-          this.$router.push({ path: '/login' });
-        }
-      },
-      async determineIfFollowed(targetUserId) {
-        let followed = false;
-        if (!(this.myId === '')) {
-          const infosUser = await ubeat.getUserInfos(this.myId);
-          const following = infosUser.following;
-          for (let i = 0; i < following.length; i += 1) {
-            if (following[i].id === targetUserId) {
-              followed = true;
-            }
-          }
-        }
-        return followed;
-      }
+export default {
+  name: 'userProfile',
+  components: {
+    CoverList
+  },
+  data () {
+    return {
+      userId: '',
+      myId: '',
+      playlists: [],
+      newPlayListName: '',
+      name: '',
+      email: '',
+      following: [],
+      userSearchResult: false,
+      alreadyFollow: false
     }
-  };
+  },
+  async beforeRouteUpdate (to, from, next) {
+    await this.fetchData()
+    next()
+  },
+  async mounted () {
+    await this.fetchData()
+  },
+  methods: {
+    async fetchData () {
+      await this.setMyId()
+      if (this.$route.params.userTargetId) {
+        this.userSearchResult = true
+        const infosUser = await ubeat.getUserInfos(this.$route.params.userTargetId)
+        this.userId = infosUser.id
+        this.name = infosUser.name
+        this.email = infosUser.email
+        this.userSearchResult = true
+        this.alreadyFollow = await this.determineIfFollowed(this.userId)
+      } else {
+        const cookie = Cookies.get('uBeatCookie')
+        if (cookie) {
+          const user = await ubeat.tokenInfo(cookie)
+          this.userId = user.id
+          this.name = user.name
+          this.email = user.email
+        } else {
+          this.$router.push('/login')
+        }
+      }
+      this.loadPlaylists(this.userId)
+      this.loadFollowing(this.userId)
+    },
+    async loadPlaylists (userId) {
+      this.playlists = await ubeat.getUserPlaylists(userId)
+    },
+    async loadFollowing (userId) {
+      const infosUser = await ubeat.getUserInfos(userId)
+      this.following = infosUser.following
+    },
+    async setMyId () {
+      const cookie = Cookies.get('uBeatCookie')
+      if (cookie) {
+        const user = await ubeat.tokenInfo(cookie)
+        this.myId = user.id
+      }
+    },
+    goToOtherProfile (otherUserId) {
+      this.$router.push(`/profile/${otherUserId}`)
+    },
+    async follow () {
+      if (this.myId) {
+        if (this.userId && this.userId !== this.myId) {
+          await ubeat.follow(this.userId, Cookies.get('uBeatCookie'))
+        }
+        this.alreadyFollow = true
+      } else {
+        this.$router.push('/login')
+      }
+    },
+    async unfollow () {
+      if (this.myId) {
+        if (this.userId && this.userId !== this.myId) {
+          await ubeat.unfollow(this.userId, Cookies.get('uBeatCookie'))
+          this.alreadyFollow = false
+        }
+      } else {
+        this.$router.push('/login')
+      }
+    },
+    async determineIfFollowed (targetUserId) {
+      let followed = false
+      if (this.myId) {
+        const infosUser = await ubeat.getUserInfos(this.myId)
+        const following = infosUser.following
+        if (following.find(user => user.id === targetUserId)) {
+          followed = true
+        }
+      }
+      return followed
+    }
+  }
+}
 </script>
 
 <style scoped>
-
   .profileInfos {
     margin-top: 30px;
   }
@@ -187,6 +183,4 @@
   #profil {
     margin: 30px;
   }
-
 </style>
-

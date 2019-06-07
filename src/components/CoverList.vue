@@ -20,7 +20,7 @@
         <cover-list-item
           :name="cover.name"
           :link="`/playlists/${cover.id}`"
-          image="/static/blank-album-200.png"
+          :image="require('@/assets/images/blank-album-200.png')"
         />
       </li>
     </ul>
@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import CoverListItem from '@/components/CoverListItem';
-import formatter from '@/js/helpers/formatter';
+import CoverListItem from '@/components/CoverListItem'
+import formatter from '@/js/helpers/formatter'
 
 export default {
   name: 'CoverList',
@@ -69,11 +69,11 @@ export default {
     wrap: Boolean
   },
   methods: {
-    imageHd(image) {
-      return formatter.imageUrlOfSize(image, 200);
+    imageHd (image) {
+      return formatter.imageUrlOfSize(image, 200)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -112,7 +112,7 @@ export default {
 @media screen and (max-width: 1263px) {
   .cover-list {
     margin-top: 38px;
-  
+
     h3 {
       font-size: 28px;
     }
@@ -126,7 +126,7 @@ export default {
 @media screen and (max-width: 600px) {
   .cover-list {
     margin-top: 32px;
-  
+
     h3 {
       font-size: 24px;
     }

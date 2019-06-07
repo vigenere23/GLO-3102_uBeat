@@ -1,28 +1,28 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import Home from '@/components/Home';
-import Album from '@/components/Album';
-import Artist from '@/components/Artist';
-import Playlists from '@/components/Playlists';
-import PlaylistAlbum from '@/components/PlaylistAlbum';
-import Search from '@/components/Search';
-import 'vuetify/dist/vuetify.min.css';
-import 'material-design-icons-iconfont/dist/material-design-icons.css';
-import LogIn from '../components/LogIn';
-import SignUp from '../components/SignUp';
-import LogOut from '../components/LogOut';
-import Profile from '../components/Profile';
-import profileId from '../components/profileId';
-import dynamicPlaylists from '../components/dynamicPlaylists';
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from '@/components/Home'
+import Album from '@/components/Album'
+import Artist from '@/components/Artist'
+import Playlists from '@/components/Playlists'
+import PlaylistAlbum from '@/components/PlaylistAlbum'
+import Search from '@/components/Search'
+import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import LogIn from '@/components/LogIn'
+import SignUp from '@/components/SignUp'
+import LogOut from '@/components/LogOut'
+import Profile from '@/components/Profile'
+import profileId from '@/components/profileId'
+import dynamicPlaylists from '@/components/dynamicPlaylists'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: Home
     },
     {
       path: '/artist/:artistId',
@@ -89,5 +89,5 @@ export default new Router({
       name: 'rePlaylists',
       component: dynamicPlaylists
     }
-  ],
-});
+  ]
+})

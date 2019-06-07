@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'loading-center'
-};
+}
 </script>
 
 <style>

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'ResultArtist',
-    props: {
-      artist: {}
-    }
-  };
+export default {
+  name: 'ResultArtist',
+  props: {
+    artist: {}
+  }
+}
 </script>

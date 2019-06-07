@@ -21,37 +21,36 @@
 </template>
 
 <script>
-  import ubeat from '@/js/apis/ubeat';
-  import * as Cookies from 'js-cookie';
+import ubeat from '@/js/apis/ubeat'
+import Cookies from 'js-cookie'
 
-  export default {
-    name: 'ResultTrack',
-    props: {
-      track: {},
-      playlistId: String,
-    },
-    async mounted() {
-      const cookie = Cookies.get('uBeatCookie');
-      if (!(cookie === null || cookie === undefined || cookie === '')) {
-        const json = await ubeat.tokenInfo(cookie);
-        const userId = json.id;
-        this.playlists = await ubeat.getUserPlaylists(userId);
-        this.playlists.sort();
+export default {
+  name: 'ResultTrack',
+  props: {
+    track: {},
+    playlistId: String
+  },
+  async mounted () {
+    const cookie = Cookies.get('uBeatCookie')
+    if (cookie) {
+      const user = await ubeat.tokenInfo(cookie)
+      this.playlists = await ubeat.getUserPlaylists(user.id)
+      this.playlists.sort()
+    }
+  },
+  data () {
+    return {
+      playlists: []
+    }
+  },
+  methods: {
+    addToPlaylist (playlist) {
+      if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === this.track.trackId)) {
+        ubeat.addSongToPlaylist(playlist.id, this.track)
+      } else {
+        this.$router.push('/login')
       }
-    },
-    data() {
-      return {
-        playlists: [],
-      };
-    },
-    methods: {
-      addToPlaylist(playlist) {
-        if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === this.track.trackId)) {
-          ubeat.addSongToPlaylist(playlist.id, this.track);
-        } else {
-          this.$router.push({ path: '/login' });
-        }
-      }
-    },
-  };
+    }
+  }
+}
 </script>

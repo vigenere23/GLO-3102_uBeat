@@ -12,17 +12,16 @@
 </template>
 
 <script>
-  import 'typeface-roboto/index.css';
-  import Navigation from '@/components/Navigation';
+import Navigation from '@/components/Navigation'
 
-  export default {
-    name: 'app',
-    components: {
-      'nav-menu': Navigation
-    }
-  };
+export default {
+  name: 'app',
+  components: {
+    'nav-menu': Navigation
+  }
+}
 </script>
 
 <style>
-  @import './assets/style.css';
+@import '~@/assets/css/style.css';
 </style>

@@ -2,7 +2,7 @@
   <v-card id="album-card" class="blue-grey darken-4">
     <img
       id="album-cover"
-      :src="imageUrl || '/static/blank-album-400.png'"
+      :src="imageUrl || require('@/assets/images/blank-album-400.png')"
     >
 
     <v-card-title primary-title>
@@ -22,33 +22,33 @@
 </template>
 
 <script>
-  export default {
-    name: 'album-infos',
-    props: {
-      title: String,
-      subtitle: String,
-      subtitleLink: {
-        type: String,
-        default: ''
-      },
-      releaseDate: String,
-      genre: String,
-      tracks: Array,
-      advisory: String,
-      itunesLink: String,
-      imageUrl: String,
-      deleteButton: Boolean
+export default {
+  name: 'album-infos',
+  props: {
+    title: String,
+    subtitle: String,
+    subtitleLink: {
+      type: String,
+      default: ''
     },
-    computed: {
-      numberOfTracks() {
-        return this.tracks.length || 0;
-      },
-      numberOfTracksText() {
-        const songText = this.numberOfTracks > 1 ? 'songs' : 'song';
-        return `${this.numberOfTracks} ${songText}`;
-      }
+    releaseDate: String,
+    genre: String,
+    tracks: Array,
+    advisory: String,
+    itunesLink: String,
+    imageUrl: String,
+    deleteButton: Boolean
+  },
+  computed: {
+    numberOfTracks () {
+      return this.tracks.length || 0
+    },
+    numberOfTracksText () {
+      const songText = this.numberOfTracks > 1 ? 'songs' : 'song'
+      return `${this.numberOfTracks} ${songText}`
     }
-  };
+  }
+}
 </script>
 <style lang="scss">
   h1 {

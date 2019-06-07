@@ -16,28 +16,32 @@
 </template>
 
 <script>
-  import ubeat from '@/js/apis/ubeat';
-  import * as Cookies from 'js-cookie';
-  import ResultArtist from './ResultArtist';
-  import ResultAlbum from './ResultAlbum';
-  import ResultTrack from './ResultTrack';
-  import ResultUser from './ResultUser';
+import ubeat from '@/js/apis/ubeat'
+import Cookies from 'js-cookie'
+import ResultArtist from '@/components/ResultArtist'
+import ResultAlbum from '@/components/ResultAlbum'
+import ResultTrack from '@/components/ResultTrack'
+import ResultUser from '@/components/ResultUser'
 
-  export default {
-    components: { ResultArtist, ResultAlbum, ResultTrack, ResultUser },
-    name: 'Result',
-    props: {
-      result: {},
-      type: String,
-    },
-    async mounted() {
-      const cookie = Cookies.get('uBeatCookie');
-      if (!(cookie === null || cookie === undefined || cookie === '')) {
-        const json = await ubeat.tokenInfo(cookie);
-        const userId = json.id;
-        this.playlists = await ubeat.getUserPlaylists(userId);
-        this.playlists.sort();
-      }
-    },
-  };
+export default {
+  components: {
+    ResultArtist,
+    ResultAlbum,
+    ResultTrack,
+    ResultUser
+  },
+  name: 'Result',
+  props: {
+    result: {},
+    type: String
+  },
+  async mounted () {
+    const cookie = Cookies.get('uBeatCookie')
+    if (cookie) {
+      const user = await ubeat.tokenInfo(cookie)
+      this.playlists = await ubeat.getUserPlaylists(user.id)
+      this.playlists.sort()
+    }
+  }
+}
 </script>

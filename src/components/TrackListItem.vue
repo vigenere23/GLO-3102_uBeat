@@ -1,5 +1,5 @@
 <template>
-  <div v-if="deleted === false">
+  <div v-if="!deleted">
     <v-hover>
       <v-list-tile class="album-tracks-list-item" slot-scope="{ hover }">
         <v-list-tile-avatar class="song-number">
@@ -44,10 +44,10 @@
 </template>
 
 <script>
-import formatter from '@/js/helpers/formatter';
-import ubeat from '@/js/apis/ubeat';
-import SongPlayer from '@/js/MusicControl';
-import { bus } from '@/main';
+import formatter from '@/js/helpers/formatter'
+import ubeat from '@/js/apis/ubeat'
+import SongPlayer from '@/js/MusicControl'
+import { bus } from '@/main'
 
 export default {
   name: 'album-tracks-list-item',
@@ -60,51 +60,51 @@ export default {
     playlists: Array
   },
   computed: {
-    durationText() {
-      return formatter.prettyDuration(this.track.trackTimeMillis);
+    durationText () {
+      return formatter.prettyDuration(this.track.trackTimeMillis)
     },
-    thisSong() {
+    thisSong () {
       return {
         title: this.track.trackName,
         duration: this.track.trackTimeMillis,
         number: this.number,
         preview: this.track.previewUrl
-      };
-    },
+      }
+    }
   },
-  data() {
+  data () {
     return {
       deleted: false,
       name: String,
       trackName: String
-    };
+    }
   },
   methods: {
-    play() {
-      const song = new SongPlayer();
-      song.pauseSong();
-      song.deleteElementsInArray();
-      this.add();
+    play () {
+      const song = new SongPlayer()
+      song.pauseSong()
+      song.deleteElementsInArray()
+      this.add()
     },
-    add() {
-      const song = new SongPlayer();
-      song.addSong(this.thisSong);
+    add () {
+      const song = new SongPlayer()
+      song.addSong(this.thisSong)
       if (song.listOfSongs.length === 1) {
-        bus.$emit('firstElementInArray', song.listOfSongs[0].title);
+        bus.$emit('firstElementInArray', song.listOfSongs[0].title)
       }
     },
-    addToPlaylist(playlist) {
+    addToPlaylist (playlist) {
       if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === this.track.trackId)) {
-        ubeat.addSongToPlaylist(playlist.id, this.track);
+        ubeat.addSongToPlaylist(playlist.id, this.track)
       }
     },
-    async deleteSong() {
-      await ubeat.deleteSongTrackFromPlaylist(this.playlistId, this.track.trackId);
-      this.deleted = true;
-      bus.$emit('songDeletedOfPlaylist', this.number);
+    async deleteSong () {
+      await ubeat.deleteSongTrackFromPlaylist(this.playlistId, this.track.trackId)
+      this.deleted = true
+      bus.$emit('songDeletedOfPlaylist', this.number)
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

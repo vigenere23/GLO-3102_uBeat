@@ -31,10 +31,10 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
-import CoverList from '@/components/CoverList';
-import LoadingCenter from '@/components/LoadingCenter';
-import ubeat from '@/js/apis/ubeat';
+import Cookies from 'js-cookie'
+import CoverList from '@/components/CoverList'
+import LoadingCenter from '@/components/LoadingCenter'
+import ubeat from '@/js/apis/ubeat'
 
 export default {
   name: 'playlists',
@@ -42,61 +42,61 @@ export default {
     CoverList,
     LoadingCenter
   },
-  data() {
+  data () {
     return {
       user: {},
       playlists: [],
       newPlayListName: '',
       loading: true
-    };
+    }
   },
-  async mounted() {
-    this.loadPage(this.$route.params.userId);
+  async mounted () {
+    this.loadPage(this.$route.params.userId)
   },
-  async beforeRouteUpdate(to, from, next) {
-    await this.loadPage(to.params.userId);
-    next();
+  async beforeRouteUpdate (to, from, next) {
+    await this.loadPage(to.params.userId)
+    next()
   },
-  async beforeMount() {
-    const cookie = Cookies.get('uBeatCookie');
-    if (!(cookie === null || cookie === undefined || cookie === '')) {
-      const json = await ubeat.tokenInfo(cookie);
-      const userId = json.id;
-      this.$router.push({ path: `/users/${userId}/playlists` });
-    } else {
-      this.$router.push({ path: '/login' });
+  async beforeMount () {
+    const cookie = Cookies.get('uBeatCookie')
+    if (cookie) {
+      const user = await ubeat.tokenInfo(cookie)
+      this.$router.push(`/users/${user.id}/playlists`)
+    }
+    else {
+      this.$router.push('/login')
     }
   },
   methods: {
-    async loadPage(userId) {
-      this.resetPage();
-      this.loading = true;
-      this.loadUserInfos(userId);
-      this.loadPlaylists(userId);
+    async loadPage (userId) {
+      this.resetPage()
+      this.loading = true
+      this.loadUserInfos(userId)
+      this.loadPlaylists(userId)
     },
-    resetPage() {
-      this.playlists = [];
-      this.username = '';
+    resetPage () {
+      this.playlists = []
+      this.username = ''
     },
-    async loadUserInfos(userId) {
-      const user = await ubeat.getUserInfos(userId);
-      this.user = user;
+    async loadUserInfos (userId) {
+      const user = await ubeat.getUserInfos(userId)
+      this.user = user
     },
-    async loadPlaylists(userId) {
-      const playlists = await ubeat.getUserPlaylists(userId);
-      this.loading = false;
-      this.playlists = playlists;
+    async loadPlaylists (userId) {
+      const playlists = await ubeat.getUserPlaylists(userId)
+      this.loading = false
+      this.playlists = playlists
     },
-    async addPlaylist() {
+    async addPlaylist () {
       if (this.newPlayListName !== '') {
-        const infos = await ubeat.getUserInfos(this.$route.params.userId);
-        const newPlaylist = await ubeat.addPlaylist(this.newPlayListName, infos.email);
+        const infos = await ubeat.getUserInfos(this.$route.params.userId)
+        const newPlaylist = await ubeat.addPlaylist(this.newPlayListName, infos.email)
         if (newPlaylist) {
-          this.playlists.push(newPlaylist);
-          this.newPlayListName = '';
+          this.playlists.push(newPlaylist)
+          this.newPlayListName = ''
         }
       }
     }
-  },
-};
+  }
+}
 </script>

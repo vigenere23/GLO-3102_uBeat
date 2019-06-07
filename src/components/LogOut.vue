@@ -2,15 +2,15 @@
   <div>
   <div class="bigspace"></div>
     <div class="content">
-      <h1> Do you want to logout</h1>
-      <v-btn v-on:click="redirect"> Yes </v-btn>
+      <h1>Do you want to logout?</h1>
+      <v-btn v-on:click="redirect">Yes</v-btn>
     </div>
   </div>
 
 </template>
 
 <script>
-    import Cookies from 'js-cookie';
+    import Cookies from 'js-cookie'
 
     export default {
       name: 'LogOut',
@@ -21,21 +21,20 @@
           snackbar: false,
           snackbarMessage: ''
 
-        };
+        }
       },
       methods: {
         async redirect() {
-          Cookies.remove('uBeatCookie');
-          this.$router.push('/login');
+          Cookies.remove('uBeatCookie')
+          this.$router.push('/login')
         }
       },
       async beforeMount() {
-        const cookie = Cookies.get('uBeatCookie');
-        if (cookie === null || cookie === undefined || cookie === '') {
-          this.$router.push({ path: '/login' });
+        if (!Cookies.get('uBeatCookie')) {
+          this.$router.push('/login')
         }
       }
-    };
+    }
 </script>
 
 <style scoped>

@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import formatter from '@/js/helpers/formatter';
-import styles from '@/js/helpers/styles';
+import formatter from '@/js/helpers/formatter'
+import styles from '@/js/helpers/styles'
 
 export default {
   name: 'artist-infos',
@@ -19,14 +19,14 @@ export default {
     image: String
   },
   computed: {
-    itunesLink() {
-      return formatter.itunesLink(this.infos.artistLinkUrl);
+    itunesLink () {
+      return formatter.itunesLink(this.infos.artistLinkUrl)
     },
-    artistImageStyle() {
-      return styles.fadingBackgroundImageStyle(this.image);
+    artistImageStyle () {
+      return styles.fadingBackgroundImageStyle(this.image)
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

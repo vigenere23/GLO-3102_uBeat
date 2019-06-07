@@ -4,9 +4,7 @@ Welcome to uBeat, the best musical platform!
 
 ## Installation
 
-```
-git clone https://github.com/vigenere23/GLO-3102_uBeat.git
-cd GLO-3102_uBeat
+```bash
 yarn install
 git submodule init
 git submodule update
@@ -28,7 +26,7 @@ yarn dev
 
 ## SpotifyAPI
 
-To correctly start the spotifyAPI, please read the [doc](https://github.com/vigenere23/GLO-3102_SpotifyAPI). 
+To correctly start the spotifyAPI, please read the [doc](https://github.com/vigenere23/GLO-3102_SpotifyAPI).
 
 ## Screenshots
 
@@ -36,7 +34,6 @@ To correctly start the spotifyAPI, please read the [doc](https://github.com/vige
 ![uBeat screenshot 2](https://user-images.githubusercontent.com/32545895/57195342-5a3b0f00-6f1f-11e9-9db4-d9a47691a764.png)
 ![uBeat screenshot 3](https://user-images.githubusercontent.com/32545895/57195343-5a3b0f00-6f1f-11e9-9f1e-368f71977c1e.png)
 ![uBeat screenshot 4](https://user-images.githubusercontent.com/32545895/57195340-5a3b0f00-6f1f-11e9-8a2d-9e519c209d69.png)
-
 
 ### Team members
 

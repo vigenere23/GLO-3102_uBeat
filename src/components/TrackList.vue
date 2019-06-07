@@ -33,72 +33,72 @@
 </template>
 
 <script>
-  import * as Cookies from 'js-cookie';
-  import TrackListItem from '@/components/TrackListItem';
-  import ubeat from '@/js/apis/ubeat';
-  import { bus } from '@/main';
-  import SongPlayer from '../js/MusicControl';
+import Cookies from 'js-cookie'
+import TrackListItem from '@/components/TrackListItem'
+import ubeat from '@/js/apis/ubeat'
+import { bus } from '@/main'
+import SongPlayer from '@/js/MusicControl'
 
-  export default {
-    name: 'track-list',
-    components: {
-      TrackListItem
-    },
-    created() {
-      bus.$on('songDeletedOfPlaylist', (data) => {
-        this.tracks.splice(data - 1, 1);
-        for (let i = data - 1; i < this.tracks.length; i += 1) {
-          this.tracks[i].number -= 1;
+export default {
+  name: 'track-list',
+  components: {
+    TrackListItem
+  },
+  props: {
+    tracks: Array,
+    listType: String,
+    playlistId: String,
+    userId: String
+  },
+  data () {
+    return {
+      playlists: []
+    }
+  },
+  created () {
+    bus.$on('songDeletedOfPlaylist', (number) => {
+      this.tracks.splice(number - 1, 1)
+      for (let i = number - 1; i < this.tracks.length; i += 1) {
+        this.tracks[i].number -= 1
+      }
+    })
+  },
+  async mounted () {
+    const cookie = Cookies.get('uBeatCookie')
+    if (cookie) {
+      const user = await ubeat.tokenInfo(cookie)
+      this.playlists = await ubeat.getUserPlaylists(user.id)
+      this.playlists.sort()
+    }
+  },
+  beforeMount () {
+    if (!Cookies.get('uBeatCookie')) {
+      this.$router.push('/login')
+    }
+  },
+  methods: {
+    addAllTracksToPlaylist (playlist) {
+      this.tracks.forEach((track) => {
+        if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === track.trackId)) {
+          ubeat.addSongToPlaylist(playlist.id, track)
         }
-      });
+      })
     },
-    async mounted() {
-      const cookie = Cookies.get('uBeatCookie');
-      if (!(cookie === null || cookie === undefined || cookie === '')) {
-        const json = await ubeat.tokenInfo(cookie);
-        const userId = json.id;
-        this.playlists = await ubeat.getUserPlaylists(userId);
-        this.playlists.sort();
-      }
-    },
-    beforeMount() {
-      const cookie = Cookies.get('uBeatCookie');
-      if (cookie === null || cookie === undefined || cookie === '') {
-        this.$router.push({ path: '/login' });
-      }
-    },
-    data() {
-      return {
-        playlists: [],
-      };
-    },
-    methods: {
-      addAllTracksToPlaylist(playlist) {
-        this.tracks.forEach((track) => {
-          if (!playlist.tracks.find(playlistTrack => playlistTrack.trackId === track.trackId)) {
-            ubeat.addSongToPlaylist(playlist.id, track);
-          }
-        });
-      },
-      playAllAlbum() {
-        const song = new SongPlayer();
-        song.pauseSong();
-        song.deleteElementsInArray();
-        this.tracks.forEach((track) => {
-          song.addSong({ title: track.trackName,
-            duration: track.trackTimeMillis,
-            number: track.number,
-            preview: track.previewUrl });
-        });
-      }
-    },
-    props: {
-      tracks: Array,
-      listType: String,
-      playlistId: String,
-      userId: String
-    },
-  };
+    playAllAlbum () {
+      const song = new SongPlayer()
+      song.pauseSong()
+      song.deleteElementsInArray()
+      this.tracks.forEach((track) => {
+        song.addSong({
+          title: track.trackName,
+          duration: track.trackTimeMillis,
+          number: track.number,
+          preview: track.previewUrl
+        })
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -112,4 +112,3 @@
     }
   }
 </style>
-

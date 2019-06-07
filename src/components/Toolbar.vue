@@ -1,10 +1,11 @@
 <template>
-  <v-toolbar id="toolbar"
-             app
-             height="64px"
-             color="primary"
-             :fixed="toolbar.fixed"
-             :clipped-left="toolbar.clippedLeft">
+  <v-toolbar
+    id="toolbar"
+    app
+    height="64px"
+    color="primary"
+    :fixed="toolbar.fixed"
+    :clipped-left="toolbar.clippedLeft">
     <v-toolbar-side-icon
       dark
       v-if="windowWidth <= 600"
@@ -47,27 +48,28 @@
     <v-spacer v-if="windowWidth >= 1264"></v-spacer>
   </v-toolbar>
 </template>
+
 <script>
-  export default {
-    name: 'toolbar',
-    data() {
-      return {
-        selected: 'Global',
-        home: { name: 'Home', icon: 'dashboard', path: '/' },
-        items: ['Global', 'Artists', 'Albums', 'Tracks', 'Users']
-      };
-    },
-    props: {
-      drawer: {},
-      toolbar: {},
-      windowWidth: {}
-    },
-    methods: {
-      search() {
-        const type = this.selected.toLowerCase();
-        const query = document.getElementById('searchField').value.toLowerCase();
-        this.$router.replace(`/search/${type}/${query}`);
-      }
+export default {
+  name: 'toolbar',
+  data () {
+    return {
+      selected: 'Global',
+      home: { name: 'Home', icon: 'dashboard', path: '/' },
+      items: ['Global', 'Artists', 'Albums', 'Tracks', 'Users']
     }
-  };
+  },
+  props: {
+    drawer: {},
+    toolbar: {},
+    windowWidth: {}
+  },
+  methods: {
+    search () {
+      const type = this.selected.toLowerCase()
+      const query = document.getElementById('searchField').value.toLowerCase()
+      this.$router.replace(`/search/${type}/${query}`)
+    }
+  }
+}
 </script>

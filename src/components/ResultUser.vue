@@ -14,22 +14,18 @@
 </template>
 
 <script>
-  import ubeat from '@/js/apis/ubeat';
-  import Cookies from 'js-cookie';
+import ubeat from '@/js/apis/ubeat'
+import Cookies from 'js-cookie'
 
-  export default {
-    name: 'ResultUser',
-    props: {
-      user: {}
-    },
-    data() {
-      return {
-      };
-    },
-    methods: {
-      async follow() {
-        await ubeat.follow(this.user.id, Cookies.get('uBeatCookie'));
-      },
-    },
-  };
+export default {
+  name: 'ResultUser',
+  props: {
+    user: {}
+  },
+  methods: {
+    async follow () {
+      await ubeat.follow(this.user.id, Cookies.get('uBeatCookie'))
+    }
+  }
+}
 </script>
